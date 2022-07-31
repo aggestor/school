@@ -1,2 +1,2 @@
-# TID WEBSITE PROJECT
+# School archive management
 
