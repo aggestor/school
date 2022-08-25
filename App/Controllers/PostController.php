@@ -1,12 +1,12 @@
 <?php
 
-namespace Root\App\Controllers;
+namespace App\Controllers;
 
-use Root\App\Exceptions\NotFoundException;
-use Root\App\Models\CommentModel;
-use Root\App\Models\PostModel;
-use Root\Core\CommentProcessor;
-use Root\Core\PostProcessor;
+use App\Exceptions\NotFoundException;
+use App\Models\CommentModel;
+use App\Models\PostModel;
+use Core\CommentProcessor;
+use Core\PostProcessor;
 
 class PostController extends Controller
 {

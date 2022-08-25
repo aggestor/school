@@ -1,11 +1,11 @@
 <?php
 
-namespace Root\Core;
+namespace Core;
 
-use Root\App\Controllers\Controller;
-use Root\App\Models\AdminModel;
-use Root\App\Models\PostModel;
-use Root\App\Models\Schema;
+use App\Controllers\Controller;
+use App\Models\AdminModel;
+use App\Models\PostModel;
+use App\Models\Schema;
 //this class is kinda busy and un documented but ill do some changes here SOOOOOONNNNNNNNN !!!
 // this will be some kind of abstract class and jus the processors parent
 class Processor extends Controller{
@@ -98,6 +98,17 @@ class Processor extends Controller{
      */
     public function isNullThenBreak($data){
         return !$this->isNull($data);
+    }
+    /**
+     * Makes sure the given data is numeric
+     * @param mixed $data is the data to test
+     * 
+     * @return boolean saying if the data is a numeric/numeric string or not
+     */
+    public function isNumeric($data){
+        $this->isNullThenBreak($data);
+
+        return is_numeric($data);
     }
     /**
      * Makes sure all the data into the given array are not not null else it will return false.

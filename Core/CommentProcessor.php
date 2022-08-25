@@ -1,7 +1,7 @@
 <?php
-namespace Root\Core;
+namespace Core;
 
-use Root\App\Models\CommentModel;
+use App\Models\CommentModel;
 
 //will work on this later
 class CommentProcessor extends Processor

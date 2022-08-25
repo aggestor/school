@@ -1,11 +1,11 @@
 <?php
 
-namespace Root\App\Controllers;
+namespace App\Controllers;
 
-use Root\App\Models\AdminModel;
-use Root\App\Models\Schema;
-use Root\Core\AdminProcessor;
-use Root\Core\PostProcessor;
+use App\Models\AdminModel;
+use App\Models\Schema;
+use Core\AdminProcessor;
+use Core\PostProcessor;
 
 class AdminController extends Controller{
 
@@ -14,17 +14,17 @@ class AdminController extends Controller{
         return $this->view("admin.index", "layout");
     }
     public function profile(){
-        if($this->isLoggedIn()){
+        if(!$this->isLoggedIn()){
             $processor = new PostProcessor;
             $posts = $processor->findUsersLastPosts($_SESSION[parent::SESSION_ADMIN]['id'],3);
             return $this->view("admin.profile", "layout_admin", ['user' => $_SESSION['admin'], 'posts'=>$posts]);
         }else{
-            $this->redirect("/login");
+            $this->redirect("/auth/connexion");
         }
     }
     public function login(){
         if ($this->isLoggedIn()) {
-            $this->redirect("/admin");
+            $this->redirect("/dashboard");
         } else {
             return $this->view("admin.login", "layout");
         }
@@ -73,7 +73,7 @@ class AdminController extends Controller{
                 }
             }
         }else{
-            $this->redirect("/login");
+            $this->redirect("/auth/connexion");
         }
     }
     /**
@@ -81,12 +81,12 @@ class AdminController extends Controller{
      */
     public function dashboard(){
         if($this->isGetMethod()){
-            if($this->isLoggedIn()){
+            if(!$this->isLoggedIn()){
                 $processor = new PostProcessor;
                 $posts = $processor->getPostBy("*");
                 return $this->view("admin.admin", "layout_admin", ['users' => $this->findUsers(), 'posts'=> $posts[0]]);
             }
-            else $this->redirect("/login");
+            else $this->redirect("/auth/connexion");
         }
     }
     /**
@@ -96,7 +96,7 @@ class AdminController extends Controller{
         if($this->isGetMethod()){
             if($this->isLoggedIn())
             return $this->view("admin.users", "layout_admin", ['users' => $this->findUsers()]);
-            else $this->redirect("/login");
+            else $this->redirect("/auth/connexion");
         }
     }
     /**
@@ -106,7 +106,7 @@ class AdminController extends Controller{
         if($this->isGetMethod()){
             if($this->isLoggedIn())
             return $this->view("admin.add_user", "layout_admin", ['users' => $this->findUsers()]);
-            else $this->redirect("/login");
+            else $this->redirect("/auth/connexion");
         }
     }
     /**
@@ -115,7 +115,7 @@ class AdminController extends Controller{
     public function logout(){
         unset($_SESSION[parent::SESSION_ADMIN]);
         session_destroy();
-        $this->redirect("/login");
+        $this->redirect("/auth/connexion");
     }
     public function findUsers() : array{
         $accumulator = [];
@@ -133,7 +133,7 @@ class AdminController extends Controller{
                 $post = AdminModel::remove(htmlspecialchars($_GET['user']));
                 $this->redirect($_SERVER['HTTP_REFERER']);
             }else{
-                $this->redirect("/login");
+                $this->redirect("/auth/connexion");
             }
         }
     }

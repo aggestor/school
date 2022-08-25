@@ -2,8 +2,8 @@
 
 namespace App\Objects;
 
-use Root\App\Models\AdminModel;
-use Root\App\Models\Schema;
+use App\Models\AdminModel;
+use App\Models\Schema;
 
 class Admin extends AdminModel{
     public $model = null ;

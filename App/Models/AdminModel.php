@@ -1,6 +1,6 @@
 <?php
 
-namespace Root\App\Models;
+namespace App\Models;
 
 class AdminModel extends Model{
     public function __construct()

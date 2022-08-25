@@ -1,8 +1,8 @@
 <?php
 
-namespace Root\Objects;
+namespace App\Objects;
 
-use Root\App\Models\PostModel;
+use App\Models\PostModel;
 
 class Post extends PostModel{
     public $model = null ;

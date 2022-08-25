@@ -1,6 +1,8 @@
 <?php
 
-namespace Root\App\Controllers;
+namespace App\Controllers;
+
+use Core\StudentProcessor;
 
 class Controller
 {
@@ -17,6 +19,12 @@ class Controller
     public const POST_FILE_ATTACHED = "post_file";
     public const POST_CONTENT = "content";
     public const SAVE_POST = "save_post";
+
+    public  $student_processor = null;
+
+    public function getStudentProcessor(){
+        return new StudentProcessor;
+    }
     
     /**
      * This function renders the view into a specific template, by default we user layouts.php

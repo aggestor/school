@@ -1,7 +1,7 @@
 <?php
-namespace Root\Core;
+namespace Core;
 
-use Root\App\Models\PostModel;
+use App\Models\PostModel;
 
 //will work on this later
 class PostProcessor extends Processor{

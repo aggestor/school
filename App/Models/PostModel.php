@@ -1,14 +1,10 @@
 <?php
 
-namespace Root\App\Models;
+namespace App\Models;
 
 class PostModel extends Model
 {
-     public function __construct()
-    {
-        
-    }
-
+     public function __construct(){}
     /**
      * Adds an new post in the database
      * @param string $id post's id

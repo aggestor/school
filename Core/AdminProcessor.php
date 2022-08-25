@@ -1,8 +1,8 @@
 <?php
-namespace Root\Core;
+namespace Core;
 
-use Root\App\Models\AdminModel;
-use Root\App\Models\Schema;
+use App\Models\AdminModel;
+use App\Models\Schema;
 
 //will work on this later
 class AdminProcessor extends Processor

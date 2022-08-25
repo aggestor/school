@@ -1,6 +1,6 @@
 <?php
 
-namespace Root\Core;
+namespace Core;
 
 class GenerateId
 {

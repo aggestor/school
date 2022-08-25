@@ -1,9 +1,9 @@
 <?php
 
-namespace Root\App\Exceptions;
+namespace App\Exceptions;
 
 use Exception;
-use Root\App\Controllers\Controller;
+use App\Controllers\Controller;
 use Throwable;
 
 class NotFoundException extends Exception
@@ -16,6 +16,6 @@ class NotFoundException extends Exception
     {
         //require VIEWS . 'pages/404.php';
         http_response_code(404);
-        $controller = (new Controller())->view('pages.static.404', 'layouts', ['message' => $message]);
+        $controller = (new Controller())->view('static.404', 'layouts', ['message' => $message]);
     }
 }
