@@ -9,7 +9,7 @@ class Database extends PDO
 {
     private const USER = "root";
     private const HOST = "localhost";
-    private const DATABASE = "tid";
+    private const DATABASE = "uor_archive";
     private const PASSWORD = "";
     // private const USER = "fomibuni_root";
     // private const HOST = "localhost";
@@ -28,7 +28,7 @@ class Database extends PDO
             try {
                 $pdo = new \PDO($dsn, self::USER, self::PASSWORD);
                 $pdo->setAttribute(\PDO::MYSQL_ATTR_INIT_COMMAND, 'UTF-8');
-                $pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+                $pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
                 $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
                 self::$db = $pdo;
             } catch (\PDOException $e) {

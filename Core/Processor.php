@@ -10,7 +10,7 @@ use App\Models\Schema;
 // this will be some kind of abstract class and jus the processors parent
 class Processor extends Controller{
 
-    const RGX_TELEPHONE = "/^(((\+)|00)([1-9]{1,3})([0-9]{6,15}))$/";
+    const RGX_TELEPHONE = "/^(((\+)|0)([1-9]{1,3})([0-9]{6,15}))$/";
 
     public $errors = [];
     public $id = "";
@@ -142,6 +142,13 @@ class Processor extends Controller{
             }
         }
         return $condition;
+    }
+    protected function loadData($data){
+        $accumulator = [];
+        while($item  = $data->fetch()){
+            array_push($accumulator, $item);
+        }
+        return $accumulator;
     }
 
 }

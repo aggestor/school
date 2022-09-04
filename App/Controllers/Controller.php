@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use Core\DepartmentProcessor;
+use Core\FacultyProcessor;
 use Core\StudentProcessor;
 
 class Controller
@@ -24,6 +26,12 @@ class Controller
 
     public function getStudentProcessor(){
         return new StudentProcessor;
+    }
+    public function getFacultyProcessor(){
+        return new FacultyProcessor;
+    }
+    public function getDepartmentProcessor(){
+        return new DepartmentProcessor;
     }
     
     /**
