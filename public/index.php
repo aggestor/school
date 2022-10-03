@@ -19,6 +19,7 @@ $routes->get("/auth/connexion", "App\Controllers\AuthController@login");
 $routes->post("/auth/connexion", "App\Controllers\AuthController@__login");
 $routes->get("/auth/reinitialiser-mot-de-passe", "App\Controllers\AuthController@resetPassword");
 $routes->get("/auth/logout", "App\Controllers\AdminController@logout");
+$routes->get("/", "App\Controllers\StaticController@index");
 
 $routes->get("/dashboard", "App\Controllers\AdminController@dashboard");
 $routes->get("/users/current", "App\Controllers\AdminController@profile");
@@ -31,9 +32,16 @@ $routes->get("/users/update/([a-zA-Z0-9]*)", "App\Controllers\AdminController@up
 $routes->get("/posts", "App\Controllers\PostController@posts");
 $routes->get("/posts/new", "App\Controllers\PostController@new_post");
 $routes->post("/posts/new", "App\Controllers\PostController@_new_post");
+
 $routes->get("/identification/etudiant", "App\Controllers\StudentsController@registration");
 $routes->post("/identification/etudiant", "App\Controllers\StudentsController@__registration");
 $routes->get("/identification/personnel", "App\Controllers\PersonalsController@registration");
+
+$routes->get("/etudiants/(\d*)", "App\Controllers\StudentsController@getStudent",'mat');
+
+//theses routes bellow are for testing purposes
+
+$routes->get('/test', "App\Controllers\TestController@std");
 
 
 try {

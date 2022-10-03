@@ -150,5 +150,12 @@ class Processor extends Controller{
         }
         return $accumulator;
     }
+    protected function getCount($data){
+        return $data->rowCount();
+    }
+    public function withinInterval($data,$number1, $number2){
+      if($data >= $number1 AND $data <=$number2 ) return true;
+      return false;
+    }
 
 }

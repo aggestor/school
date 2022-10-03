@@ -8,17 +8,20 @@ const menus = document.querySelectorAll(".menu a")
 const _g = (element) => document.querySelector(element)
 
 let setHashContainer = container => {
-    window.location.hash = container
-    $(container).slideDown(500);
-    $(container).siblings().slideUp(500);
-    $(`a[href='${container}']`)
-    .addClass("bg-sky-500")
-    .addClass("text-white")
-    .removeClass("text-sky-500");
-    $(`a[href='${container}']`)
-      .siblings()
-      .removeClass("bg-sky-500")
-      .addClass("text-sky-500");
+    const allowedRoutes = ['/identification/etudiant', '/identification/personnel']
+    if (allowedRoutes.includes(window.location.pathname)) {
+        window.location.hash = container
+        $(container).slideDown(500);
+        $(container).siblings().slideUp(500);
+        $(`a[href='${container}']`)
+        .addClass("bg-sky-500")
+        .addClass("text-white")
+        .removeClass("text-sky-500");
+        $(`a[href='${container}']`)
+          .siblings()
+          .removeClass("bg-sky-500")
+          .addClass("text-sky-500");
+    }
 
 }
 async function useMenus() {
@@ -52,9 +55,6 @@ function setupRegistrationDocument() {
       handleDocumentInput = _g("#handleDocumentInput"),
         documentInput = _g("#documentInput");
     if(handleDocumentInput)handleDocumentInput.onclick = () => documentInput.click()
-    if(documentInput) documentInput.onchange = function () {
-        
-    }
     if (draggableZone) {
         draggableZone.addEventListener("dragenter", function (e) {
             draggableZone.classList.add("border-2")

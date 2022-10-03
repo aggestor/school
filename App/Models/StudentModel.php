@@ -65,4 +65,13 @@ class StudentModel extends Model{
         $process->is_active,
         $process->student_since]);
     }
+    public function findLastId(){
+        return $this->find($this->table,"MAX(id) as id",'id > ?',[0]);
+    }
+    public function findStudentByKey($key, $value){
+        return $this->find($this->table,$key,"$key = ?", [$value]);
+    }
+    public function findStudentData($key, $value){
+        return $this->find($this->table,"*","$key = ?", [$value]);
+    }
 }

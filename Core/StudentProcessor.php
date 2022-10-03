@@ -35,7 +35,6 @@ class StudentProcessor extends Processor
         $this->is_verified = 0;
         $this->is_active = 0;
         $this->student_since  = '';
-        $this->registration_number = 0;
     }
     public function checkDocument(){
         $accepted_size = 41943040;
@@ -261,6 +260,7 @@ class StudentProcessor extends Processor
     }
     public function checkIdentity(){
         $this->initIdentity();
+        $this->generateRegistrationNumber();
 
         if(!$this->hasMoreCharsThen($this->user_first_name,2)){
             $this->errors['user_first_name'] = 'Le nom doit avoir au minium 2 caractères !';
@@ -282,6 +282,9 @@ class StudentProcessor extends Processor
         }
         if(!$this->isEmail($this->user_email)){
             $this->errors['user_email'] = 'Addresse Mail incorrect !';
+        }
+        if($this->mailExist($this->user_email)){
+            $this->errors['user_email'] = 'Addresse Mail déjà utilisée !';
         }
         if(!$this->hasMoreCharsThen($this->birth_place, 4)){
             $this->errors['birth_place'] = 'Lieu de naissance invalide !';
@@ -321,4 +324,48 @@ class StudentProcessor extends Processor
             $this->errors['student_status'] = "Type d'étudiant choisi non valide!";
         }
     }
+    public function  generateRegistrationNumber(){
+        $this->findRegistrationNumber();
+    }
+    public function findLastId(){
+        $data = $this->student->findLastId()->fetch()->id;
+        return $data = $data ? $data : 0;
+    }
+    public function mailExist($email = null){
+        $data = $this->student->findStudentByKey('mail_address',$email ?? $this->user_email);
+        $count = $this->getCount($data);
+        if($count == 0) return false;
+        return true;
+    }
+    public function findRegistrationNumber($number = null){
+       $default_number = $this->getCalculateRegistrationNumber();
+       $registrations = $this->student->findStudentByKey('registration_number',$number ?? $default_number );
+       $count = $registrations->rowCount();
+       if($count == 0){
+         $this->registration_number = $default_number;
+       }
+    }
+    public function getCalculateRegistrationNumber(){
+      $id = $this->findLastId();
+      $number  = '';
+       if($id > 0){
+           if($this->withinInterval($id,1,9)){
+             $number = '000'.$id;
+           }
+           if($this->withinInterval($id,10,99)){
+              $number = '00'.$id;
+           }
+           if($this->withinInterval($id,100,999)){
+              $number = '0'.$id;
+           }
+           if($id > 1000){
+              $number = $id;
+           }
+       }else{
+        $number = '0001';
+       }
+       return $number;
+    }
+    
+    
 }
