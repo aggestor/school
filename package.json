@@ -1,16 +1,17 @@
 {
-  "devDependencies": {
-    "tailwindcss": "^3.0.11"
-  },
-  "dependencies": {
-    "postcss": "^8.4.5"
-  },
   "name": "smf-tid",
   "description": "",
   "version": "0.1.0",
   "main": "tailwind.config.js",
   "scripts": {
-    "watch": "npx tailwindcss -i ./assets/src/app.css -o ./assets/css/tailwind.css --watch --minify"
+    "watch": "npx tailwindcss -i ./assets/src/app.css -o ./assets/css/tailwind.css --watch --minify",
+    "build": "npx tailwindcss -i ./assets/src/app.css -o ./assets/css/tailwind.css  --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.0.11"
+  },
+  "dependencies": {
+    "postcss": "^8.4.5"
   },
   "keywords": [],
   "author": "",

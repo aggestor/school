@@ -8,6 +8,6 @@ use App\Controllers\Controller;
     public function std(){
         $processor = $this->getStudentProcessor();
         $processor->findLastId();
-        return $this->view('static.student-register-success','layout');
+        return $this->view('static.reset-password-mail-sent','layout', ['mail' =>'aggeer.aa@gmail.com']);
     }
  }
