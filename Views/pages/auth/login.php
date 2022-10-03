@@ -32,7 +32,7 @@
                 </div>
                 <div class="md:w-10/12 flex justify-between mx-auto my-4">
                     <button type="submit" name="login" class="bg-sky-500 font-semibold text-white p-2 w-4/12 h-10 hover:bg-sky-600 transition-colors duration-500 justify-center items-center rounded">Connexion</button>
-                    <a href="/etudiants/inscription" class="text-sky-500 font-semibold border-2 border-sky-500 hover:text-white transition-colors duration-500 bg-white flex justify-center items-center w-4/12 h-10 hover:bg-sky-600 rounded">Inscription</a>
+                    <a href="/identification/etudiant" class="text-sky-500 font-semibold border-2 border-sky-500 hover:text-white transition-colors duration-500 bg-white flex justify-center items-center w-4/12 h-10 hover:bg-sky-600 rounded">Inscription</a>
                 </div>
           </form>
           <div class="w-7/12 overflow-hidden rounded-r-lg h-full block">
