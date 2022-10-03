@@ -29,6 +29,9 @@ use App\Controllers\Controller;
       $mat = $_GET['mat'];
       $process = $this->getStudentProcessor();
       $student = $process->student->findStudentData("registration_number",$mat)->fetch();
-      return $this->view("students.profile", "layout_simple",["student" => $student]);
+      if($student){
+         return $this->view("students.profile", "layout_simple",["student" => $student]);
+      }
+      return $this->view("static.404","layouts",['message' => "L'étudiant que vous rechercher est introuvable."]);
     }
  }
