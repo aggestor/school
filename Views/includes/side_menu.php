@@ -35,7 +35,7 @@
             <span class="w-8 h-8 rounded-full bg-slate-200 grid place-items-center mr-3"><i class="fas text-orange-500 fa-cog "></i></span>
              Configuration</a> 
         </li>
-        <li><a href="/admin/administration" class="h-full mb-3 my-2 py-1.5 w-full rounded duration-500 transition-colors cursor-pointer hover:bg-slate-200 font-semibold text-gray-800 flex pl-2 items-center">
+        <li><a href="/admin/all" class="h-full mb-3 my-2 py-1.5 w-full rounded duration-500 transition-colors cursor-pointer hover:bg-slate-200 font-semibold text-gray-800 flex pl-2 items-center">
             <span class="w-8 h-8 rounded-full bg-slate-200 grid place-items-center mr-3"><i class="fas text-gray-500 fa-user-secret "></i></span>
              Administration</a> 
         </li>
