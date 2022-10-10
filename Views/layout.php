@@ -34,8 +34,11 @@
         }
         </style>
 </head>
-<body class="bg-slate-200 w-full h-full flex justify-center items-center">
+<body class="bg-slate-200 w-full h-full flex flex-col justify-center items-center">
 <?= $content ?>
+<div class=" mt-10 w-full">
+    <?php include VIEWS . 'includes/footer.php'; ?>
+</div>
 
 </body>
 </html>

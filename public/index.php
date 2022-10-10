@@ -29,15 +29,40 @@ $routes->post("/users/new", "App\Controllers\AdminController@_new_user");
 $routes->get("/users/delete/([a-zA-Z0-9]*)", "App\Controllers\AdminController@delete_user","user");
 $routes->get("/users/update/([a-zA-Z0-9]*)", "App\Controllers\AdminController@update_user","user");
 
-$routes->get("/posts", "App\Controllers\PostController@posts");
-$routes->get("/posts/new", "App\Controllers\PostController@new_post");
-$routes->post("/posts/new", "App\Controllers\PostController@_new_post");
+$routes->get("/admin", "App\Controllers\AdminController@index");
+$routes->get("/admin/login", "App\Controllers\AdminController@login");
+$routes->get("/admin/register", "App\Controllers\AdminController@register");
+$routes->get("/admin/profile", "App\Controllers\AdminController@index");
+$routes->get("/admin/all", "App\Controllers\AdminController@all");
+$routes->get("/admin/update/([a-zA-Z0-9]*)", "App\Controllers\AdminController@index");
+
+$routes->get("/admin/etudiants", "App\Controllers\AdminController@index");
+$routes->get("/admin/personnels", "App\Controllers\AdminController@index");
+
+$routes->get("/admin/faculties/new", "App\Controllers\FacultiesController@new");
+$routes->get("/admin/faculties", "App\Controllers\FacultiesController@all");
+$routes->get("/admin/faculties/update/([a-zA-Z0-9]*)", "App\Controllers\FacultiesController@update", "id");
+$routes->get("/admin/faculties/delete/([a-zA-Z0-9]*)", "App\Controllers\FacultiesController@delete", "id");
+
+$routes->get("/admin/departments/new", "App\Controllers\DepartmentsController@new");
+$routes->get("/admin/departments", "App\Controllers\DepartmentsController@all");
+$routes->get("/admin/departments/update/([a-zA-Z0-9]*)", "App\Controllers\DepartmentsController@update", "id");
+$routes->get("/admin/departments/delete/([a-zA-Z0-9]*)", "App\Controllers\DepartmentsController@delete", "id");
+
+$routes->get("/admin/promotions/new", "App\Controllers\PromotionsController@new");
+$routes->get("/admin/promotions", "App\Controllers\PromotionsController@all");
+$routes->get("/admin/promotions/update/([a-zA-Z0-9]*)", "App\Controllers\PromotionsController@update", "id");
+$routes->get("/admin/promotions/delete/([a-zA-Z0-9]*)", "App\Controllers\PromotionsController@delete", "id");
+
+$routes->get("/admin/", "App\Controllers\AdminController@index");
 
 $routes->get("/identification/etudiant", "App\Controllers\StudentsController@registration");
 $routes->post("/identification/etudiant", "App\Controllers\StudentsController@__registration");
 $routes->get("/identification/personnel", "App\Controllers\PersonalsController@registration");
 
 $routes->get("/etudiants/(\d*)", "App\Controllers\StudentsController@getStudent",'mat');
+$routes->get("/etudiants/modification/data/(\d*)", "App\Controllers\StudentsController@updateData",'mat');
+$routes->get("/etudiants/modification/mot-de-passe/(\d*)", "App\Controllers\StudentsController@updatePassword",'mat');
 
 //theses routes bellow are for testing purposes
 

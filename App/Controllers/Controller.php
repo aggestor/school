@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Core\DepartmentProcessor;
 use Core\FacultyProcessor;
 use Core\StudentProcessor;
+use Core\PromotionProcessor;
 
 class Controller
 {
@@ -32,6 +33,9 @@ class Controller
     }
     public function getDepartmentProcessor(){
         return new DepartmentProcessor;
+    }
+    public function getPromotionProcessor(){
+        return new PromotionProcessor;
     }
     
     /**

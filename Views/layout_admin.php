@@ -18,7 +18,7 @@
         <meta property="og:description" content=""/>
         <meta property="og:title" content="ABoard" />
         <meta property="og:url" content="" />
-        <title>ABoard</title>
+        <title>School Archive Manager</title>
     </head>
     <body class="w-full bg-slate-200 grid overflow-hidden grid-cols-12 home-body h-full">
         <?php include VIEWS."includes/side_menu.php" ?>
@@ -33,9 +33,10 @@
             const currentPath = window.location.href
             console.log(menuItems)
             menuItems.forEach(item =>{
-                let rgx  = new RegExp(currentPath)
+                let rgx  = new RegExp(`^(${currentPath})$`)
                 if(rgx.test(item.href)){
-                    $(item).addClass("bg-indigo-600").addClass('text-white')
+                    console.log(rgx)
+                    $(item).addClass("bg-sky-500").css("color","white")
                 }
             })
         </script>

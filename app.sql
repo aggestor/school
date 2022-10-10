@@ -95,3 +95,49 @@ CREATE TABLE `students`(
     `created_at`  DATE,
     `last_update`  DATETIME
 );
+
+CREATE TABLE `personals` (
+  `id` int(11) NOT NULL, #
+  `first_name` varchar(40) NOT NULL,#
+  `second_name` varchar(50) NOT NULL,#
+  `last_name` varchar(50) NOT NULL,#
+  `phone_number` varchar(20) DEFAULT NULL,#
+  `mail_address` varchar(255) DEFAULT NULL,#
+  `picture` varchar(255) DEFAULT NULL, #
+  `place_of_birth` varchar(40) DEFAULT NULL,#
+  `date_of_birth` date NOT NULL,#
+  `civilian_status` varchar(30) NOT NULL,#
+  `sex` varchar(10) NOT NULL,#
+  `id_type` varchar(30) DEFAULT NULL,#
+  `id_number` varchar(30) DEFAULT NULL,#
+  `nationality` varchar(150) DEFAULT NULL,#
+  `state` varchar(60) DEFAULT NULL,#
+  `town` varchar(60) DEFAULT NULL,#
+  `municipality` varchar(60) DEFAULT NULL,#
+  `neighborhood` varchar(60) DEFAULT NULL,#
+  `physical_address` varchar(60) DEFAULT NULL,#
+  `function` varchar(60) NOT NULL, #
+  `functional_type_id` SMALLINT(1) NOT NULL,
+  `academical_level `SMALLINT(1) NOT NULL,
+  `academical_status `VARCHAR(50) NOT NULL,
+  `faculty_id` smallint(6) NOT NULL,
+  `faculty_search_domain` smallint(6) NOT NULL,
+  `search_domain` VARCHAR(100) NOT NULL,
+  `engagement_date` DATE NOT NULL,
+  `base_salary` VARCHAR(10),
+  `prime` VARCHAR(100),
+  `state_origin` varchar(60) DEFAULT NULL,
+  `town_origin` varchar(60) DEFAULT NULL,
+  `municipality_origin` varchar(60) DEFAULT NULL,
+  `neighborhood_origin` varchar(60) DEFAULT NULL,
+  `blood_type` varchar(20) DEFAULT NULL,
+  `height` varchar(20) DEFAULT NULL,
+  `allergies` varchar(90) DEFAULT NULL,
+  `handicaps` varchar(90) DEFAULT NULL,
+  `document` varchar(90) DEFAULT NULL,
+  `registration_number` varchar(20) DEFAULT NULL, #
+  `is_verified` smallint(1) DEFAULT NULL,
+  `is_active` smallint(1) DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `last_update` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

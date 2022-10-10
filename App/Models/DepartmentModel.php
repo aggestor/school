@@ -10,7 +10,7 @@ class DepartmentModel extends Model {
         parent::create($this->table,'name,acronym,faculty_id,created_at,last_update','?,?,NOW(), NOW()',[$object->name, $object->acronym]);
     }
     public function findAll(){
-        return parent::find($this->table.$this->lin,"faculties.id, faculties.name,faculties.acronym, departments.id, departments.name, departments.acronym, departments.created_at, departments.last_update", "departments.id != ?", ['p']);
+        return parent::find($this->table.$this->lin,"faculties.id f_id, faculties.name as f_name,faculties.acronym f_acronym, departments.id, departments.name, departments.acronym, departments.created_at, departments.last_update", "departments.id != ?", ['p']);
     }
     public function findAllByFaculty($fac_id,$fields = "*"){
         return parent::find($this->table,$fields, "faculty_id != ?", [$fac_id]);

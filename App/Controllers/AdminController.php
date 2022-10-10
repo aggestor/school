@@ -10,8 +10,10 @@ use Core\PostProcessor;
 class AdminController extends Controller{
 
     public function index(){
-
-        return $this->view("admin.index", "layout");
+        return $this->view("admin.index", "layout_admin");
+    }
+    public function login(){
+        return $this->view("admin.login", "layout");
     }
     public function profile(){
         if(!$this->isLoggedIn()){
@@ -22,12 +24,19 @@ class AdminController extends Controller{
             $this->redirect("/auth/connexion");
         }
     }
-    public function login(){
-        if ($this->isLoggedIn()) {
-            $this->redirect("/dashboard");
-        } else {
-            return $this->view("admin.login", "layout");
-        }
+    public function all(){
+        //if ($this->isLoggedIn()) {
+            //$this->redirect("/dashboard");
+        //} else {
+            return $this->view("admin.all", "layout_admin");
+        //}
+    }
+    public function register(){
+        //if ($this->isLoggedIn()) {
+            //$this->redirect("/dashboard");
+        //} else {
+            return $this->view("admin.register", "layout_admin");
+        //}
     }
     /**
      * Login data control
