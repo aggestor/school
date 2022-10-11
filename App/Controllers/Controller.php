@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Core\AdminProcessor;
 use Core\DepartmentProcessor;
+use Core\FacSearchDomainProcessor;
 use Core\FacultyProcessor;
 use Core\FunctionProcessor;
 use Core\StudentProcessor;
@@ -44,6 +45,9 @@ class Controller
     }
     public function getFunctionProcessor(){
         return new FunctionProcessor;
+    }
+    public function getFSDProcessor(){
+        return new FacSearchDomainProcessor;
     }
     
     /**

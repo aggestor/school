@@ -52,6 +52,12 @@ $routes->get("/admin/functions", "App\Controllers\FunctionsController@all");
 $routes->get("/admin/functions/update/([a-zA-Z0-9]*)", "App\Controllers\FunctionsController@update", "id");
 $routes->get("/admin/functions/delete/([a-zA-Z0-9]*)", "App\Controllers\FunctionsController@delete", "id");
 
+$routes->get("/admin/domains/new", "App\Controllers\FacSearchDomainController@new");
+$routes->post("/admin/domains/new", "App\Controllers\FacSearchDomainController@_new");
+$routes->get("/admin/domains", "App\Controllers\FacSearchDomainController@all");
+$routes->get("/admin/domains/update/([a-zA-Z0-9]*)", "App\Controllers\FacSearchDomainController@update", "id");
+$routes->get("/admin/domains/delete/([a-zA-Z0-9]*)", "App\Controllers\FacSearchDomainController@delete", "id");
+
 $routes->get("/admin/departments/new", "App\Controllers\DepartmentsController@new");
 $routes->get("/admin/departments", "App\Controllers\DepartmentsController@all");
 $routes->get("/admin/departments/update/([a-zA-Z0-9]*)", "App\Controllers\DepartmentsController@update", "id");
