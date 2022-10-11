@@ -25,10 +25,13 @@ class AdminController extends Controller{
         }
     }
     public function all(){
+        $processor = $this->getAdminProcessor();
+
+        $admins = $processor->getAllAdmins();
         //if ($this->isLoggedIn()) {
             //$this->redirect("/dashboard");
         //} else {
-            return $this->view("admin.all", "layout_admin");
+            return $this->view("admin.all", "layout_admin", ['admins' => $admins]);
         //}
     }
     public function register(){
@@ -37,6 +40,18 @@ class AdminController extends Controller{
         //} else {
             return $this->view("admin.register", "layout_admin");
         //}
+    }
+    public function _register(){
+        if($this->isPostMethod()){
+            $processor = $this->getAdminProcessor();
+            $processor->registerProcess();
+            if($processor->hasErrors()){
+                return $this->view("admin.register", "layout_admin",['errors' => $processor->getErrors()]);
+            }
+            $result = $processor->admin->new($processor->getData());
+            return $this->view("admin.register_success", "layout_admin", ['name' => $processor->getData()['name']]);
+
+        }
     }
     /**
      * Login data control
@@ -63,89 +78,24 @@ class AdminController extends Controller{
         }
     }
     /**
-     * Adds an new admin into the database.
-     */
-    public function _new_user(){
-        if($this->isLoggedIn()){
-            
-            if($this->isPostMethod()){
-                $processor = new AdminProcessor;
-                $processor->addUserProcess();
-    
-                if($processor->hasErrors()){
-                    $errors = $processor->getErrors();
-                    return $this->view("admin.add_user", "layout_admin",["errors"=> $errors, "users" => $this->findUsers()]);
-                }else{
-                    $id = $processor->getAdminId();
-                    AdminModel::add($id,htmlspecialchars($_POST[parent::USER_NAMES]), htmlspecialchars($_POST[parent::USER_EMAIL]), hash("SHA256", $_POST[parent::USER_PASSWORD]));
-                    return $this->view("msg.user_saving_success", "layout_admin");
-                }
-            }
-        }else{
-            $this->redirect("/auth/connexion");
-        }
-    }
-    /**
      * Controls everyone trying to access the addUser page and the session is needed here !!!,
      */
-    public function dashboard(){
-        if($this->isGetMethod()){
-            if(!$this->isLoggedIn()){
-                $processor = new PostProcessor;
-                $posts = $processor->getPostBy("*");
-                return $this->view("admin.admin", "layout_admin", ['users' => $this->findUsers(), 'posts'=> $posts[0]]);
-            }
-            else $this->redirect("/auth/connexion");
-        }
-    }
-    /**
-     * Controls everyone trying to access the addUser page and the session is needed here !!!,
-     */
-    public function users(){
-        if($this->isGetMethod()){
-            if($this->isLoggedIn())
-            return $this->view("admin.users", "layout_admin", ['users' => $this->findUsers()]);
-            else $this->redirect("/auth/connexion");
-        }
-    }
-    /**
-     * Controls everyone trying to access the addUser page and the session is needed here !!!,
-     */
-    public function new_user(){
-        if($this->isGetMethod()){
-            if($this->isLoggedIn())
-            return $this->view("admin.add_user", "layout_admin", ['users' => $this->findUsers()]);
-            else $this->redirect("/auth/connexion");
-        }
-    }
+    // public function dashboard(){
+    //     if($this->isGetMethod()){
+    //         if(!$this->isLoggedIn()){
+    //             $processor = new PostProcessor;
+    //             $posts = $processor->getPostBy("*");
+    //             return $this->view("admin.admin", "layout_admin", ['users' => $this->findUsers(), 'posts'=> $posts[0]]);
+    //         }
+    //         else $this->redirect("/auth/connexion");
+    //     }
+    // }
     /**
      * Logs out the  user then redirect him to the home page
      */
     public function logout(){
         unset($_SESSION[parent::SESSION_ADMIN]);
         session_destroy();
-        $this->redirect("/auth/connexion");
+        $this->redirect("/admin/login");
     }
-    public function findUsers() : array{
-        $accumulator = [];
-        if($this->isLoggedIn()){
-            $admins = AdminModel::findAll();
-           while($admin = $admins->fetch()){
-               array_push($accumulator, $admin);
-           }
-        }
-        return $accumulator;
-    }
-    public function delete_user(){
-        if($this->isGetMethod()){
-            if($this->isLoggedIn()){
-                $post = AdminModel::remove(htmlspecialchars($_GET['user']));
-                $this->redirect($_SERVER['HTTP_REFERER']);
-            }else{
-                $this->redirect("/auth/connexion");
-            }
-        }
-    }
-    
-
 }

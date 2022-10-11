@@ -32,6 +32,7 @@ $routes->get("/users/update/([a-zA-Z0-9]*)", "App\Controllers\AdminController@up
 $routes->get("/admin", "App\Controllers\AdminController@index");
 $routes->get("/admin/login", "App\Controllers\AdminController@login");
 $routes->get("/admin/register", "App\Controllers\AdminController@register");
+$routes->post("/admin/register", "App\Controllers\AdminController@_register");
 $routes->get("/admin/profile", "App\Controllers\AdminController@index");
 $routes->get("/admin/all", "App\Controllers\AdminController@all");
 $routes->get("/admin/update/([a-zA-Z0-9]*)", "App\Controllers\AdminController@index");
@@ -43,6 +44,12 @@ $routes->get("/admin/faculties/new", "App\Controllers\FacultiesController@new");
 $routes->get("/admin/faculties", "App\Controllers\FacultiesController@all");
 $routes->get("/admin/faculties/update/([a-zA-Z0-9]*)", "App\Controllers\FacultiesController@update", "id");
 $routes->get("/admin/faculties/delete/([a-zA-Z0-9]*)", "App\Controllers\FacultiesController@delete", "id");
+
+$routes->get("/admin/functions/new", "App\Controllers\FunctionsController@new");
+$routes->post("/admin/functions/new", "App\Controllers\FunctionsController@_new");
+$routes->get("/admin/functions", "App\Controllers\FunctionsController@all");
+$routes->get("/admin/functions/update/([a-zA-Z0-9]*)", "App\Controllers\FunctionsController@update", "id");
+$routes->get("/admin/functions/delete/([a-zA-Z0-9]*)", "App\Controllers\FunctionsController@delete", "id");
 
 $routes->get("/admin/departments/new", "App\Controllers\DepartmentsController@new");
 $routes->get("/admin/departments", "App\Controllers\DepartmentsController@all");

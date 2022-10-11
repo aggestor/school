@@ -2,8 +2,10 @@
 
 namespace App\Controllers;
 
+use Core\AdminProcessor;
 use Core\DepartmentProcessor;
 use Core\FacultyProcessor;
+use Core\FunctionProcessor;
 use Core\StudentProcessor;
 use Core\PromotionProcessor;
 
@@ -36,6 +38,12 @@ class Controller
     }
     public function getPromotionProcessor(){
         return new PromotionProcessor;
+    }
+    public function getAdminProcessor(){
+        return new AdminProcessor;
+    }
+    public function getFunctionProcessor(){
+        return new FunctionProcessor;
     }
     
     /**

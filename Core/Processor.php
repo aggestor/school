@@ -6,6 +6,8 @@ use App\Controllers\Controller;
 use App\Models\AdminModel;
 use App\Models\PostModel;
 use App\Models\Schema;
+use stdClass;
+
 //this class is kinda busy and un documented but ill do some changes here SOOOOOONNNNNNNNN !!!
 // this will be some kind of abstract class and jus the processors parent
 class Processor extends Controller{
@@ -15,7 +17,6 @@ class Processor extends Controller{
     public $errors = [];
     public $id = "";
     public $postId = "";
-    public $admin;
     public $isAuth ;
     public $thumbnail;
 
@@ -143,6 +144,10 @@ class Processor extends Controller{
         }
         return $condition;
     }
+    /**
+     * Fetch pdo data and returns it into an array
+     * @param  \PDOStatement $data the data to count
+     */
     protected function loadData($data){
         $accumulator = [];
         while($item  = $data->fetch()){
@@ -150,12 +155,42 @@ class Processor extends Controller{
         }
         return $accumulator;
     }
+    /**
+     * Gets the count of data
+     * @param \PDOStatement $data the data to count
+     */
     protected function getCount($data){
         return $data->rowCount();
     }
+    /**
+     * Makes sure given humber is within the given interval
+     * @param number $data the number to check
+     * @param number $number1 the beginning of the interval
+     * @param number $number2 the end of the interval
+     */
     public function withinInterval($data,$number1, $number2){
       if($data >= $number1 AND $data <=$number2 ) return true;
       return false;
     }
-
+    /**
+     * Sets an error using a given key-value pair
+     * @param string $key the key of the error
+     * @param string $value the value of the error
+     */
+    public function setError($key, $value){
+        $this->errors[$key] = $value;
+    }
+    /**
+     * Fills an array
+     * @param array $data array
+     */
+    public function setData($data){
+        $this->data = $data;
+    }
+    /**
+     * Returns propriety data
+     */
+    public function getData(){
+        return $this->data;
+    }
 }

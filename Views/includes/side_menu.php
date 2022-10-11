@@ -17,7 +17,7 @@
         </li>
         <li><a href="/admin/faculties" class="h-full mb-3 my-2 py-1.5 w-full rounded duration-500 transition-colors cursor-pointer hover:bg-slate-200 font-semibold text-gray-800 flex pl-2 items-center">
             <span class="w-8 h-8 rounded-full bg-slate-200 grid place-items-center mr-3"><i class="fas text-purple-500 fa-comments "></i></span>
-             Factulés</a> 
+             Facultés</a> 
         </li>
         <li><a href="/admin/departments" class="h-full mb-3 my-2 py-1.5 w-full rounded duration-500 transition-colors cursor-pointer hover:bg-slate-200 font-semibold text-gray-800 flex pl-2 items-center">
             <span class="w-8 h-8 rounded-full bg-slate-200 grid place-items-center mr-3"><i class="fas text-teal-500 fa-newspaper "></i></span>
@@ -27,7 +27,7 @@
             <span class="w-8 h-8 rounded-full bg-slate-200 grid place-items-center mr-3"><i class="fas text-cyan-500 fa-list "></i></span>
              Promotions</a> 
         </li>
-        <li><a href="/admin/functions" class="h-full mb-3 my-2 py-1.5 w-full rounded duration-500 transition-colors cursor-pointer hover:bg-slate-200 font-semibold text-gray-800 flex pl-2 items-center">
+        <li><a href="/admin/inscriptions" class="h-full mb-3 my-2 py-1.5 w-full rounded duration-500 transition-colors cursor-pointer hover:bg-slate-200 font-semibold text-gray-800 flex pl-2 items-center">
             <span class="w-8 h-8 rounded-full bg-slate-200 grid place-items-center mr-3"><i class="fas text-blue-500 fa-pen "></i></span>
              Inscriptions</a> 
         </li>

@@ -23,8 +23,6 @@ class StudentProcessor extends Processor
         $this->checkUserProfile();
         $this->checkDocument();
         $this->setBooleans();
-        // id    first_name    second_name    last_name    phone_number    mail_address    picture    place_of_birth    date_of_birth    civilian_status    sex    id_type    id_number    nationality    state    town    municipality    neighborhood    physical_address    student_status    faculty_id    department_id    orientation    promotion_id    state_origin    town_origin    municipality_origin    neighborhood_origin    clg_name    clg_state    clg_town    clg_section_studied    clg_l_e_center    clg_l_e_year    clg_l_e_percentage    clg_diploma_number    ps_father    ps_mother    ps_sponsor    ps_phone_number    ps_type_sponsor    blood_type    height    allergies    handicaps    document    registration_number    is_registered    is_verified    is_active    student_since    created_at    last_update
-
     }
     public function initFiles(){
             $this->user_profile = $_FILES['user_profile'];
