@@ -5,7 +5,7 @@ namespace Core;
 use App\Models\FacultyModel;
 
 class FacultyProcessor extends Processor{
-    private $faculty  = null;
+    public $faculty  = null;
     public function __construct(){
         !$this->faculty && $this->faculty = new FacultyModel;
     }
@@ -18,10 +18,10 @@ class FacultyProcessor extends Processor{
     }
     public function createFacultyProcess(){
         $this->initProcess();
-        if(!$this->hasMoreCharsThen(2,$this->name)){
+        if(!$this->hasMoreCharsThen($this->name,6)){
             $this->errors['name'] = "Le nom de la faculté est obligatoire !";
         }
-        if(!$this->hasMoreCharsThen(2,$this->acronym)){
+        if(!$this->hasMoreCharsThen($this->acronym,2)){
             $this->errors['acronym'] = "L'acronyme de la faculté est obligatoire !";
         }
     }
