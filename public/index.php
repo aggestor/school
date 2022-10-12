@@ -63,6 +63,7 @@ $routes->get("/admin/departments/new", "App\Controllers\DepartmentsController@ne
 $routes->post("/admin/departments/new", "App\Controllers\DepartmentsController@_new");
 $routes->get("/admin/departments", "App\Controllers\DepartmentsController@all");
 $routes->get("/admin/departments/update/([a-zA-Z0-9]*)", "App\Controllers\DepartmentsController@update", "id");
+$routes->post("/admin/departments/update/([a-zA-Z0-9]*)", "App\Controllers\DepartmentsController@_update", "id");
 $routes->get("/admin/departments/delete/([a-zA-Z0-9]*)", "App\Controllers\DepartmentsController@delete", "id");
 
 $routes->get("/admin/promotions/new", "App\Controllers\PromotionsController@new");

@@ -21,4 +21,7 @@ class DepartmentModel extends Model {
     public function deleteOne($data){
         return parent::delete($this->table,"id = ?", [$data]);
     }
+    public function updateOne($object, $id){
+        parent::update($this->table,"name=?,acronym=?,faculty_id=?,last_update=?","id=?",[$object->name, $object->acronym, $object->faculty,"NOW()" ,$id]);
+    }
 }

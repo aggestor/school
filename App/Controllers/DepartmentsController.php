@@ -11,6 +11,36 @@ class DepartmentsController extends Controller
 
         return $this->view("departments.new", "layout_admin",['fac' => $faculties]);
     }
+    public function update()
+    {
+        $id = htmlspecialchars($_GET['id']);
+        $fac = $this->getFacultyProcessor();
+        $faculties = $fac->getAll();
+
+        $process = $this->getDepartmentProcessor();
+        $data = $process->department->findOne($id)->fetch();
+
+        return $this->view("departments.update", "layout_admin",['fac' => $faculties, 'data' =>$data]);
+    }
+    public function _update()
+    {
+        $id = htmlspecialchars($_GET['id']);
+        if($this->isPostMethod()){
+            $fac = $this->getFacultyProcessor();
+            $faculties = $fac->getAll();
+
+            $dep = $this->getDepartmentProcessor();
+            $dep->createDepProcess();
+
+            if($dep->hasErrors()){
+                return $this->view("departments.update", "layout_admin",['errors' => $dep->getErrors() ,'fac' => $faculties]);
+            }else{
+                $dep->department->updateOne($dep, $id);
+                return $this->view("departments.update_success", "layout_admin",['fac' => $faculties]);
+            }
+    
+        }
+    }
     public function _new()
     {
         if($this->isPostMethod()){
