@@ -17,8 +17,8 @@
         <span class="w-3/12 text-center"><?= $admin->email?></span>
         <span class="w-2/12 text-center"><?= $admin->phone ?></span>
         <span class="w-2/12 flex justify-center">
-            <a class="mr-2 h-8 w-8 rounded bg-blue-500 text-white grid place-items-center" href="/admin/faculties/update/<?=$fac->id?>"><span class="fas fa-pen"></span></a>
-            <a class="mr-2 h-8 w-8 rounded bg-red-500 text-white grid place-items-center" href="/admin/faculties/delete/<?=$fac->id?>"><span class="fas fa-trash"></span></a>
+            <a class="mr-2 h-8 w-8 rounded bg-blue-500 text-white grid place-items-center" href="/admin/update/<?=$admin->id?>"><span class="fas fa-pen"></span></a>
+            <a class="mr-2 h-8 w-8 rounded bg-red-500 text-white grid place-items-center" href="/admin/delete/<?=$admin->id?>"><span class="fas fa-trash"></span></a>
         </span>
     </div>
     <?php endforeach?>

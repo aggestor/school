@@ -1,5 +1,5 @@
-<div class="w-5/12 shadow bg-white h-[400px] rounded">
-    <form action="/login" method="POST" class="w-full h-full flex justify-center flex-col">
+<div class="w-5/12 shadow bg-white h-[430px] rounded">
+    <form  method="POST" class="w-full h-full flex justify-center flex-col">
                 <div class="md:w-10/12 w-11/12 mb-8 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl my-4 text-center">School Archive Manager.</h2>
                     <h2 class="text-black font-semibold text-lg my-2 text-center"> Connexion administrateur.</h2>
@@ -7,18 +7,18 @@
                 </div>
                 <div class="md:w-10/12 w-full mx-auto my-2">
                     <div class=" mx-auto focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
-                        <input id="identifier" name="user_email" type="email" placeholder="Email" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['user_email'])) {echo $_POST['user_email'];}?>" />
+                        <input name="email" type="email" placeholder="Email" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['email'])) {echo $_POST['email'];}?>" />
                     </div>
-                    <?php if (isset($_POST['login']) && !empty($params['errors']['user_email'])): ?>
-                        <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['user_email']; ?></span>
+                    <?php if (isset($_POST['login']) && !empty($params['errors']['email'])): ?>
+                        <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['email']; ?></span>
                     <?php endif;?>
                 </div>
                 <div class="md:w-10/12 w-full mx-auto my-2">
                     <div class=" mx-auto focus-within:font-semibold transition-colors duration-500  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 border-transparent bg-slate-200 h-10 items-center flex rounded">
-                        <input id="identifier" name="user_password" type="password" placeholder="Mot de passe" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['user_password'])) {echo $_POST['user_password'];}?>" />
+                        <input id="identifier" name="password" type="password" placeholder="Mot de passe" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['password'])) {echo $_POST['password'];}?>" />
                     </div>
-                    <?php if (isset($_POST['login']) && !empty($params['errors']['user_password'])): ?>
-                        <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['user_password']; ?></span>
+                    <?php if (isset($_POST['login']) && !empty($params['errors']['password'])): ?>
+                        <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['password']; ?></span>
                     <?php endif;?>
                 </div>
                 <div class="md:w-10/12 mx-auto my-2">

@@ -31,11 +31,12 @@ $routes->get("/users/update/([a-zA-Z0-9]*)", "App\Controllers\AdminController@up
 
 $routes->get("/admin", "App\Controllers\AdminController@index");
 $routes->get("/admin/login", "App\Controllers\AdminController@login");
+$routes->post("/admin/login", "App\Controllers\AdminController@_login");
 $routes->get("/admin/register", "App\Controllers\AdminController@register");
 $routes->post("/admin/register", "App\Controllers\AdminController@_register");
 $routes->get("/admin/profile", "App\Controllers\AdminController@index");
 $routes->get("/admin/all", "App\Controllers\AdminController@all");
-$routes->get("/admin/update/([a-zA-Z0-9]*)", "App\Controllers\AdminController@index");
+$routes->get("/admin/update/([a-zA-Z0-9]*)", "App\Controllers\AdminController@update");
 
 $routes->get("/admin/etudiants", "App\Controllers\AdminController@index");
 $routes->get("/admin/personnels", "App\Controllers\AdminController@index");

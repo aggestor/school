@@ -8,27 +8,43 @@ use App\Models\Schema;
 class AdminProcessor extends Processor
 {
     public $admin = null;
+    public $user = null;
     public $data = [];
     public function __construct()
     {
         !$this->admin && $this->admin = new AdminModel;
+    }
+    private function initLogin(){
+        $this->email = htmlspecialchars($_POST['email']);
+        $this->password = htmlspecialchars($_POST['password']);
     }
     /**
      * Processing the admin login, making sure the admin, the real one with real data is logged in
      */
     public function loginAdminProcess()
     {
-        if (!$this->isEmail($_POST['email'])) {
-            $this->errors["email"] = "Addresse email invalide !";
-        } else if (!$this->AdminKeyExist('email',htmlspecialchars($_POST['email']))) {
-            $this->errors[parent::USER_EMAIL] = "Cette addresse email n'existe pas !";
+        $this->initLogin();
+
+        if(!$this->isEmail($this->email)){
+            $this->setError('email', "Addresse email invalide !");
+        }else{
+            if ($this->AdminKeyExist("email", $this->email)) {
+                $this->setError('email', "Addresse n'existe pas !");
+            }
         }
-        if ($this->valuesMatch(hash("SHA256", $_POST[parent::USER_PASSWORD]), $this->admin['_password'])) {
-            $this->isAuth = true;
-        } else {
-            $this->errors[parent::USER_PASSWORD] = "Le mot de passe est incorrect !";
+        if(!$this->hasMoreCharsThen($this->password, 6)){
+            $this->setError('password',"Mot de passe trop court !");
         }
-    
+        $result = $this->admin->findMany("email = ?", [$this->email])->fetch();
+        if($result){
+            if($this->valuesMatch(hash("SHA256", $this->password),$result->password)){
+                $this->user = $result;
+                return;
+            }else{
+                $this->setError("password", "Mot de passe incorrect ");
+            }
+        }
+        
     }
     /**
      * This whole process here is for adding a new user admin into the database, to add a user you need to pass all the conditions bellow.

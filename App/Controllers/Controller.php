@@ -67,7 +67,7 @@ class Controller
     public function view(string $path, string $template = 'layouts', array $params = null)
     {
         ob_start();
-        $path = str_replace('.', DIRECTORY_SEPARATOR, $this->get_page().$path);
+        $path = str_replace('.', DIRECTORY_SEPARATOR, "pages".DIRECTORY_SEPARATOR.$path);
         require VIEWS . $path . '.php';
         if ($params) {
             $params = extract($params);
@@ -120,16 +120,7 @@ class Controller
         $uploaded = move_uploaded_file($temp, $path);
         return $uploaded;
     }
-     public function get_page(){
-        if(isset($_SESSION['lang'])){
-            if($_SESSION['lang'] === "fr"){
-                return ".pages.";
-            }else{
-                return ".pages_en.";
-            }
-        }else{
-            $_SESSION['lang'] = "fr";
-            return ".pages.";
-        }
+    public function askLogin(){
+        $this->redirect("/admin/login");
     }
 }

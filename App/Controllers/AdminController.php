@@ -10,9 +10,15 @@ use Core\PostProcessor;
 class AdminController extends Controller{
 
     public function index(){
-        return $this->view("admin.index", "layout_admin");
+        if($this->isLoggedIn()){
+            return $this->view("admin.index", "layout_admin");
+        }
+        $this->askLogin();
     }
     public function login(){
+        if($this->isLoggedIn()){
+            $this->redirect("/admin");
+        }
         return $this->view("admin.login", "layout");
     }
     public function profile(){
@@ -25,77 +31,62 @@ class AdminController extends Controller{
         }
     }
     public function all(){
-        $processor = $this->getAdminProcessor();
-
-        $admins = $processor->getAllAdmins();
-        //if ($this->isLoggedIn()) {
-            //$this->redirect("/dashboard");
-        //} else {
+        if($this->isLoggedIn()){
+            $processor = $this->getAdminProcessor();
+            $admins = $processor->getAllAdmins();
             return $this->view("admin.all", "layout_admin", ['admins' => $admins]);
-        //}
+        }
+        $this->askLogin();
+        
     }
     public function register(){
-        //if ($this->isLoggedIn()) {
-            //$this->redirect("/dashboard");
-        //} else {
+        if ($this->isLoggedIn()) {
             return $this->view("admin.register", "layout_admin");
-        //}
+        } 
+        $this->askLogin();
     }
     public function _register(){
-        if($this->isPostMethod()){
+        if($this->isPostMethod() && $this->isLoggedIn()){
             $processor = $this->getAdminProcessor();
             $processor->registerProcess();
             if($processor->hasErrors()){
                 return $this->view("admin.register", "layout_admin",['errors' => $processor->getErrors()]);
             }
-            $result = $processor->admin->new($processor->getData());
+            $processor->admin->new($processor->getData());
             return $this->view("admin.register_success", "layout_admin", ['name' => $processor->getData()['name']]);
-
         }
     }
     /**
      * Login data control
      */
-    public function __login(){
+    public function _login(){
         if($this->isPostMethod()){
-            $processor = new AdminProcessor;
+            $processor = $this->getAdminProcessor();
             $processor->loginAdminProcess();
-            if($processor->hasErrors() || !$processor->isAuth){
+            if($processor->hasErrors()){
                 $errors = $processor->getErrors();
                 return $this->view("admin.login", "layout",["errors"=>$errors]);
             }else{
-                $schema = new Schema;
-                $admin = $processor->admin;
-                $_SESSION[parent::SESSION_ADMIN]["id"] = $admin[$schema->admin['id']];
-                $_SESSION[parent::SESSION_ADMIN]["email"] = $admin[$schema->admin['email']];
-                $_SESSION[parent::SESSION_ADMIN]["name"] = $admin[$schema->admin['name']];
-                $_SESSION[parent::SESSION_ADMIN]["status"] = $admin[$schema->admin['status']];
-                $_SESSION[parent::SESSION_ADMIN]["record_date"] = $admin[$schema->admin['recordDate']];
-                $_SESSION[parent::SESSION_ADMIN]["record_time"] = $admin[$schema->admin['recordTime']];
+                $admin = $processor->user;
+                $_SESSION['admin']["id"] = $admin->id;
+                $_SESSION['admin']["email"] = $admin->email;
+                $_SESSION['admin']["name"] = $admin->name;
+                $_SESSION['admin']["status"] = $admin->status;
+                $_SESSION['admin']["record_date"] = $admin->recordDate;
+                $_SESSION['admin']["record_time"] = $admin->recordTime;
 
-                $this->redirect("/dashboard");
+                $this->redirect("/admin");
             }
         }
     }
-    /**
-     * Controls everyone trying to access the addUser page and the session is needed here !!!,
-     */
-    // public function dashboard(){
-    //     if($this->isGetMethod()){
-    //         if(!$this->isLoggedIn()){
-    //             $processor = new PostProcessor;
-    //             $posts = $processor->getPostBy("*");
-    //             return $this->view("admin.admin", "layout_admin", ['users' => $this->findUsers(), 'posts'=> $posts[0]]);
-    //         }
-    //         else $this->redirect("/auth/connexion");
-    //     }
-    // }
-    /**
-     * Logs out the  user then redirect him to the home page
-     */
     public function logout(){
-        unset($_SESSION[parent::SESSION_ADMIN]);
-        session_destroy();
-        $this->redirect("/admin/login");
+        if($this->isLoggedIn()){
+            unset($_SESSION["admin"]);
+            session_destroy();
+            $this->askLogin();
+        }
+    }
+    public function update(){
+        return $this->view("admin.update", 'layout_admin');
     }
 }
