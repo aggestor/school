@@ -44,6 +44,7 @@ $routes->get("/admin/faculties/new", "App\Controllers\FacultiesController@new");
 $routes->post("/admin/faculties/new", "App\Controllers\FacultiesController@_new");
 $routes->get("/admin/faculties", "App\Controllers\FacultiesController@all");
 $routes->get("/admin/faculties/update/([a-zA-Z0-9]*)", "App\Controllers\FacultiesController@update", "id");
+$routes->post("/admin/faculties/update/([a-zA-Z0-9]*)", "App\Controllers\FacultiesController@_update", "id");
 $routes->get("/admin/faculties/delete/([a-zA-Z0-9]*)", "App\Controllers\FacultiesController@delete", "id");
 
 $routes->get("/admin/functions/new", "App\Controllers\FunctionsController@new");

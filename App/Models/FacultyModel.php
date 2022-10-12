@@ -23,4 +23,7 @@ class FacultyModel extends Model {
         }
         //delete many logic goes here
     }
+    public function updateOne($object, $id){
+        parent::update($this->table,"name=?,acronym=?,last_update=?","id=?",[$object->name, $object->acronym,"NOW()" ,$id]);
+    }
 }

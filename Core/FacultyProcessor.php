@@ -25,6 +25,9 @@ class FacultyProcessor extends Processor{
             $this->errors['acronym'] = "L'acronyme de la faculté est obligatoire !";
         }
     }
+    public function delete($id){
+        return $this->faculty->deleteOne($id)->fetch();
+    }
     
 
 
