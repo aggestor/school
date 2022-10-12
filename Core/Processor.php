@@ -148,7 +148,7 @@ class Processor extends Controller{
      * Fetch pdo data and returns it into an array
      * @param  \PDOStatement $data the data to count
      */
-    protected function loadData($data){
+    public function loadData($data){
         $accumulator = [];
         while($item  = $data->fetch()){
             array_push($accumulator, $item);
@@ -159,7 +159,7 @@ class Processor extends Controller{
      * Gets the count of data
      * @param \PDOStatement $data the data to count
      */
-    protected function getCount($data){
+    public function getCount($data){
         return $data->rowCount();
     }
     /**

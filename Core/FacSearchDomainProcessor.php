@@ -23,4 +23,7 @@ class FacSearchDomainProcessor extends Processor{
             $this->errors['name'] = "Le nom du domaine de recherche est obligatoire !";
         }
     }
+    public function delete($id){
+        return $this->fsd->deleteOne($id)->fetch();
+    }
 }

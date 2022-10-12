@@ -23,15 +23,15 @@
             
                 <div class="md:w-10/12 w-full mx-auto my-2">
                     <div class=" mx-auto focus-within:font-semibold transition-colors duration-500  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 border-transparent bg-slate-200 h-10 items-center flex rounded">
-                        <input list="dep" name="department" type="text" placeholder="Faculté" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_admin']) && empty($params['errors']['department'])) {echo $_POST['department'];}?>" />
+                        <input list="dep" name="faculty" type="text" placeholder="Faculté" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_admin']) && empty($params['errors']['faculty'])) {echo $_POST['faculty'];}?>" />
                         <datalist id="dep">
                             <?php foreach ($params['fac'] as $fac): ?>
                             <option value="<?=$fac->id?>"><?=$fac->name?></option>
                             <?php endforeach;?>
                         </datalist>
                     </div>
-                    <?php if (isset($_POST['register_admin']) && !empty($params['errors']['department'])): ?>
-                        <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['department']; ?></span>
+                    <?php if (isset($_POST['register_admin']) && !empty($params['errors']['faculty'])): ?>
+                        <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['faculty']; ?></span>
                     <?php endif;?>
                 </div>
                 <div class="md:w-10/12 flex justify-end mx-auto my-4">

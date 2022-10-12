@@ -59,13 +59,16 @@ $routes->get("/admin/domains/update/([a-zA-Z0-9]*)", "App\Controllers\FacSearchD
 $routes->get("/admin/domains/delete/([a-zA-Z0-9]*)", "App\Controllers\FacSearchDomainController@delete", "id");
 
 $routes->get("/admin/departments/new", "App\Controllers\DepartmentsController@new");
+$routes->post("/admin/departments/new", "App\Controllers\DepartmentsController@_new");
 $routes->get("/admin/departments", "App\Controllers\DepartmentsController@all");
 $routes->get("/admin/departments/update/([a-zA-Z0-9]*)", "App\Controllers\DepartmentsController@update", "id");
 $routes->get("/admin/departments/delete/([a-zA-Z0-9]*)", "App\Controllers\DepartmentsController@delete", "id");
 
 $routes->get("/admin/promotions/new", "App\Controllers\PromotionsController@new");
+$routes->post("/admin/promotions/new", "App\Controllers\PromotionsController@_new");
 $routes->get("/admin/promotions", "App\Controllers\PromotionsController@all");
 $routes->get("/admin/promotions/update/([a-zA-Z0-9]*)", "App\Controllers\PromotionsController@update", "id");
+$routes->post("/admin/promotions/update/([a-zA-Z0-9]*)", "App\Controllers\PromotionsController@_update", "id");
 $routes->get("/admin/promotions/delete/([a-zA-Z0-9]*)", "App\Controllers\PromotionsController@delete", "id");
 
 $routes->get("/admin/", "App\Controllers\AdminController@index");

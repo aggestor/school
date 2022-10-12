@@ -84,7 +84,7 @@ class Model extends Database
      */
     public static function delete($table, $where, $attr)
     {
-        $query = self::makeQuery("DELETE FROM $table WHERE $where = ?;", $attr);
+        $query = self::makeQuery("DELETE FROM $table WHERE $where;", $attr);
         return $query;
     }
     /**
@@ -99,7 +99,7 @@ class Model extends Database
      */
     public static function update($table, $fields,$where, $attr)
     {
-        $query = self::makeQuery("UPDATE TABLE $table SET $fields WHERE $where;", $attr);
+        $query = self::makeQuery("UPDATE $table SET $fields WHERE $where;", $attr);
         return $query;
     }
 
