@@ -51,6 +51,7 @@ $routes->get("/admin/functions/new", "App\Controllers\FunctionsController@new");
 $routes->post("/admin/functions/new", "App\Controllers\FunctionsController@_new");
 $routes->get("/admin/functions", "App\Controllers\FunctionsController@all");
 $routes->get("/admin/functions/update/([a-zA-Z0-9]*)", "App\Controllers\FunctionsController@update", "id");
+$routes->post("/admin/functions/update/([a-zA-Z0-9]*)", "App\Controllers\FunctionsController@_update", "id");
 $routes->get("/admin/functions/delete/([a-zA-Z0-9]*)", "App\Controllers\FunctionsController@delete", "id");
 
 $routes->get("/admin/domains/new", "App\Controllers\FacSearchDomainController@new");

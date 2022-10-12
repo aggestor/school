@@ -21,4 +21,7 @@ class FunctionProcessor extends Processor{
             $this->errors['name'] = "Le nom de la fonction est obligatoire !";
         }
     }
+    public function delete($id){
+        return $this->function->deleteOne($id)->fetch();
+    }
 }

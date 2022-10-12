@@ -23,4 +23,7 @@ class FunctionModel extends Model {
         }
         //delete many logic goes here
     }
+    public function updateOne($object, $id){
+        parent::update($this->table,"name=?,last_update=?","id=?",[$object->name,"NOW()" ,$id]);
+    }
 }

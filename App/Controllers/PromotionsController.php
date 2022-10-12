@@ -78,7 +78,6 @@ class PromotionsController extends Controller
         $id = htmlspecialchars($_GET['id']);
         $process = $this->getPromotionProcessor();
         $process->delete($id);
-        $fsd = $process->getAll();
         $this->redirect("/admin/promotions");
     }
    

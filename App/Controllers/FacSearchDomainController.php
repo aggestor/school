@@ -29,7 +29,6 @@ class FacSearchDomainController extends Controller
         $id = htmlspecialchars($_GET['id']);
         $process = $this->getFSDProcessor();
         $process->delete($id);
-        $fsd = $process->getAll();
         $this->redirect("/admin/domains");
         //return $this->view("search_domains.all", "layout_admin", ['fsd' => $fsd]);
     }
