@@ -3,6 +3,6 @@ namespace App\Controllers;
 
 class StaticController extends Controller {
     public function index(){
-        $this->redirect("/auth/connexion");
+        return $this->view("static.home");
     }
 }

@@ -40,15 +40,7 @@ class StudentsController extends Controller
     }
     public function updateData()
     {
-        // $mat = $_GET['mat'];
-        // $process = $this->getStudentProcessor();
-        // $student = $process->student->findStudentData("registration_number",$mat)->fetch();
-        // if($student){
-        //    return $this->view("students.profile", "layout_simple",["student" => $student]);
-        // }
-        // return $this->view("static.404","layouts",['message' => "L'étudiant que vous rechercher est introuvable."]);
         return $this->view("students.update-data", "layout_simple", ['message' => "L'étudiant que vous rechercher est introuvable."]);
-
     }
     public function updatePassword()
     {

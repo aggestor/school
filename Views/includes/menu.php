@@ -1,27 +1,24 @@
 
-<div class="w-full bg-white h-14 px-4 py-2 flex items-center justify-between">
-  <div class="text-indigo-600 pl-3 font-bold text-2xl">
-        ABoard
+<div class="w-full bg-white shadow shadow-gray-200 h-16">
+  <div class="w-11/12 mx-auto h-full flex justify-between items-center">
+    <div class="text-sky-500 h-full w-4/12 flex items-center font-bold text-4xl">
+        <span>UOR</span> 
     </div>
-  <div class="w-4/12 flex items-center justify-between">
-    <span class="w-8 h-8 grid place-items-center cursor-pointer hover:bg-slate-200 duration-500 transition-colors rounded-full">
-      <span class="fas fa-align-left"></span>
-    </span>
-    <div class="focus-within:font-semibold text-gray-700  focus-within:text-indigo-500 w-[93%] bg-slate-200 group focus-within:border-indigo-500 focus-within:border-2 h-8 px-2 items-center flex rounded">
-        <input id="search_bar" name="search_bar" type="email" placeholder="Rechercher ici..." class="bg-transparent placeholder:text-gray-900 focus:text-indigo-500 focus:outline-none ml-2 w-full"/>
+    <div class="w-6/12 flex items-center font-semibold h-full text-gray-900 justify-around">
+      <a href="/" class="hover:text-sky-500 duration-300 transition-colors">Acceuil</a>
+      <a href="/apropos" class="hover:text-sky-500 duration-300 transition-colors">A propos</a>
+      <a href="/contacts" class="hover:text-sky-500 duration-300 transition-colors">Contacts</a>
+      <?php if(isset($_SESSION['user'])) : ?>
+        <a href="/user/current" class="hover:text-sky-500 duration-300 transition-colors">Profil</a>
+      <a href="/logout" class="hover:text-sky-500 duration-300 transition-colors">
+        Déconnexion
+      </a>
+      <?php else : ?>
+      <a href="/auth/connexion" class="bg-sky-500 text-white rounded p-1.5 hover:bg-sky-600 hover:ring-2 hover:ring-sky-200 duration-300 transition-colors">
+        Connexion
+      </a>
+      <?php endif?>
     </div>
-  </div>
-  <div class="w-5/12 flex text-gray-700 justify-end">
-    <a href="/users/current" class="h-8 w-8 rounded-full overflow-hidden mx-0.5"><img src="/assets/images/aggestor2.png" class="w-full h-full object-cover" alt="Aggestor's image"></a>
-    <a href="/logout" class="w-8 mx-0.5  h-8 grid place-items-center cursor-pointer hover:bg-slate-200 duration-500 transition-colors rounded-full">
-      <span class="fas fa-power-off"></span>
-    </a>
-    <span class="w-8 mx-0.5  h-8 grid place-items-center cursor-pointer hover:bg-slate-200 duration-500 transition-colors rounded-full">
-      <span class="fas fa-envelope"></span>
-    </span>
-    <span class="w-8 mx-0.5  h-8 grid place-items-center cursor-pointer hover:bg-slate-200 duration-500 transition-colors rounded-full">
-      <span class="fas fa-bars"></span>
-    </span>
   </div>
 
 </div>

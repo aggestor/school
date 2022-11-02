@@ -9,18 +9,19 @@ const _g = (element) => document.querySelector(element)
 
 let setHashContainer = container => {
     const allowedRoutes = ['/identification/etudiant', '/identification/personnel']
+    console.log(window.location.pathname)
     if (allowedRoutes.includes(window.location.pathname)) {
         window.location.hash = container
         $(container).slideDown(500);
         $(container).siblings().slideUp(500);
         $(`a[href='${container}']`)
-        .addClass("bg-sky-500")
-        .addClass("text-white")
-        .removeClass("text-sky-500");
+          .removeClass("text-sky-500").removeClass("bg-white")
+          .addClass("bg-sky-500")
+          .addClass("text-white");
         $(`a[href='${container}']`)
           .siblings()
           .removeClass("bg-sky-500")
-          .addClass("text-sky-500");
+          .addClass("text-sky-500").addClass("bg-white");
     }
 
 }

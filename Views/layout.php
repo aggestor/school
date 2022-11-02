@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="/assets/images/128x128.png" sizes="128x128"/>
     <link rel="shortcut icon" href="/assets/images/32x32.png" sizes="32x32"/>
     <meta name="theme-color" content="#"/>
-    <title>Administration</title>
+    <title>UOR | School Archive Manager</title>
     <style>
         /* width */
         ::-webkit-scrollbar {
@@ -36,7 +36,7 @@
 </head>
 <body class="bg-slate-200 w-full h-full flex flex-col justify-center items-center">
 <?= $content ?>
-<div class=" mt-10 w-full">
+<div class=" mt-10 hidden w-full">
     <?php include VIEWS . 'includes/footer.php'; ?>
 </div>
 

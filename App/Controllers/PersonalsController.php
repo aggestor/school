@@ -12,4 +12,8 @@ class PersonalsController extends Controller
     {
         return $this->view("auth.reset-password", "layout");
     }
+    public function registration()
+    {
+        return $this->view("personals.registration", "layout");
+    }
 }

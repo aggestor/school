@@ -5,16 +5,22 @@ namespace App\Controllers;
 class FacSearchDomainController extends Controller
 {
     function new () {
-        return $this->view("search_domains.new", "layout_admin");
+        if($this->isLoggedIn()){
+            return $this->view("search_domains.new", "layout_admin");
+        }
+        $this->askLogin();
     }
     function update () {
-        $id = htmlspecialchars($_GET['id']);
-        $process = $this->getFSDProcessor();
-        $data = $process->fsd->findOne($id)->fetch();
-        return $this->view("search_domains.update", "layout_admin", ['data' => $data]);
+        if($this->isLoggedIn()){
+            $id = htmlspecialchars($_GET['id']);
+            $process = $this->getFSDProcessor();
+            $data = $process->fsd->findOne($id)->fetch();
+            return $this->view("search_domains.update", "layout_admin", ['data' => $data]);
+        }
+        $this->askLogin();
     }
     function _new () {
-        if($this->isPostMethod()){
+        if($this->isPostMethod() && $this->isLoggedIn()){
             $processor = $this->getFSDProcessor();
             $processor->createFSDProcess();
             if($processor->hasErrors()){
@@ -26,7 +32,7 @@ class FacSearchDomainController extends Controller
         }
     }
     function _update () {
-        if($this->isPostMethod()){
+        if($this->isPostMethod() && $this->isLoggedIn()){
             $id = htmlspecialchars($_GET['id']);
             $processor = $this->getFSDProcessor();
             $processor->createFSDProcess();
@@ -40,15 +46,22 @@ class FacSearchDomainController extends Controller
     }
     public function all()
     {
-        $func = $this->getFSDProcessor();
-        $fsd = $func->getAll();
-        return $this->view("search_domains.all", "layout_admin", ['fsd' => $fsd]);
+        if($this->isLoggedIn()){
+            $func = $this->getFSDProcessor();
+            $fsd = $func->getAll();
+            return $this->view("search_domains.all", "layout_admin", ['fsd' => $fsd]);
+        }
+        $this->askLogin();
     }
     public function delete(){
-        $id = htmlspecialchars($_GET['id']);
-        $process = $this->getFSDProcessor();
-        $process->delete($id);
-        $this->redirect("/admin/domains");
+        if($this->isLoggedIn()){
+            $id = htmlspecialchars($_GET['id']);
+            $process = $this->getFSDProcessor();
+            $process->delete($id);
+            $this->redirect("/admin/domains");
+        }
+        $this->askLogin();
     }
+
 
 }

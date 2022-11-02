@@ -3,7 +3,7 @@
         
         <div class="w-11/12 mb-2 mx-auto">
             <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">School Archive Manager.</h2>
-            <h2 class="text-black font-semibold text-lg mt-2 text-center">Identification étudiant.</h2>
+            <h2 class="text-black font-semibold text-lg mt-2 text-center">Identification personnel.</h2>
         </div>
         <div class="relative menu h-10 mb-2 flex justify-between items-center w-11/12 mx-auto">
             <a href="#identity" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">1</a>
@@ -31,6 +31,14 @@
                     </div>
                     <div class="md:w-10/12 w-full mx-auto my-3">
                         <div class=" mx-auto focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
+                            <input id="registrationNumber" name="registration_number" type="text" placeholder="Matricule" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['registration_number'])) {echo $_POST['registration_number'];}?>" />
+                        </div>
+                        <?php if (isset($_POST['login']) && !empty($params['errors']['registration_number'])): ?>
+                            <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['registration_number']; ?></span>
+                        <?php endif;?>
+                    </div>
+                    <div class="md:w-10/12 w-full mx-auto my-3">
+                        <div class=" mx-auto focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                             <input id="firstName" name="user_first_name" type="text" placeholder="Prénom" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['user_first_name'])) {echo $_POST['user_first_name'];}?>" />
                         </div>
                         <?php if (isset($_POST['login']) && !empty($params['errors']['user_first_name'])): ?>
@@ -45,6 +53,8 @@
                             <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['user_second_name']; ?></span>
                         <?php endif;?>
                     </div>
+                </div>
+                <div class="col-span-1">
                     <div class="md:w-10/12 w-full mx-auto my-3">
                         <div class=" mx-auto focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                             <input id="lastName" name="user_last_name" type="text" placeholder="Postnom" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['user_last_name'])) {echo $_POST['user_last_name'];}?>" />
@@ -53,8 +63,6 @@
                             <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['user_last_name']; ?></span>
                         <?php endif;?>
                     </div>
-                </div>
-                <div class="col-span-1">
                     <div class="md:w-10/12 w-full mx-auto my-3">
                         <div class=" mx-auto focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                             <input name="phone_number" type="phone" placeholder="Numéro de téléphone" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['phone_number'])) {echo $_POST['phone_number'];}?>" />
@@ -87,7 +95,8 @@
                             <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['birth_date']; ?></span>
                         <?php endif;?>
                     </div>
-                    <div class="md:w-10/12 w-full mx-auto my-3">
+                    <div class="md:w-10/12 w-full mx-auto my-3 flex justify-between space-x-2">
+                            <div class="md:w-10/12 w-full mx-auto">
                         <div class=" mx-auto focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                             <input list="civil"  name="civil" type="text" placeholder="Etat civil" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['user_email'])) {echo $_POST['user_email'];}?>" />
                             <datalist id="civil">
@@ -101,7 +110,7 @@
                             <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['user_email']; ?></span>
                         <?php endif;?>
                     </div>
-                    <div class="md:w-10/12 w-full mx-auto my-3">
+                    <div class="md:w-10/12 w-full mx-auto">
                         <div class=" mx-auto focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                             <input list="sex"  name="sex" type="text" placeholder="Sexe" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['sex'])) {echo $_POST['sex'];}?>" />
                             <datalist id="sex">
@@ -113,6 +122,7 @@
                         <?php if (isset($_POST['login']) && !empty($params['errors']['sex'])): ?>
                             <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['sex']; ?></span>
                         <?php endif;?>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -203,7 +213,7 @@
                             <?php endif;?>
                         </div>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
+                    <!-- <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="student_status"  name="student_status" type="text" placeholder="Status Etudiant" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['user_email'])) {echo $_POST['user_email'];}?>" />
@@ -216,7 +226,7 @@
                                 <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['id_type']; ?></span>
                             <?php endif;?>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div style="display: none" id="orientation" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[60%]">
@@ -224,11 +234,79 @@
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">3. Orientation académique</h2>
                 </div>
                 <div class="px-8 grid grid-cols-1 col-span-2">
-                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
+                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-3">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
-                                <input list="fac_to_study"  name="fac_to_study" type="text" placeholder="Choisir Faculté / Section" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['user_email'])) {echo $_POST['user_email'];}?>" />
-                                <datalist id="fac_to_study">
+                                <input   name="function" type="text" placeholder="Fonction" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['function'])) {echo $_POST['function'];}?>" />
+                            </div>
+                            <?php if (isset($_POST['login']) && !empty($params['errors']['function'])): ?>
+                                <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['function']; ?></span>
+                            <?php endif;?>
+                        </div>
+                        <div class="col-span-1">
+                            <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
+                                <input list="academical_status"  name="academical_status" type="text" placeholder="Choisir Status académique" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['academical_status'])) {echo $_POST['academical_status'];}?>" />
+                                <datalist id="academical_status">
+                                    <option value="Permanent">1.Permanent</option>
+                                    <option value="Visiteur">2. Visiteur</option>
+                                    <option value="Partiel">3. Partiel</option>
+                                </datalist>
+                            </div>
+                            <?php if (isset($_POST['login']) && !empty($params['errors']['academical_status'])): ?>
+                                <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['academical_status']; ?></span>
+                            <?php endif;?>
+                        </div>
+                        <div class="col-span-1">
+                            <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
+                                <input list="personal_type"  name="personal_type" type="text" placeholder="Choisir Type de personnel" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['personal_type'])) {echo $_POST['personal_type'];}?>" />
+                                <datalist id="personal_type">
+                                    <option value="Académique">1.Académique</option>
+                                    <option value="Administratif">2. Administratif</option>
+                                    <option value="Scientifiaque">3. Scientifiaque</option>
+                                    <option value="Techinique et ouvrier">4. Techinique et ouvrier</option>
+                                    <option value="Recherche et documentation">5. Recherche et documentation</option>
+                                    <option value="En détachement">5. En détachement</option>
+                                    <option value="Mise en disponibilité">6. Mise en disponibilité</option>
+                                </datalist>
+                            </div>
+                            <?php if (isset($_POST['login']) && !empty($params['errors']['academical_status'])): ?>
+                                <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['academical_status']; ?></span>
+                            <?php endif;?>
+                        </div>
+                        
+                    </div>
+                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-3 grid-cols-1">
+                        <div class="col-span-1">
+                            <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
+                                <input list="academical_level"  name="academical_level" type="text" placeholder="Choisir Niveau académique" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['academical_level'])) {echo $_POST['academical_level'];}?>" />
+                                <datalist id="academical_level">
+                                    <option value="Certificat des Etudes Primaires">CEP.Certificat des Etudes Primaires</option>
+                                    <option value="4e Humanités">D4. 4e Humanités</option>
+                                    <option value="Diplome d'état">D6. Diplome d'état</option>
+                                    <option value="Doctorat">DR. Doctorat</option>
+                                    <option value="Graduant">G3. Graduant</option>
+                                    <option value="Licence">L2. Licence</option>
+                                    <option value="Maîtrise">Msc. Maîtrise</option>
+                                    <option value="Poste Primaire">PP5. Poste Primaire</option>
+                                    <option value="Sans Formation Scolaire">SFS. Sans Formation Scolaire</option>
+                                </datalist>
+                            </div>
+                            <?php if (isset($_POST['login']) && !empty($params['errors']['academical_level'])): ?>
+                                <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['academical_level']; ?></span>
+                            <?php endif;?>
+                        </div>
+                        <div class="col-span-1">
+                            <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
+                                <input   name="academical_grade" type="text" placeholder="Grade academique" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['academical_grade'])) {echo $_POST['academical_grade'];}?>" />
+                            </div>
+                            <?php if (isset($_POST['login']) && !empty($params['errors']['academical_grade'])): ?>
+                                <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['academical_grade']; ?></span>
+                            <?php endif;?>
+                        </div>
+                        <div class="col-span-1">
+                            <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
+                                <input list="fac"  name="fac" type="text" placeholder="Choisir faculté d'attache" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['fac'])) {echo $_POST['fac'];}?>" />
+                                <datalist id="fac">
                                     <option value="F.S.A">Factulté de Sciences Appliquées</option>
                                     <option value="F.S">Factulté de Santé</option>
                                     <option value="F.S.I.C">Factulté de Science de l'Information et Communication</option>
@@ -240,47 +318,45 @@
                                     <option value="F.M">Factulté de Médicine</option>
                                 </datalist>
                             </div>
-                            <?php if (isset($_POST['login']) && !empty($params['errors']['id_type'])): ?>
-                                <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['id_type']; ?></span>
+                            <?php if (isset($_POST['login']) && !empty($params['errors']['fac'])): ?>
+                                <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['fac']; ?></span>
                             <?php endif;?>
                         </div>
+                    </div>
+                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-3 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
-                                <input list="department_to_study"  name="department_to_study" type="text" placeholder="Choisir Départément / Option" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['user_email'])) {echo $_POST['user_email'];}?>" />
-                                <datalist id="department_to_study">
-                                    <option value="Carte d'élécteur">Carte d'élécteur</option>
-                                    <option value="Permis de conduire">Permis de conduire</option>
-                                    <option value="Carte Scolaire">Carte Scolaire</option>
-                                    <option value="Carte se Service">Carte se Service</option>
-                                    <option value="Carte consulaire">Carte consulaire</option>
-                                    <option value="Carte diplomatique">Carte diplomatique</option>
-                                    <option value="Certificat de nationalité">Certificat de nationalité</option>
-                                    <option value="Certificat de naissance">Certificat de naissance</option>
-                                    <option value="Sans carte">Sans carte</option>
-                                    <option value="Pièce d'identité nationale">Pièce d'identité nationale</option>
+                                <input list="fac_search_domain"  name="fac_search_domain" type="text" placeholder="Choisir faculté de domaine de recherche" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['fac_search_domain'])) {echo $_POST['fac_search_domain'];}?>" />
+                                <datalist id="fac_search_domain">
+                                    <option value="F.S.A">Factulté de Sciences Appliquées</option>
+                                    <option value="F.S">Factulté de Santé</option>
+                                    <option value="F.S.I.C">Factulté de Science de l'Information et Communication</option>
+                                    <option value="F.S.E.G">Factulté de Sciences Economiques et Gestion</option>
+                                    <option value="F.L">Factulté de Lettre</option>
+                                    <option value="F.D">Factulté de Droit</option>
+                                    <option value="F.P.S.E">Factulté de Pyschologiques et Sciences de l'Education</option>
+                                    <option value="F.S.S.A">Factulté de Science Sociale, Politique et Administrative</option>
+                                    <option value="F.M">Factulté de Médicine</option>
                                 </datalist>
                             </div>
-                            <?php if (isset($_POST['login']) && !empty($params['errors']['id_type'])): ?>
-                                <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['id_type']; ?></span>
-                            <?php endif;?>
-                        </div>
-                        
-                    </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-2 grid-cols-1">
-                        <div class="col-span-1">
-                            <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
-                                <input   name="id_type" type="text" placeholder="Orientation" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['user_email'])) {echo $_POST['user_email'];}?>" />
-                            </div>
-                            <?php if (isset($_POST['login']) && !empty($params['errors']['id_type'])): ?>
-                                <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['id_type']; ?></span>
+                            <?php if (isset($_POST['login']) && !empty($params['errors']['fac_search_domain'])): ?>
+                                <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['fac_search_domain']; ?></span>
                             <?php endif;?>
                         </div>
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
-                                <input name="id_number" type="text" placeholder="Promotion" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['id_number'])) {echo $_POST['id_number'];}?>" />
+                                <input   name="search_domain_speciality" type="text" placeholder="Saisir spécialité de recherche" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['search_domain_speciality'])) {echo $_POST['search_domain_speciality'];}?>" />
                             </div>
-                            <?php if (isset($_POST['login']) && !empty($params['errors']['id_number'])): ?>
-                                <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['id_number']; ?></span>
+                            <?php if (isset($_POST['login']) && !empty($params['errors']['search_domain_speciality'])): ?>
+                                <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['search_domain_speciality']; ?></span>
+                            <?php endif;?>
+                        </div>
+                        <div class="col-span-1">
+                            <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
+                                <input   name="engagment_date" type="date" placeholder="Grade academique" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['login']) && empty($params['errors']['engagment_date'])) {echo $_POST['engagment_date'];}?>" />
+                            </div>
+                            <?php if (isset($_POST['login']) && !empty($params['errors']['engagment_date'])): ?>
+                                <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['engagment_date']; ?></span>
                             <?php endif;?>
                         </div>
                     </div>
