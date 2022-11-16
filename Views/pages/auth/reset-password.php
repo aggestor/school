@@ -14,10 +14,10 @@
                         <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['user_email']; ?></span>
                     <?php endif;?>
                 </div>
-               
+
                 <div class="md:w-10/12 flex justify-between mx-auto my-4">
                     <button type="submit" name="reset-password" class="bg-sky-500 font-semibold text-white p-2 w-4/12 h-10 hover:bg-sky-600 transition-colors duration-500 justify-center items-center rounded">Envoyer le mail</button>
-                    <a href="/auth/connexion" class="text-sky-500 font-semibold border-2 border-sky-500 hover:text-white transition-colors duration-500 bg-white flex justify-center items-center w-4/12 h-10 hover:bg-sky-600 rounded">Connexion</a>
+                    <a href="/login" class="text-sky-500 font-semibold border-2 border-sky-500 hover:text-white transition-colors duration-500 bg-white flex justify-center items-center w-4/12 h-10 hover:bg-sky-600 rounded">Connexion</a>
                 </div>
           </form>
           <div class="w-6/12 overflow-hidden rounded-r-lg h-full grid place-items-center">

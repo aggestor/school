@@ -22,13 +22,10 @@ class AdminController extends Controller{
         return $this->view("admin.login", "layout");
     }
     public function profile(){
-        if(!$this->isLoggedIn()){
-            $processor = new PostProcessor;
-            $posts = $processor->findUsersLastPosts($_SESSION[parent::SESSION_ADMIN]['id'],3);
-            return $this->view("admin.profile", "layout_admin", ['user' => $_SESSION['admin'], 'posts'=>$posts]);
-        }else{
-            $this->redirect("/auth/connexion");
+        if($this->isLoggedIn()){
+            return $this->view("admin.profile", "layout_admin", ['user' => $_SESSION['admin']]);
         }
+        $this->askLogin();
     }
     public function all(){
         if($this->isLoggedIn()){

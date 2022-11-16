@@ -13,7 +13,6 @@
             <a href="#secondary-school" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">5</a>
             <a href="#parent-sponsors" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">6</a>
             <a href="#health" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">7</a>
-            <a href="#docs" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">8</a>
             <div class="h-1 border-t-4 bottom-4 border-sky-500 w-full absolute"></div>
         </div>
           <form enctype="multipart/form-data" method="POST" class="w-full h-[78%] overflow-auto flex justify-center flex-col">
@@ -239,8 +238,8 @@
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="fac_to_study"  name="fac_to_study" type="text" placeholder="Choisir Faculté / Section" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['fac_to_study'];}?>" />
                                 <datalist id="fac_to_study">
-                                    <?php foreach($params['faculties'] as $fac) : ?>
-                                    <option value="<?=$fac->id?>"><?=$fac->name. " | ".$fac->acronym?></option>
+                                    <?php foreach ($params['faculties'] as $fac): ?>
+                                    <option value="<?=$fac->id?>"><?=$fac->name . " | " . $fac->acronym?></option>
                                     <?php endforeach?>
                                 </datalist>
                             </div>
@@ -252,33 +251,16 @@
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="department_to_study"  name="department_to_study" type="text" placeholder="Choisir Départément / Option" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['department_to_study'];}?>" />
                                 <datalist id="department_to_study">
-                                    <option value="Génie Informatique">G.I</option>
-                                    <option value="Génie Electrique">G.E</option>
-                                    <option value="Génie Civil">G.C</option>
-                                    <option value="Géologie">Géologie</option>
-                                    <option value="Biologie">Biologie</option>
-                                    <option value="Gestion financière">G.F</option>
-                                    <option value="Economie de dévéloppement">E.D</option>
-                                    <option value="Santé publique">S.P</option>
-                                    <option value="Sciences Bucco-dentaires">S.B</option>
-                                    <option value="Biologie Medicale">B.M</option>
-                                    <option value="Droits humains">D.H</option>
-                                    <option value="Droit privé et judiciare">D.P.J</option>
-                                    <option value="Droit Economique et social">D.E.S</option>
-                                    <option value="Droit public">D.P</option>
-                                    <option value="Relations internationles">R.I</option>
-                                    <option value="Sociologie">Sociologie</option>
-                                    <option value="Anthropologie">Anthropologie</option>
-                                    <option value="Genre">Genre</option>
-                                    <option value="Sciences de l'éducation">S.E</option>
-                                    <option value="Education de la paix">E.P</option>
+                                    <?php foreach($params['departments'] as $dep) :?>
+                                    <option value="<?=$dep->id?>"><?= $dep->name." | ". $dep->acronym?></option>
+                                    <?php endforeach;?>
                                 </datalist>
                             </div>
                             <?php if (isset($_POST['register_student']) && !empty($params['errors']['department_to_study'])): ?>
                                 <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['department_to_study']; ?></span>
                             <?php endif;?>
                         </div>
-                        
+
                     </div>
                     <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-2 grid-cols-1">
                         <div class="col-span-1">
@@ -291,7 +273,12 @@
                         </div>
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
-                                <input name="promotion_to_study" type="text" placeholder="Promotion" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['promotion_to_study'];}?>" />
+                                <input list="promotion_to_study" name="promotion_to_study" type="text" placeholder="Promotion" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['promotion_to_study'];}?>" />
+                                <datalist id="promotion_to_study">
+                                    <?php foreach($params['promotions'] as $prom) :?>
+                                    <option value="<?=$prom->id?>"><?= $prom->name." | ". $prom->acronym?></option>
+                                    <?php endforeach;?>
+                                </datalist>
                             </div>
                             <?php if (isset($_POST['register_student']) && !empty($params['errors']['promotion_to_study'])): ?>
                                 <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['promotion_to_study']; ?></span>
@@ -353,7 +340,7 @@
                                 <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['town_origin']; ?></span>
                             <?php endif;?>
                         </div>
-                        
+
                     </div>
                     <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-2 grid-cols-1">
                         <div class="col-span-1">
@@ -385,7 +372,7 @@
                 <div class="px-8 grid grid-cols-1 col-span-2">
                     <div class="col-span-1">
                         <div class="w-8/12 focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
-                            <input   name="name_ss" type="text" placeholder="Nom de l'école secondaire" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student']) ) {echo $_POST['name_ss'];}?>" />
+                            <input   name="name_ss" type="text" placeholder="Nom de l'école secondaire" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['name_ss'];}?>" />
                         </div>
                         <?php if (isset($_POST['register_student']) && !empty($params['errors']['name_ss'])): ?>
                                 <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['name_ss']; ?></span>
@@ -484,7 +471,7 @@
                 </div>
             </div>
             <!---Secondary School section end--->
-            
+
             <!---Parents and sponsors section beginning--->
             <div style="display: none" id="parent-sponsors" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[70%]">
                 <div class="col-span-2  mb-2 mx-auto">
@@ -553,7 +540,7 @@
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input  name="blood_type" type="text" placeholder="Groupe Sanguin" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['blood_type'];}?>" />
-                                
+
                             </div>
                             <?php if (isset($_POST['register_student']) && !empty($params['errors']['blood_type'])): ?>
                                 <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['blood_type']; ?></span>
@@ -567,7 +554,7 @@
                                 <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['height']; ?></span>
                             <?php endif;?>
                         </div>
-                        
+
                     </div>
                     <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-2 grid-cols-1">
                         <div class="col-span-1">
@@ -587,31 +574,14 @@
                             <?php endif;?>
                         </div>
                     </div>
+                    <div class="col-span-2 md:space-x-3  my-3 flex justify-center">
+                        <button name="register_student" class="p-1.5 w-fit bg-sky-500 text-white rounded" type="submit">Envoyer le dossier</button>
+                    </div>
                 </div>
             </div>
             <!---Health section beginning--->
 
             <!---Docs section beginning--->
-            <div style="display: none" id="docs" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[90%]">
-                <div class="col-span-2  mb-2 mx-auto">
-                    <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">8. Document et envoie des données</h2>
-                </div>
-                <div class="px-8 flex flex-col h-80 col-span-2">
-                    <div id="draggableZone" draggable="true" dropzone="true" class="w-10/12 mx-auto h-56 rounded bg-gray-200 flex justify-center flex-col items-center">
-                        <span id="handleDocumentInput" class="text-sky-500 border-2 border-sky-500 bg-transparent flex justify-between font-semibold rounded py-1 cursor-pointer px-2">Choisir un fichier <svg class="ml-2 mt-0.5 h-6 text-sm" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg></span>
-                            <span class="mt-4 font-semibold text-lg">Deposer ici le document</span>
-                            <span class="mt-2 h-12 font-semibold"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg></span>
-                            <?php if (isset($_POST['register_student']) && !empty($params['errors']['document'])): ?>
-                                <span class="mt-2 text-red-500 text-xs"><?php echo $params['errors']['document']; ?></span>
-                            <?php endif;?>
-                    </div>
-                    <input type="file" name="document" hidden id="documentInput">
-                    <div class="mt-3 w-10/12 mx-auto flex justify-center items-center">
-                            <button type="submit" name="register_student" class="flex transition-all duration-500 justify-between items-center h-10 px-2 w-fit py-1 bg-sky-500 font-semibold hover:bg-sky-600 text-white rounded hover:shadow-lg hover:shadow-gray-300"> Envoyer le dossier <svg class="ml-2 h-6" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></button>
-                    </div>
-                </div>
-            </div>
             <!---Docs section end--->
           </form>
         <!--End first section/hero-->
@@ -624,5 +594,7 @@
     <div class="w-full  absolute left-0 right-0 bottom-0">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#06b6d4" fill-opacity="1" d="M0,192L80,160C160,128,320,64,480,69.3C640,75,800,149,960,154.7C1120,160,1280,96,1360,64L1440,32L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
     </div>
-    <div class="absolute bottom-3 w-full text-white text-center" id="footer">Copyright &copy; <?=date('Y')?>, SAM | U.O.R. All rights reserved</div>
+    <div class="absolute bottom-3 w-full text-white text-center" id="footer">
+        <?php include VIEWS.'includes/footer.php'?>
+    </div>
 </section>

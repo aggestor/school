@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="w-5/12 flex text-gray-700 justify-end">
-    <a href="/users/current" class="h-8 w-8 rounded-full overflow-hidden mx-0.5"><img src="/assets/images/aggestor2.png" class="w-full h-full object-cover" alt="Aggestor's image"></a>
+    <a href="/admin/current" class="h-8 w-8 rounded-full overflow-hidden mx-0.5"><img src="/assets/images/u.png" class="w-full h-full object-cover" alt="Aggestor's image"></a>
     <a href="/auth/logout" class="w-8 mx-0.5  h-8 grid place-items-center cursor-pointer hover:bg-slate-200 duration-500 transition-colors rounded-full">
       <span class="fas fa-power-off"></span>
     </a>

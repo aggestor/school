@@ -7,7 +7,6 @@ use App\Exceptions\NotFoundException;
 include("../Autoloader.php");
 Autoloader::register();
 define('VIEWS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR);
-define('VIEWS_', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Views_en' . DIRECTORY_SEPARATOR);
 define('RACINE', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR);
 define('FILES', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR);
 
@@ -15,11 +14,13 @@ session_start();
 session_regenerate_id();
 $routes = new Router($_SERVER['REQUEST_URI']);
 
-$routes->get("/auth/connexion", "App\Controllers\AuthController@login");
-$routes->post("/auth/connexion", "App\Controllers\AuthController@__login");
-$routes->get("/auth/reinitialiser-mot-de-passe", "App\Controllers\AuthController@resetPassword");
-$routes->get("/auth/logout", "App\Controllers\AdminController@logout");
 $routes->get("/", "App\Controllers\StaticController@index");
+
+$routes->get("/login", "App\Controllers\StudentsController@login");
+$routes->post("/login", "App\Controllers\StudentsController@_login");
+$routes->get("/reset-password", "App\Controllers\StudentsController@resetPassword");
+$routes->get("/logout", "App\Controllers\StudentsController@logout");
+$routes->get("/my-profile", "App\Controllers\StudentsController@profile");
 
 $routes->get("/dashboard", "App\Controllers\AdminController@dashboard");
 $routes->get("/users/current", "App\Controllers\AdminController@profile");
@@ -34,7 +35,8 @@ $routes->get("/admin/login", "App\Controllers\AdminController@login");
 $routes->post("/admin/login", "App\Controllers\AdminController@_login");
 $routes->get("/admin/register", "App\Controllers\AdminController@register");
 $routes->post("/admin/register", "App\Controllers\AdminController@_register");
-$routes->get("/admin/profile", "App\Controllers\AdminController@index");
+$routes->get("/admin/profile", "App\Controllers\AdminController@profile");
+$routes->get("/admin/current", "App\Controllers\AdminController@profile");
 $routes->get("/admin/all", "App\Controllers\AdminController@all");
 $routes->get("/admin/update/([a-zA-Z0-9]*)", "App\Controllers\AdminController@update");
 
@@ -76,15 +78,15 @@ $routes->get("/admin/promotions/update/([a-zA-Z0-9]*)", "App\Controllers\Promoti
 $routes->post("/admin/promotions/update/([a-zA-Z0-9]*)", "App\Controllers\PromotionsController@_update", "id");
 $routes->get("/admin/promotions/delete/([a-zA-Z0-9]*)", "App\Controllers\PromotionsController@delete", "id");
 
-$routes->get("/admin/", "App\Controllers\AdminController@index");
+$routes->get("/admin", "App\Controllers\AdminController@index");
 
 $routes->get("/identification/etudiant", "App\Controllers\StudentsController@registration");
 $routes->post("/identification/etudiant", "App\Controllers\StudentsController@__registration");
 $routes->get("/identification/personnel", "App\Controllers\PersonalsController@registration");
 
-$routes->get("/etudiants/(\d*)", "App\Controllers\StudentsController@getStudent",'mat');
-$routes->get("/etudiants/modification/data/(\d*)", "App\Controllers\StudentsController@updateData",'mat');
-$routes->get("/etudiants/modification/mot-de-passe/(\d*)", "App\Controllers\StudentsController@updatePassword",'mat');
+$routes->get("/admin/etudiants/(\d*)", "App\Controllers\StudentsController@getStudent",'mat');
+$routes->get("/admin/etudiants/modification/data/(\d*)", "App\Controllers\StudentsController@updateData",'mat');
+$routes->get("/admin/etudiants/modification/mot-de-passe/(\d*)", "App\Controllers\StudentsController@updatePassword",'mat');
 
 //theses routes bellow are for testing purposes
 

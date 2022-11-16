@@ -11,6 +11,39 @@ class StudentProcessor extends Processor
         $this->student = new StudentModel;
         $this->states = ["Bas-Uele","Équateur","Haut-Katanga","Haut-Lomami","Haut-Uele","Ituri","Kasaï","Kasaï central","Kasaï oriental","Kinshasa","Kongo-Centra","Kwango","Kwilu","Lomami","Lualaba","Mai-Ndombe","Maniema","Mongala","Nord-Kivu","Nord-Ubangi","Sankuru","Sud-Kivu","Sud-Ubangi","Tanganyika","Tshopo","Tshuapa"];
     }
+    private function initLogin(){
+        $this->email = $this->sanitize('email');
+        $this->password = $this->sanitize('password');
+    }
+    /**
+     * Processing the student login, making sure the student, the real one with real data is logged in
+     */
+    public function loginStudentProcess()
+    {
+        $this->initLogin();
+
+        if(!$this->isEmail($this->email)){
+            $this->setError('email', "Addresse email invalide !");
+        }else{
+            if ($this->StudentKeyExist("mail_address", $this->email)) {
+                $this->setError('email', "Addresse n'existe pas !");
+            }
+        }
+        if(!$this->hasMoreCharsThen($this->password, 6)){
+            $this->setError('password',"Mot de passe trop court !");
+        }
+        $result = $this->student->findMany("mail_address = ?", [$this->email],"registration_number,id,mail_address, password")->fetch();
+        var_dump($result);
+        if($result){
+            if($this->valuesMatch(hash("SHA256", $this->password),$result->password)){
+                $this->student_data = $result;
+                return;
+            }else{
+                $this->setError("password", "Mot de passe incorrect ");
+            }
+        }
+        
+    }
     public function identifyStudentProcess()
     {
         $this->checkIdentity();
@@ -21,12 +54,10 @@ class StudentProcessor extends Processor
         $this->checkParentSponsor();
         $this->checkHealth();
         $this->checkUserProfile();
-        $this->checkDocument();
         $this->setBooleans();
     }
     public function initFiles(){
             $this->user_profile = $_FILES['user_profile'];
-            $this->document = $_FILES['document'];
     }
     public function setBooleans(){
         $this->is_registered = 0;
@@ -34,23 +65,23 @@ class StudentProcessor extends Processor
         $this->is_active = 0;
         $this->student_since  = '';
     }
-    public function checkDocument(){
-        $accepted_size = 41943040;
-        $accepted_extensions = [".docx", ".pdf"];
-        if (!empty($this->document['name'])) {
-            $extension = strrchr($this->document['name'], ".");
-            if ($this->document['size'] > $accepted_size) {
-                $this->errors['document'] = "La taille du fichier ne doit pas depasser 20 Mo !";
-            }
-            if (!in_array(strtolower($extension), $accepted_extensions)) {
-                $this->errors['document'] = "Le fortmat du fichier doit etre soit docx, soit pdf";
-            }
-            $this->document_file = $this->user_email . $extension;
-        } else {
-            $this->document_file = null;
-            $this->errors['document'] = "Le document est obligatoire !";
-        }
-    }
+    // public function checkDocument(){
+    //     $accepted_size = 41943040;
+    //     $accepted_extensions = [".docx", ".pdf"];
+    //     if (!empty($this->document['name'])) {
+    //         $extension = strrchr($this->document['name'], ".");
+    //         if ($this->document['size'] > $accepted_size) {
+    //             $this->errors['document'] = "La taille du fichier ne doit pas depasser 20 Mo !";
+    //         }
+    //         if (!in_array(strtolower($extension), $accepted_extensions)) {
+    //             $this->errors['document'] = "Le fortmat du fichier doit etre soit docx, soit pdf";
+    //         }
+    //         $this->document_file = $this->user_email . $extension;
+    //     } else {
+    //         $this->document_file = null;
+    //         $this->errors['document'] = "Le document est obligatoire !";
+    //     }
+    // }
     public function checkUserProfile(){
         $accepted_size = 41943040;
         $accepted_extensions = [".png", ".jpg", ".jpeg"];
@@ -180,8 +211,8 @@ class StudentProcessor extends Processor
         if (!$this->isNumeric($this->diploma_number)) {
             $this->errors['diploma_number'] = "Numéro du diplome invalide !";
         }
-        if (!$this->isNumeric($this->exetat_pourcentage)) {
-            $this->errors['exetat_pourcentage'] = "Pourcentage exetat  invalide !";
+        if (!$this->isNumeric($this->exetat_pourcentage) OR ($this->exetat_pourcentage < 50  OR $this->extat_pourcentage > 99 )) {
+            $this->errors['exetat_pourcentage'] = "Pourcentage exetat invalide !";
         }
         if (!$this->hasMoreCharsThen($this->town_ss, 2)) {
             $this->errors['town_ss'] = "Territoire/Ville  invalide !";
@@ -220,32 +251,10 @@ class StudentProcessor extends Processor
     public function checkOrientation(){
         $this->initOrientation();
         $fac = [1,2,3,4,5,6,7,8,9,10,11];
-        $dep = [
-            "Génie Informatique",
-            "Génie Electrique",
-            "Génie Civil",
-            "Géologie",
-            "Biologie",
-            "Gestion financière",
-            "Economie de dévéloppement",
-            "Santé publique",
-            "Sciences Bucco-dentqires",
-            "Biologie Medicale",
-            "Droits humains",
-            "Droit privé et judiciare",
-            "Droit Economique et social",
-            "Droit public",
-            "Relations internationles",
-            "Sociologie",
-            "Anthropologie",
-            "Genre",
-            "Sciences de l'éducation",
-            "Education de la paix",
-        ];
         if(!in_array($this->fac_to_study,$fac)){
             $this->errors['fac_to_study'] = "Faculté choisie invalide !";
         }
-        if(!in_array($this->department_to_study,$dep)){
+        if(!in_array($this->department_to_study,$fac)){
             $this->errors['department_to_study'] = "Faculté choisie invalide !";
         }
         if (!$this->hasMoreCharsThen($this->orientation_to_study, 2)) {
@@ -341,6 +350,7 @@ class StudentProcessor extends Processor
        $count = $registrations->rowCount();
        if($count == 0){
          $this->registration_number = $default_number;
+         $this->password = hash("SHA256", $this->birth_date.$default_number);
        }
     }
     public function getCalculateRegistrationNumber(){
@@ -363,6 +373,15 @@ class StudentProcessor extends Processor
         $number = '0001';
        }
        return $number;
+    }
+    /**
+     * Searches a student specific data into the database and tells whether it exists in the database or not
+     * 
+     * @return boolean TRUE if the data is found, else it returns FALSE.
+     */
+    public function StudentKeyExist($key, $value){
+        $result = $this->student->findOne($key, $value);
+        return $result === false;
     }
     
     

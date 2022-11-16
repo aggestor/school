@@ -6,11 +6,15 @@ const menus = document.querySelectorAll(".menu a")
  * @returns {HTMLElement}
  */
 const _g = (element) => document.querySelector(element)
+async function loadHash() {
+    return window.location.hash
+}
+console.log(document.querySelector("#health"))
 
-let setHashContainer = container => {
+let setHashContainer = async container => {
     const allowedRoutes = ['/identification/etudiant', '/identification/personnel']
-    console.log(window.location.pathname)
     if (allowedRoutes.includes(window.location.pathname)) {
+        console.log((await loadHash()))
         window.location.hash = container
         $(container).slideDown(500);
         $(container).siblings().slideUp(500);
@@ -34,7 +38,7 @@ async function useMenus() {
     })
 }
 async function setInitialContainer() {
-    const hash = window.location.hash
+    const hash = await loadHash()
     hash ? setHashContainer(hash)  : setHashContainer("#identity")
 }
 function pickImage() {
@@ -51,30 +55,6 @@ function pickImage() {
         }
     }
 }
-function setupRegistrationDocument() {
-    const draggableZone = _g("#draggableZone"),
-      handleDocumentInput = _g("#handleDocumentInput"),
-        documentInput = _g("#documentInput");
-    if(handleDocumentInput)handleDocumentInput.onclick = () => documentInput.click()
-    if (draggableZone) {
-        draggableZone.addEventListener("dragenter", function (e) {
-            draggableZone.classList.add("border-2")
-            draggableZone.classList.add("border-sky-500");
-        })
-        draggableZone.addEventListener("dragover", function (e) {
-            draggableZone.classList.add("border-sky-500");
-            draggableZone.classList.add("border-2")
-        })
-        draggableZone.addEventListener("dragleave", function (e) {
-            draggableZone.classList.remove("border-sky-500");
-            draggableZone.classList.remove("border-2")
-        })
-        draggableZone.addEventListener("drop", function (e) {
-            console.log(e)
-        })
-    } 
-    
-}
 
 
 async function main() {
@@ -82,7 +62,6 @@ async function main() {
         useMenus()
     })
     pickImage()
-    setupRegistrationDocument()
 }
 
 main()

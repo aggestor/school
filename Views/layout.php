@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/tailwind.css">
     <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/app.js" async></script>
     <link rel="shortcut icon" href="/assets/images/128x128.png" sizes="128x128"/>
     <link rel="shortcut icon" href="/assets/images/32x32.png" sizes="32x32"/>
     <meta name="theme-color" content="#"/>
@@ -39,6 +38,6 @@
 <div class=" mt-10 hidden w-full">
     <?php include VIEWS . 'includes/footer.php'; ?>
 </div>
-
+<script src="/assets/js/app.js"></script>
 </body>
 </html>

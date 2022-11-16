@@ -193,4 +193,7 @@ class Processor extends Controller{
     public function getData(){
         return $this->data;
     }
+    public function sanitize($param){
+        return htmlspecialchars($_POST[$param]);
+    }
 }

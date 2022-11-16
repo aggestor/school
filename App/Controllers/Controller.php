@@ -12,22 +12,6 @@ use Core\PromotionProcessor;
 
 class Controller
 {
-    public const SESSION_ADMIN = 'admin';
-    public const USER_EMAIL = "user_email";
-    public const USER_NAMES = "username";
-    public const USER_PASSWORD = "user_password";
-    public const USER_PASSWORD_2 = "user_password_2";
-    public const SAVE_USER = "save_user";
-
-    public const POST_TITLE = "title";
-    public const POST_TYPE = "type";
-    public const POST_FILE = "file";
-    public const POST_FILE_ATTACHED = "post_file";
-    public const POST_CONTENT = "content";
-    public const SAVE_POST = "save_post";
-
-    public  $student_processor = null;
-
     public function getStudentProcessor(){
         return new StudentProcessor;
     }
@@ -89,10 +73,10 @@ class Controller
         header('Location:' . $path);
     }
     /**
-     * This function just checks whether there's an admin connected or not.
+     * This function just checks whether there's an admin|personal|student connected or not.
      */
-    public function isLoggedIn() : bool{
-        $is_logged_in = isset($_SESSION[self::SESSION_ADMIN]) ? true : false;
+    public function isLoggedIn($name = 'admin') : bool{
+        $is_logged_in = isset($_SESSION[$name]) ? true : false;
         return $is_logged_in;
     }
     /**
@@ -120,7 +104,8 @@ class Controller
         $uploaded = move_uploaded_file($temp, $path);
         return $uploaded;
     }
-    public function askLogin(){
+    public function askLogin($simple = false){
+        if($simple) $this->redirect("/login");
         $this->redirect("/admin/login");
     }
 }
