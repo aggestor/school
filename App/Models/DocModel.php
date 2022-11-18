@@ -18,7 +18,12 @@ class DocModel extends Model {
     public function deleteOne($data){
         return parent::delete($this->table,"id = ?", [$data]);
     }
-    // public function updateOne($object, $id){
-    //     parent::update($this->table,"name=?,acronym=?,last_update=?","id=?",[$object->name, $object->acronym,"NOW()" ,$id]);
-    // }
+    public function updateOne($object, $id, $with_file = true){
+        if($with_file){
+            parent::update($this->table,"doc_name = ?,type = ?,last_update=NOW()","id=?",[$object->document_file,$object->type ,$id]);
+        }else{
+            parent::update($this->table,"type = ?,last_update=NOW()","id=?",[$object->type,$id]);
+
+        }
+    }
 }

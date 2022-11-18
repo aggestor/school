@@ -183,6 +183,35 @@ class StudentsController extends Controller
             $this->redirect('/admin/students/'.$mat);
         }
         $this->askLogin();
-
+    }
+    public function updateDocs(){
+        if($this->isGetMethod()){
+            if($this->isLoggedIn('student')){
+                $id = $_GET['id'];
+                $process = $this->getStudentProcessor();
+                $data = $process->docs->findOne($id, "id")->fetch();
+                return $this->view('students.update-docs', 'layout_simple', ['doc' => $data]);
+            }$this->askLogin(true);
+        }
+    }
+    public function _updateDocs(){
+        if($this->isPostMethod()){
+            if($this->isLoggedIn('student')){
+                $process = $this->getStudentProcessor();
+                $id = $_GET['id'];
+                $process->updateDocsProcess();
+                if($process->hasErrors()){
+                    return $this->view('students.update-docs', 'layout_simple', ['errors' => $process->getErrors()]);
+                }else {
+                    if($process->document_file === null){
+                        $process->docs->updateOne($process,$id,false);
+                    }else{
+                        $process->docs->updateOne($process,$id);
+                        $this->uploadFile($process->doc['tmp_name'], FILES . "docs" . DIRECTORY_SEPARATOR . $process->document_file);
+                    }
+                    return $this->view('students.update-docs-success', 'layout_simple');
+                }
+            }$this->askLogin(true);
+        }
     }
 }

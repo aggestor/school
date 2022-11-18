@@ -38,6 +38,7 @@ class StudentProcessor extends Processor
                     $this->setError('repeat_password', "Le mot de passe ne correspond pas ");
                 }
             }
+            $this->password = $this->encrypt($this->password);
         }else{
             $this->password = $_SESSION['student']['password'];
         }
@@ -452,7 +453,7 @@ class StudentProcessor extends Processor
        $count = $registrations->rowCount();
        if($count == 0){
          $this->registration_number = $default_number;
-         $this->password = hash("SHA256", $this->birth_date.$default_number);
+         $this->password = $this->encrypt($this->user_phone_number);
        }
     }
     public function getCalculateRegistrationNumber(){
@@ -508,6 +509,13 @@ class StudentProcessor extends Processor
         }
         $this->checkUserDoc();
     }
+    public function updateDocsProcess(){
+        $this->initAddDocs();
+        if(!$this->hasMoreCharsThen($this->type,10)){
+            $this->setError("type", "Ce type semble invalide");
+        }
+        $this->checkUserDocUpdate();
+    }
     public function checkUserDoc(){
         $accepted_size = 41943040;
         $accepted_extensions = [".pdf"];
@@ -525,6 +533,24 @@ class StudentProcessor extends Processor
         } else {
             $this->document_file = null;
             $this->errors['document'] = "Le fichier est obligatoire !";
+        }
+
+    }
+    public function checkUserDocUpdate(){
+        $accepted_size = 41943040;
+        $accepted_extensions = [".pdf"];
+        if (!empty($this->doc['name'])) {
+            $extension = strrchr($this->doc['name'], ".");
+            if ($this->doc['size'] > $accepted_size) {
+                $this->errors['document'] = "La taille du fichier ne doit pas depasser 4 Mo !";
+            }
+            if (!in_array(strtolower($extension), $accepted_extensions)) {
+                $this->errors['document'] = "Le fichier doit etre en format PDF ";
+            }
+            $mat = isset($_SESSION['student']) ? $_SESSION['student']['mat'] : $_SESSION['personal']['mat'];
+            $this->document_file = time()."_".$mat."_". $extension;
+        } else {
+            $this->document_file = null;
         }
 
     }

@@ -27,6 +27,9 @@ $routes->get("/my-profile/docs", "App\Controllers\StudentsController@docs");
 $routes->get("/my-profile/docs/add", "App\Controllers\StudentsController@addDocs");
 $routes->post("/my-profile/docs/add", "App\Controllers\StudentsController@_addDocs");
 
+$routes->get("/my-profile/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\StudentsController@updateDocs","id");
+$routes->post("/my-profile/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\StudentsController@_updateDocs","id");
+
 $routes->get("/dashboard", "App\Controllers\AdminController@dashboard");
 $routes->get("/users/current", "App\Controllers\AdminController@profile");
 $routes->get("/users", "App\Controllers\AdminController@users");
@@ -94,7 +97,6 @@ $routes->get("/identification/personnel", "App\Controllers\PersonalsController@r
 $routes->get("/admin/students/(\d*)", "App\Controllers\StudentsController@getStudent",'mat');
 $routes->get("/admin/students/confirm/(\d*)", "App\Controllers\StudentsController@confirmStudent",'mat');
 $routes->get("/admin/students/update/data/(\d*)", "App\Controllers\StudentsController@updateData",'mat');
-//theses routes bellow are for testing purposes
 
 $routes->get('/test', "App\Controllers\TestController@std");
 
