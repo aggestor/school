@@ -45,7 +45,9 @@ $routes->get("/admin/current", "App\Controllers\AdminController@profile");
 $routes->get("/admin/all", "App\Controllers\AdminController@all");
 $routes->get("/admin/update/([a-zA-Z0-9]*)", "App\Controllers\AdminController@update");
 
-$routes->get("/admin/etudiants", "App\Controllers\AdminController@index");
+$routes->get("/admin/inscriptions/students", "App\Controllers\StudentsController@findInscription");
+$routes->get("/admin/inscriptions/personals", "App\Controllers\StudentsController@findInscriptionPersonals");
+$routes->get("/admin/inscriptions", "App\Controllers\InscriptionsController@inscriptions");
 $routes->get("/admin/personnels", "App\Controllers\AdminController@index");
 
 $routes->get("/admin/faculties/new", "App\Controllers\FacultiesController@new");
@@ -89,10 +91,9 @@ $routes->get("/identification/etudiant", "App\Controllers\StudentsController@reg
 $routes->post("/identification/etudiant", "App\Controllers\StudentsController@__registration");
 $routes->get("/identification/personnel", "App\Controllers\PersonalsController@registration");
 
-$routes->get("/admin/etudiants/(\d*)", "App\Controllers\StudentsController@getStudent",'mat');
-$routes->get("/admin/etudiants/modification/data/(\d*)", "App\Controllers\StudentsController@updateData",'mat');
-$routes->get("/admin/etudiants/modification/mot-de-passe/(\d*)", "App\Controllers\StudentsController@updatePassword",'mat');
-
+$routes->get("/admin/students/(\d*)", "App\Controllers\StudentsController@getStudent",'mat');
+$routes->get("/admin/students/confirm/(\d*)", "App\Controllers\StudentsController@confirmStudent",'mat');
+$routes->get("/admin/students/update/data/(\d*)", "App\Controllers\StudentsController@updateData",'mat');
 //theses routes bellow are for testing purposes
 
 $routes->get('/test', "App\Controllers\TestController@std");

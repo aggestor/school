@@ -46,9 +46,9 @@ async function setInitialContainer() {
     hash ? setHashContainer(hash)  : setHashContainer("#identity")
 }
 function pickImage() {
-    const userProfile = _g(".userProfile"),
-      cameraHandle = _g(".cameraHandle"),
-        imageContainer = _g(".imageContainer");
+    const userProfile = _g("#userProfile"),
+      cameraHandle = _g("#cameraHandle"),
+        imageContainer = _g("#imageContainer");
     if (cameraHandle) cameraHandle.onclick = function () {
         console.log('click')
         userProfile.click()

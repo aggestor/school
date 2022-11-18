@@ -32,13 +32,17 @@ class StudentsController extends Controller
     }
     public function getStudent()
     {
-        $process = $this->getStudentProcessor();
-        $mat = $_GET['mat'];
-        $student = $process->student->findStudentData("registration_number", $mat)->fetch();
-        if ($student) {
-            return $this->view("students.profile", "layout_simple", ["student" => $student]);
+        if($this->isLoggedIn()){
+
+            $process = $this->getStudentProcessor();
+            $mat = $_GET['mat'];
+            $student = $process->student->findStudentData("registration_number", $mat)->fetch();
+            if ($student) {
+                return $this->view("students.profile", "layout_simple", ["student" => $student]);
+            }
+            return $this->view("static.404", "layouts", ['message' => "L'étudiant que vous rechercher est introuvable."]);
         }
-        return $this->view("static.404", "layouts", ['message' => "L'étudiant que vous rechercher est introuvable."]);
+        $this->askLogin();
     }
     public function updateData()
     {
@@ -162,5 +166,23 @@ class StudentsController extends Controller
                 }
             }$this->askLogin(true);
         }
+    }
+    public function findInscription(){
+        if($this->isLoggedIn()){
+            $process = $this->getStudentProcessor();
+            $students = $process->loadData($process->student->findAwaitingInscriptions());
+            return $this->view('students.inscriptions', 'layout_admin', ['students' => $students]);
+        }
+        $this->askLogin();
+    }
+    public function confirmStudent(){
+        if ($this->isLoggedIn()) {
+            $mat = $_GET['mat'];
+            $process = $this->getStudentProcessor();
+            $students = $process->loadData($process->student->confirmData($mat));
+            $this->redirect('/admin/students/'.$mat);
+        }
+        $this->askLogin();
+
     }
 }

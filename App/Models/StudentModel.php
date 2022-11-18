@@ -133,10 +133,20 @@ class StudentModel extends Model{
     public function findOne($key, $value){
         return self::findStudent($key, "$key = ?", [$value])->fetch();
     }
+    public function findAwaitingInscriptions(){
+        return $this->find($this->table.' INNER JOIN departments ON departments.id = students.department_id INNER JOIN promotions ON promotions.id = students.promotion_id','first_name, last_name,second_name, students.id as s_id,registration_number, picture,departments.name as d_name, promotions.name as p_name','is_registered = ?',['0']);
+    }
      public static function findStudent($fields, $where, $value){
         return parent::find('students', $fields, "$where", $value);
     }
     public function findMany($key, $value, $data = "*"){
         return self::findStudent($data, "$key", $value);
+    }
+    public function confirmData($id){
+        return $this->updateOne('is_registered','1',$id);
+    }
+    public function updateOne($key, $value, $data,$k = 'registration_number'){
+        return $this->update($this->table,"$key = ?","$k = ?", [$value,$data]);
+
     }
 }
