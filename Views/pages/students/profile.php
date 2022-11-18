@@ -1,8 +1,15 @@
 <?php $student = $params['student']?>
 <div class="w-11/12 mx-auto p-4 bg-white">
-    <h1 class="text-center font-bold text-2xl text-gray-800">
-        Fiche étudiant/<span class="text-sky-500"><?=$student->registration_number?></span>
-    </h1>
+    <div class="w-full flex justify-between">
+
+        <h1 class="text-center font-bold text-2xl text-gray-800">
+            Fiche étudiant/<span class="text-sky-500"><?=$student->registration_number?></span>
+        </h1>
+        <div class="flex w-3/12 items-center justify-between">
+            <a href="/my-profile/modify" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200">Modifier <span class="fas fa-pen text-gray-500 ml-3 mt-1"></span></a>
+            <a href="/my-profile/docs" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200">Mes dossiers <span class="fas fa-folder text-gray-500 ml-3 mt-1"></span></a>
+        </div>
+    </div>
     <!--First section-->
     <div class="w-full mt-4 h-72 space-x-3 grid grid-cols-12">
         <div class="col-span-3 h-ful">

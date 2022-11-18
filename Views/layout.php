@@ -8,6 +8,7 @@
     <script src="/assets/js/jquery.min.js"></script>
     <link rel="shortcut icon" href="/assets/images/128x128.png" sizes="128x128"/>
     <link rel="shortcut icon" href="/assets/images/32x32.png" sizes="32x32"/>
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css"/>
     <meta name="theme-color" content="#"/>
     <title>UOR | School Archive Manager</title>
     <style>

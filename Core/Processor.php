@@ -193,7 +193,18 @@ class Processor extends Controller{
     public function getData(){
         return $this->data;
     }
+    /**
+     * Returns a sanitized version of the post coming data
+     * @return mixed
+     */
     public function sanitize($param){
         return htmlspecialchars($_POST[$param]);
+    }
+    /**
+     * Returns hashed string
+     * @return string
+     */
+    public function encrypt(string $plain_text){
+        return hash("SHA256",$plain_text);
     }
 }

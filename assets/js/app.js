@@ -9,8 +9,12 @@ const _g = (element) => document.querySelector(element)
 async function loadHash() {
     return window.location.hash
 }
-console.log(document.querySelector("#health"))
+const docPicker = _g("#dockPicker")
+if ($('#docPicker')) {
+    $("#docPicker").on("click", () => $("#fileHolder").click())
+} 
 
+console.log("there we go")
 let setHashContainer = async container => {
     const allowedRoutes = ['/identification/etudiant', '/identification/personnel']
     if (allowedRoutes.includes(window.location.pathname)) {
@@ -42,10 +46,11 @@ async function setInitialContainer() {
     hash ? setHashContainer(hash)  : setHashContainer("#identity")
 }
 function pickImage() {
-    const userProfile = _g("#userProfile"),
-      cameraHandle = _g("#cameraHandle"),
-        imageContainer = _g("#imageContainer");
+    const userProfile = _g(".userProfile"),
+      cameraHandle = _g(".cameraHandle"),
+        imageContainer = _g(".imageContainer");
     if (cameraHandle) cameraHandle.onclick = function () {
+        console.log('click')
         userProfile.click()
         userProfile.onchange = e => {
             let $fileObject = e.target.files[0]

@@ -1,15 +1,46 @@
 <?php
 namespace Core;
 
+use App\Models\DocModel;
 use App\Models\StudentModel;
 
 class StudentProcessor extends Processor
 {   
     public $student = null;
+    public $docs = null;
     public function __construct()
     {
         $this->student = new StudentModel;
+        $this->docs = new DocModel;
         $this->states = ["Bas-Uele","Équateur","Haut-Katanga","Haut-Lomami","Haut-Uele","Ituri","Kasaï","Kasaï central","Kasaï oriental","Kinshasa","Kongo-Centra","Kwango","Kwilu","Lomami","Lualaba","Mai-Ndombe","Maniema","Mongala","Nord-Kivu","Nord-Ubangi","Sankuru","Sud-Kivu","Sud-Ubangi","Tanganyika","Tshopo","Tshuapa"];
+    }
+    public function resetPasswordProcess(){
+        $this->email = $this->sanitize('email');
+
+        if (!$this->isEmail($this->email)) {
+            $this->setError('email', "Addresse email invalide !");
+        } else {
+            if ($this->StudentKeyExist("mail_address", $this->email)) {
+                $this->setError('email', "Addresse n'existe pas !");
+            }
+        }
+    }
+    public function checkPasswordUpdate(){
+        $this->initPasswordUpdate();
+        if($this->old_password !== ''){
+            if($this->encrypt($this->old_password) != $_SESSION['student']['password']){
+                $this->setError('old_password', "Ancien mot de passe incorrect ");
+            }else{
+                if(!$this->hasMoreCharsThen($this->new_password,6)){
+                    $this->setError('new_password', "Mot de passe trop court, minimum 6 Caractètes !");
+                }
+                if(!$this->valuesMatch($this->new_password, $this->password)){
+                    $this->setError('repeat_password', "Le mot de passe ne correspond pas ");
+                }
+            }
+        }else{
+            $this->password = $_SESSION['student']['password'];
+        }
     }
     private function initLogin(){
         $this->email = $this->sanitize('email');
@@ -32,8 +63,7 @@ class StudentProcessor extends Processor
         if(!$this->hasMoreCharsThen($this->password, 6)){
             $this->setError('password',"Mot de passe trop court !");
         }
-        $result = $this->student->findMany("mail_address = ?", [$this->email],"registration_number,id,mail_address, password")->fetch();
-        var_dump($result);
+        $result = $this->student->findMany("mail_address = ?", [$this->email],"registration_number,id,mail_address, password,picture")->fetch();
         if($result){
             if($this->valuesMatch(hash("SHA256", $this->password),$result->password)){
                 $this->student_data = $result;
@@ -56,6 +86,18 @@ class StudentProcessor extends Processor
         $this->checkUserProfile();
         $this->setBooleans();
     }
+    public function updateStudentProcess()
+    {
+        $this->checkIdentityForUpdate();
+        $this->checkAddress();
+        $this->checkOrigin();
+        $this->checkOrientation();
+        $this->checkSS();
+        $this->checkParentSponsor();
+        $this->checkHealth();
+        $this->checkUserProfileUpdate();
+        $this->checkPasswordUpdate();
+    }
     public function initFiles(){
             $this->user_profile = $_FILES['user_profile'];
     }
@@ -65,23 +107,6 @@ class StudentProcessor extends Processor
         $this->is_active = 0;
         $this->student_since  = '';
     }
-    // public function checkDocument(){
-    //     $accepted_size = 41943040;
-    //     $accepted_extensions = [".docx", ".pdf"];
-    //     if (!empty($this->document['name'])) {
-    //         $extension = strrchr($this->document['name'], ".");
-    //         if ($this->document['size'] > $accepted_size) {
-    //             $this->errors['document'] = "La taille du fichier ne doit pas depasser 20 Mo !";
-    //         }
-    //         if (!in_array(strtolower($extension), $accepted_extensions)) {
-    //             $this->errors['document'] = "Le fortmat du fichier doit etre soit docx, soit pdf";
-    //         }
-    //         $this->document_file = $this->user_email . $extension;
-    //     } else {
-    //         $this->document_file = null;
-    //         $this->errors['document'] = "Le document est obligatoire !";
-    //     }
-    // }
     public function checkUserProfile(){
         $accepted_size = 41943040;
         $accepted_extensions = [".png", ".jpg", ".jpeg"];
@@ -101,6 +126,26 @@ class StudentProcessor extends Processor
         }
 
     }
+    public function checkUserProfileUpdate(){
+        $accepted_size = 41943040;
+        $accepted_extensions = [".png", ".jpg", ".jpeg"];
+        if (!empty($this->user_profile['name'])) {
+            $extension = strrchr($this->user_profile['name'], ".");
+            if ($this->user_profile['size'] > $accepted_size) {
+                $this->errors['user_profile'] = "La taille de l'image ne doit pas depasser 4 Mo !";
+            }
+            if (!in_array(strtolower($extension), $accepted_extensions)) {
+                $this->errors['user_profile'] = "Le 'image doit etre de format png jpg ou jpeg ";
+            }
+            $this->profile_file = $this->user_email. $extension;
+            $this->photo_updated = true;
+        }else{
+            $this->photo_updated = false;
+            $this->profile_file = $_SESSION['student']['picture'];
+
+        }
+
+    }
     public function initIdentity(){
         if(isset($_POST['register_student'])){
             $this->user_first_name = htmlspecialchars($_POST['user_first_name']);
@@ -113,6 +158,26 @@ class StudentProcessor extends Processor
             $this->civilian_status = htmlspecialchars($_POST['civilian_status']);
             $this->sex = htmlspecialchars($_POST['sex']);
             $this->initFiles();
+        }
+    }
+    public function initPasswordUpdate(){
+        if(isset($_POST['register_student'])){
+            $this->old_password = $this->sanitize('old_password');
+            $this->new_password = $this->sanitize('new_password');
+            $this->password = $this->sanitize('repeat_password');
+        }
+    }
+    public function initIdentityUpdate(){
+        if(isset($_POST['register_student'])){
+            $this->user_first_name = htmlspecialchars($_POST['user_first_name']);
+            $this->user_second_name = htmlspecialchars($_POST['user_second_name']);
+            $this->user_last_name = htmlentities($_POST['user_last_name']);
+            $this->user_phone_number = htmlspecialchars($_POST['user_phone_number']);
+            $this->user_email = htmlspecialchars($_POST['user_email']);
+            $this->birth_place = htmlspecialchars($_POST['birth_place']);
+            $this->birth_date = htmlspecialchars($_POST['birth_date']);
+            $this->civilian_status = htmlspecialchars($_POST['civilian_status']);
+            $this->sex = htmlspecialchars($_POST['sex']);
         }
     }
     public function initAddress(){
@@ -211,7 +276,7 @@ class StudentProcessor extends Processor
         if (!$this->isNumeric($this->diploma_number)) {
             $this->errors['diploma_number'] = "Numéro du diplome invalide !";
         }
-        if (!$this->isNumeric($this->exetat_pourcentage) OR ($this->exetat_pourcentage < 50  OR $this->extat_pourcentage > 99 )) {
+        if (!$this->isNumeric($this->exetat_pourcentage) OR ($this->exetat_pourcentage < 50  OR $this->exetat_pourcentage > 99 )) {
             $this->errors['exetat_pourcentage'] = "Pourcentage exetat invalide !";
         }
         if (!$this->hasMoreCharsThen($this->town_ss, 2)) {
@@ -300,6 +365,43 @@ class StudentProcessor extends Processor
             $this->errors['birth_date'] = 'Date de naissance incorrecte !';
         }
     }
+    public function checkIdentityForUpdate(){
+        $this->initFiles();
+        $this->initIdentityUpdate();
+
+        if (!$this->hasMoreCharsThen($this->user_first_name, 2)) {
+            $this->errors['user_first_name'] = 'Le nom doit avoir au minium 2 caractères !';
+        }
+        if (!$this->hasMoreCharsThen($this->user_second_name, 2)) {
+            $this->errors['user_second_name'] = 'Le Post-nom doit avoir au minium 2 caractères !';
+        }
+        if (!$this->hasMoreCharsThen($this->user_last_name, 2)) {
+            $this->errors['user_last_name'] = 'Le Prénom doit avoir au minium 2 caractères !';
+        }
+        if (!$this->isPhoneNumber($this->user_phone_number)) {
+            $this->errors['user_phone_number'] = 'Numéro de téléphone incorrect !';
+        }
+        if (!$this->hasMoreCharsThen($this->civilian_status, 9)) {
+            $this->errors['civilian_status'] = "Choix de l'état civil invalide !";
+        }
+        if (!$this->hasMoreCharsThen($this->sex, 4)) {
+            $this->errors['sex'] = 'Choix du sexe invalide !';
+        }
+        if (!$this->isEmail($this->user_email)) {
+            $this->errors['user_email'] = 'Addresse Mail incorrect !';
+        }
+        if($_SESSION['student']['email'] != $this->user_email){
+            if ($this->mailExist($this->user_email)) {
+                $this->errors['user_email'] = 'Addresse Mail déjà utilisée !';
+            }
+        }
+        if (!$this->hasMoreCharsThen($this->birth_place, 4)) {
+            $this->errors['birth_place'] = 'Lieu de naissance invalide !';
+        }
+        if (!$this->isNullThenBreak($this->birth_date)) {
+            $this->errors['birth_date'] = 'Date de naissance incorrecte !';
+        }
+    }
     public function checkAddress(){
         $this->initAddress();
 
@@ -331,7 +433,7 @@ class StudentProcessor extends Processor
             $this->errors['student_status'] = "Type d'étudiant choisi non valide!";
         }
     }
-    public function  generateRegistrationNumber(){
+    public function generateRegistrationNumber(){
         $this->findRegistrationNumber();
     }
     public function findLastId(){
@@ -382,6 +484,49 @@ class StudentProcessor extends Processor
     public function StudentKeyExist($key, $value){
         $result = $this->student->findOne($key, $value);
         return $result === false;
+    }
+    /**
+     * Searches a student specific data into the database and tells whether it exists in the database or not
+     * 
+     * @return boolean TRUE if the data is found, else it returns FALSE.
+     */
+    public function docExist($value){
+        $result = $this->docs->findOne($value);
+        return $result === false;
+    }
+    public function initAddDocs(){
+        $this->type = $this->sanitize('type');
+        $this->doc = $_FILES['document'];
+    }
+    public function addDocsProcess(){
+        $this->initAddDocs();
+        if(!$this->hasMoreCharsThen($this->type,10)){
+            $this->setError("type", "Ce type semble invalide");
+        }
+        if(!$this->docExist($this->type)){
+            $this->setError("type", "Vous avez déjà uploader ce type de document ($this->type)");
+        }
+        $this->checkUserDoc();
+    }
+    public function checkUserDoc(){
+        $accepted_size = 41943040;
+        $accepted_extensions = [".pdf"];
+        if (!empty($this->doc['name'])) {
+            $extension = strrchr($this->doc['name'], ".");
+            
+            if ($this->doc['size'] > $accepted_size) {
+                $this->errors['document'] = "La taille du fichier ne doit pas depasser 4 Mo !";
+            }
+            if (!in_array(strtolower($extension), $accepted_extensions)) {
+                $this->errors['document'] = "Le fichier doit etre en format PDF ";
+            }
+            $mat = isset($_SESSION['student']) ? $_SESSION['student']['mat'] : $_SESSION['personal']['mat'];
+            $this->document_file = time()."_".$mat."_". $extension;
+        } else {
+            $this->document_file = null;
+            $this->errors['document'] = "Le fichier est obligatoire !";
+        }
+
     }
     
     

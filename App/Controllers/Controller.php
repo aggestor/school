@@ -106,6 +106,6 @@ class Controller
     }
     public function askLogin($simple = false){
         if($simple) $this->redirect("/login");
-        $this->redirect("/admin/login");
+        else $this->redirect("/admin/login");
     }
 }

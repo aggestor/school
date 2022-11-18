@@ -21,6 +21,11 @@ $routes->post("/login", "App\Controllers\StudentsController@_login");
 $routes->get("/reset-password", "App\Controllers\StudentsController@resetPassword");
 $routes->get("/logout", "App\Controllers\StudentsController@logout");
 $routes->get("/my-profile", "App\Controllers\StudentsController@profile");
+$routes->get("/my-profile/modify", "App\Controllers\StudentsController@modify");
+$routes->post("/my-profile/modify", "App\Controllers\StudentsController@_modify");
+$routes->get("/my-profile/docs", "App\Controllers\StudentsController@docs");
+$routes->get("/my-profile/docs/add", "App\Controllers\StudentsController@addDocs");
+$routes->post("/my-profile/docs/add", "App\Controllers\StudentsController@_addDocs");
 
 $routes->get("/dashboard", "App\Controllers\AdminController@dashboard");
 $routes->get("/users/current", "App\Controllers\AdminController@profile");

@@ -1,5 +1,4 @@
 <div class="w-full h-full">
-    <?php var_dump($params)?>
     <div class="w-full  space-x-4 grid grid-cols-12 h-[450px]">
         <div class="col-span-5 overflow-hidden h-full rounded bg-white shadow shadow-gray-400">
             <div class="others mt-20 flex flex-col items-center justify-around">

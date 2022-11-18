@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
+use App\Models\DocModel;
 
 class StudentsController extends Controller
 {
@@ -31,8 +32,8 @@ class StudentsController extends Controller
     }
     public function getStudent()
     {
-        $mat = $_GET['mat'];
         $process = $this->getStudentProcessor();
+        $mat = $_GET['mat'];
         $student = $process->student->findStudentData("registration_number", $mat)->fetch();
         if ($student) {
             return $this->view("students.profile", "layout_simple", ["student" => $student]);
@@ -43,17 +44,6 @@ class StudentsController extends Controller
     {
         return $this->view("students.update-data", "layout_simple", ['message' => "L'étudiant que vous rechercher est introuvable."]);
     }
-    // public function updatePassword()
-    // {
-    //     // $mat = $_GET['mat'];
-    //     // $process = $this->getStudentProcessor();
-    //     // $student = $process->student->findStudentData("registration_number",$mat)->fetch();
-    //     // if($student){
-    //     //    return $this->view("students.profile", "layout_simple",["student" => $student]);
-    //     // }
-    //     // return $this->view("static.404","layouts",['message' => "L'étudiant que vous rechercher est introuvable."]);
-    //     return $this->view("students.update-password", "layout_simple", ['message' => "L'étudiant que vous rechercher est introuvable."]);
-    // }
     /**
      * Render the login page from get REQUEST
      */
@@ -73,18 +63,19 @@ class StudentsController extends Controller
             }else{
                 $student = $processor->student_data;
                 $_SESSION['student']["id"] = $student->id;
-                $_SESSION['student']["email"] = $student->email;
+                $_SESSION['student']["email"] = $student->mail_address;
                 $_SESSION['student']["mat"] = $student->registration_number;
+                $_SESSION['student']["password"] = $student->password;
+                $_SESSION['student']["picture"] = $student->picture;
+                $_SESSION['user']['type'] = 'student';
                 $this->redirect("/my-profile");
             }
         }
     }
     public function logout(){
-        if($this->isLoggedIn()){
             unset($_SESSION["student"]);
             session_destroy();
-            $this->askLogin();
-        }
+            $this->redirect('/');
     }
     public function profile(){
         if($this->isLoggedIn('student')){
@@ -93,5 +84,83 @@ class StudentsController extends Controller
             return $this->view("students.profile", "layout_simple", ["student" => $student]);
         }
         $this->askLogin(true);
+    }
+    public function resetPassword(){
+        return $this->view("auth.reset-password", 'layout');
+    }
+    public function docs(){
+        if($this->isLoggedIn('student')){
+            $process = $this->getStudentProcessor();
+            $docs = $process->loadData($process->docs->findAll());
+            return $this->view("students.docs", 'layout_simple', ['docs' => $docs]);
+        }
+        $this->askLogin(true);
+    }
+    public function modify(){
+        if($this->isGetMethod()){
+            if($this->isLoggedIn('student')){
+                $process = $this->getStudentProcessor();
+                $fac = $this->getFacultyProcessor();
+                $dep = $this->getDepartmentProcessor();
+                $prom = $this->getPromotionProcessor();
+                $departments = $dep->getAll();
+                $faculties = $fac->getAll();
+                $promotions = $prom->getAll();
+    
+                $student = $process->student->findStudentData("registration_number", $_SESSION['student']['mat'])->fetch();
+                return $this->view("students.modify", 'layout_simple',["student" => $student,'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
+            }
+            $this->askLogin(true);
+        }
+    }
+    public function _modify(){
+        if($this->isLoggedIn('student')){
+            $process = $this->getStudentProcessor();
+            $fac = $this->getFacultyProcessor();
+            $dep = $this->getDepartmentProcessor();
+            $prom = $this->getPromotionProcessor();
+            $departments = $dep->getAll();
+            $faculties = $fac->getAll();
+            $promotions = $prom->getAll();
+            $process->updateStudentProcess();
+            if($process->hasErrors()){
+                $student = $process->student->findStudentData("registration_number", $_SESSION['student']['mat'])->fetch();
+                return $this->view("students.modify", 'layout_simple',['errors' => $process->getErrors(),"student" => $student,'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
+            }else{
+               $process->student->updateData($process);
+               if($process->photo_updated){
+                    unlink(FILES . "users" . DIRECTORY_SEPARATOR . $_SESSION['student']['picture']);
+                    $this->uploadFile($process->user_profile['tmp_name'], FILES . "users" . DIRECTORY_SEPARATOR . $process->profile_file);
+                }
+                $this->redirect('/my-profile');
+            }
+        }
+        else $this->askLogin(true);
+    }
+    public function _resetPassword(){
+        $process = $this->getStudentProcessor();
+    }
+    public function addDocs(){
+        if($this->isGetMethod()){
+            if($this->isLoggedIn('student')){
+                return $this->view('students.add-docs', 'layout_simple');
+            }$this->askLogin(true);
+        }
+    }
+    public function _addDocs(){
+        if($this->isPostMethod()){
+            if($this->isLoggedIn('student')){
+                $process = $this->getStudentProcessor();
+                
+                $process->addDocsProcess();
+                if($process->hasErrors()){
+                    return $this->view('students.add-docs', 'layout_simple', ['errors' => $process->getErrors()]);
+                }else {
+                    $process->docs->new($process);
+                    $this->uploadFile($process->doc['tmp_name'], FILES . "docs" . DIRECTORY_SEPARATOR . $process->document_file);
+                    return $this->view('students.add-docs-success', 'layout_simple');
+                }
+            }$this->askLogin(true);
+        }
     }
 }

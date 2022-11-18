@@ -28,7 +28,7 @@
                     </label>
                 </div>
                 <div class="md:w-10/12 text-sm text-gray-600 mx-auto my-2">
-                    Mot de passe oublié ?<a href="/rreset-passwordinitialiser-mot-de-passe" class="font-semibold hover:text-sky-500"> Réinitialiser </a>
+                    Mot de passe oublié ?<a href="/reset-password" class="font-semibold hover:text-sky-500"> Réinitialiser </a>
                 </div>
                 <div class="md:w-10/12 flex justify-between mx-auto my-4">
                     <button type="submit" name="login" class="bg-sky-500 font-semibold text-white p-2 w-4/12 h-10 hover:bg-sky-600 transition-colors duration-500 justify-center items-center rounded">Connexion</button>

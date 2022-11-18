@@ -27,6 +27,7 @@
                 <?php echo $content; ?>
             </section>
         </main>
+        <script src="/assets/js/app.js"></script>
         <script>
             const menuItems = document.querySelectorAll("#menu_list li a")
             const currentPath = window.location.href
