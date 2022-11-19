@@ -7,6 +7,7 @@ use Core\DepartmentProcessor;
 use Core\FacSearchDomainProcessor;
 use Core\FacultyProcessor;
 use Core\FunctionProcessor;
+use Core\PersonalProcessor;
 use Core\StudentProcessor;
 use Core\PromotionProcessor;
 
@@ -32,6 +33,9 @@ class Controller
     }
     public function getFSDProcessor(){
         return new FacSearchDomainProcessor;
+    }
+    public function getPersonalProcess(){
+        return new PersonalProcessor;
     }
     
     /**

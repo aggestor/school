@@ -2,16 +2,38 @@
 
 namespace App\Controllers;
 
-use App\Models\AdminModel;
-use App\Models\Schema;
-use Core\AdminProcessor;
-use Core\PostProcessor;
-
 class AdminController extends Controller{
 
     public function index(){
         if($this->isLoggedIn()){
-            return $this->view("admin.index", "layout_admin");
+            $s =$this->getStudentProcessor();
+            $student_count = $s->getCount($s->student->findAll());
+            $not_registered_students = $s->getCount($s->student->findAwaitingInscriptions());
+            $registered_students = $s->getCount($s->student->findRegisteredOnly());
+
+            $fac = $this->getFacultyProcessor();
+            $faculties = $fac->getCount($fac->getAll());
+
+            $dep = $this->getDepartmentProcessor();
+            $departs = $dep->getCount($dep->getAll());
+            
+            $prom = $this->getPromotionProcessor();
+            $promotions = $prom->getCount($prom->getAll());
+
+            $func = $this->getFunctionProcessor();
+            $funcs = $func->getCount($func->getAll());
+
+            $fsd = $this->getFSDProcessor();
+            $fsd_s = $fsd->getCount($fsd->getAll());
+
+            $admin = $this->getAdminProcessor();
+            $admins = $admin->getCount($admin->admin->findAll());
+
+            $docs = $s->getCount($s->docs->findAll());
+
+            $last4 = $s->loadData($s->student->findLast());
+
+            return $this->view("admin.index", "layout_admin",['students_count' => $student_count, 'nrs' =>$not_registered_students, 'rs' =>$registered_students, 'fac' => $faculties, 'dep' => $departs, 'prom' => $promotions, 'funcs' => $funcs,'fsds' => $fsd_s, 'admins' => $admins, 'docs' => $docs, 'last4s' =>$last4]);
         }
         $this->askLogin();
     }
@@ -77,11 +99,9 @@ class AdminController extends Controller{
         }
     }
     public function logout(){
-        if($this->isLoggedIn()){
             unset($_SESSION["admin"]);
             session_destroy();
-            $this->askLogin();
-        }
+            $this->redirect('/admin/login');
     }
     public function update(){
         return $this->view("admin.update", 'layout_admin');

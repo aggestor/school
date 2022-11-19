@@ -89,10 +89,12 @@ $routes->post("/admin/promotions/update/([a-zA-Z0-9]*)", "App\Controllers\Promot
 $routes->get("/admin/promotions/delete/([a-zA-Z0-9]*)", "App\Controllers\PromotionsController@delete", "id");
 
 $routes->get("/admin", "App\Controllers\AdminController@index");
+$routes->get("/admin/logout", "App\Controllers\AdminController@logout");
 
 $routes->get("/identification/etudiant", "App\Controllers\StudentsController@registration");
 $routes->post("/identification/etudiant", "App\Controllers\StudentsController@__registration");
 $routes->get("/identification/personnel", "App\Controllers\PersonalsController@registration");
+$routes->post("/identification/personnel", "App\Controllers\PersonalsController@__registration");
 
 $routes->get("/admin/students/(\d*)", "App\Controllers\StudentsController@getStudent",'mat');
 $routes->get("/admin/students/confirm/(\d*)", "App\Controllers\StudentsController@confirmStudent",'mat');

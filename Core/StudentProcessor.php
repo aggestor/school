@@ -492,7 +492,7 @@ class StudentProcessor extends Processor
      * @return boolean TRUE if the data is found, else it returns FALSE.
      */
     public function docExist($value){
-        $result = $this->docs->findOne($value);
+        $result = $this->docs->findExactOneDoc($value, 'student',$_SESSION['student']['id']);
         return $result === false;
     }
     public function initAddDocs(){

@@ -15,6 +15,9 @@ class DocModel extends Model {
     public function findOne($id, $key = 'type', $field = '*'){
         return parent::find($this->table, $field, "$key = ?", [$id]);
     }
+    public function findExactOneDoc($type,$user_type, $user ){
+        return parent::find($this->table, "*", "type = ? AND type_user = ? AND id = ?", [$type,$user_type, $user]);
+    }
     public function deleteOne($data){
         return parent::delete($this->table,"id = ?", [$data]);
     }

@@ -160,6 +160,7 @@ class Processor extends Controller{
      * @param \PDOStatement $data the data to count
      */
     public function getCount($data){
+        if(is_array($data)) return count($data);
         return $data->rowCount();
     }
     /**
@@ -206,5 +207,9 @@ class Processor extends Controller{
      */
     public function encrypt(string $plain_text){
         return hash("SHA256",$plain_text);
+    }
+    public function has2NumbersOnly($data){
+        if(strlen($data) <= 2 AND  is_numeric($data)) return true;
+        return false;
     }
 }
