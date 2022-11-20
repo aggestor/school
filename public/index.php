@@ -49,7 +49,7 @@ $routes->get("/admin/all", "App\Controllers\AdminController@all");
 $routes->get("/admin/update/([a-zA-Z0-9]*)", "App\Controllers\AdminController@update");
 
 $routes->get("/admin/inscriptions/students", "App\Controllers\StudentsController@findInscription");
-$routes->get("/admin/inscriptions/personals", "App\Controllers\StudentsController@findInscriptionPersonals");
+$routes->get("/admin/inscriptions/personals", "App\Controllers\PersonalsController@findInscription");
 $routes->get("/admin/inscriptions", "App\Controllers\InscriptionsController@inscriptions")
 ;
 $routes->get("/admin/personals", "App\Controllers\PersonalsController@getAll");
@@ -103,7 +103,12 @@ $routes->get("/admin/students/confirm/(\d*)", "App\Controllers\StudentsControlle
 $routes->get("/admin/students/lock/(\d*)", "App\Controllers\StudentsController@lockStudent",'mat');
 $routes->get("/admin/students/update/data/(\d*)", "App\Controllers\StudentsController@updateData",'mat');
 
-$routes->get('/test', "App\Controllers\TestController@std");
+$routes->get("/admin/personals/(\d*)", "App\Controllers\PersonalsController@getPersonal",'mat');
+$routes->get("/admin/personals", "App\Controllers\PersonalsController@getAll");
+$routes->get("/admin/personals/confirm/(\d*)", "App\Controllers\PersonalsController@confirmPersonal",'mat');
+$routes->get("/admin/personals/lock/(\d*)", "App\Controllers\PersonalsController@lockPersonal",'mat');
+$routes->get("/admin/personals/update/data/(\d*)", "App\Controllers\PersonalsController@updateData",'mat');
+
 
 
 try {

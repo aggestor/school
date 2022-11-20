@@ -105,8 +105,7 @@ class StudentProcessor extends Processor
     public function setBooleans(){
         $this->is_registered = 0;
         $this->is_verified = 0;
-        $this->is_active = 0;
-        $this->student_since  = '';
+        $this->is_active = 1;
     }
     public function checkUserProfile(){
         $accepted_size = 41943040;
@@ -301,16 +300,16 @@ class StudentProcessor extends Processor
         $this->initOrigin();
         
         if(!in_array($this->state_origin,$this->states)){
-            $this->errors['state_origin'] = "Province/Etat choisie invalide !";
+            $this->setError('state_origin', "Province/Etat choisie invalide !");
         }
         if (!$this->hasMoreCharsThen($this->town_origin, 2)) {
-            $this->errors['town_origin'] = "Territoire/Ville  invalide !";
+            $this->setError('town_origin', "Territoire/Ville  invalide !");
         }
         if (!$this->hasMoreCharsThen($this->municipality_origin, 2)) {
-            $this->errors['municipality_origin'] = "Collectivité/Communie/Secteur invalide !";
+            $this->setError('municipality_origin', "Collectivité/Communie/Secteur invalide !");
         }
         if (!$this->hasMoreCharsThen($this->neighborhood_origin, 2)) {
-            $this->errors['neighborhood_origin'] = "Groupement/Quartier invalide !";
+            $this->setError('neighborhood_origin', "Groupement/Quartier invalide !");
         }
 
     }

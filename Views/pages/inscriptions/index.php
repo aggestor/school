@@ -31,7 +31,7 @@
 
 <div class="w-full flex justify-between items-center py-1 mb-4 px-3 h-14 rounded shadow bg-white">
     <h1 class="text-gray-800 font-semibold text-lg">5 derniers personnels non-inscrits</h1>
-    <a href="/admin/inscriptions/students" class="text-white bg-sky-500 rounded p-1.5">Afficher plus</a>
+    <a href="/admin/inscriptions/personals" class="text-white bg-sky-500 rounded p-1.5">Afficher plus</a>
 </div>
 <div class="w-full flex justify-between flex-col items-center py-1 mb-4 px-3 min-h-max h-auto rounded shadow bg-white">
     <div class="border border-gray-500 mb-2 rounded w-full text-gray-800 font-semibold p-2 flex justify-between">

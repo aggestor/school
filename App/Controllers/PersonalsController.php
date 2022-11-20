@@ -36,23 +36,23 @@ class PersonalsController extends Controller
             return $this->view("static.student-register-success", "layout", ['mail' => $process->user_email]);
         }
     }
-    public function getStudent()
+    public function getPersonal()
     {
         if ($this->isLoggedIn()) {
 
-            $process = $this->getStudentProcessor();
+            $process = $this->getPersonalProcess();
             $mat = $_GET['mat'];
-            $student = $process->student->findStudentData("registration_number", $mat)->fetch();
+            $student = $process->personal->findPersonalData("registration_number", $mat)->fetch();
             if ($student) {
-                return $this->view("students.profile", "layout_simple", ["student" => $student]);
+                return $this->view("personals.profile", "layout_simple", ["personal" => $student]);
             }
-            return $this->view("static.404", "layouts", ['message' => "L'étudiant que vous rechercher est introuvable."]);
+            return $this->view("static.404", "layouts", ['message' => "Le personel que vous rechercher est introuvable."]);
         }
         $this->askLogin();
     }
     public function updateData()
     {
-        return $this->view("students.update-data", "layout_simple", ['message' => "L'étudiant que vous rechercher est introuvable."]);
+        return $this->view("personals.update-data", "layout_admin", ['message' => "L'étudiant que vous rechercher est introuvable."]);
     }
     /**
      * Render the login page from get REQUEST
@@ -189,19 +189,19 @@ class PersonalsController extends Controller
     public function findInscription()
     {
         if ($this->isLoggedIn()) {
-            $process = $this->getStudentProcessor();
-            $students = $process->loadData($process->student->findAwaitingInscriptions());
-            return $this->view('students.inscriptions', 'layout_admin', ['students' => $students]);
+            $process = $this->getPersonalProcess();
+            $personals = $process->loadData($process->personal->findAwaitingInscriptions());
+            return $this->view('personals.inscriptions', 'layout_admin', ['personals' => $personals]);
         }
         $this->askLogin();
     }
-    public function confirmStudent()
+    public function confirmPersonal()
     {
         if ($this->isLoggedIn()) {
             $mat = $_GET['mat'];
-            $process = $this->getStudentProcessor();
-            $students = $process->loadData($process->student->confirmData($mat));
-            $this->redirect('/admin/students/' . $mat);
+            $process = $this->getPersonalProcess();
+            $process->personal->confirmData($mat);
+            $this->redirect('/admin/personals/' . $mat);
         }
         $this->askLogin();
     }
@@ -236,6 +236,13 @@ class PersonalsController extends Controller
                 }
             }$this->askLogin(true);
         }
+    }
+    public function getAll(){
+        if($this->isLoggedIn()){
+            $s = $this->getPersonalProcess();
+            $personals = $s->loadData($s->personal->findRegisteredOnly());
+            return $this->view('personals.only-registered', 'layout_admin', ['personals' => $personals]);
+        }else $this->askLogin();
     }
 }
 

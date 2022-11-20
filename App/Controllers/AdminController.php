@@ -11,6 +11,11 @@ class AdminController extends Controller{
             $not_registered_students = $s->getCount($s->student->findAwaitingInscriptions());
             $registered_students = $s->getCount($s->student->findRegisteredOnly());
 
+            $p = $this->getPersonalProcess();
+            $personal_count = $p->getCount($p->personal->findAll());
+            $not_registered_personals = $p->getCount($p->personal->findAwaitingInscriptions());
+            $registered_personals = $p->getCount($p->personal->findRegisteredOnly());
+
             $fac = $this->getFacultyProcessor();
             $faculties = $fac->getCount($fac->getAll());
 
@@ -32,8 +37,13 @@ class AdminController extends Controller{
             $docs = $s->getCount($s->docs->findAll());
 
             $last4 = $s->loadData($s->student->findLast());
+            $last4p = $p->loadData($p->personal->findLast());
+            $docs = $p->getCount($p->docs->findAll());
+            $p_docs = $p->getCount($p->docs->findByKeyValue('type_user', 'personal'));
+            $s_docs = $p->getCount($p->docs->findByKeyValue('type_user', 'student'));
+            
 
-            return $this->view("admin.index", "layout_admin",['students_count' => $student_count, 'nrs' =>$not_registered_students, 'rs' =>$registered_students, 'fac' => $faculties, 'dep' => $departs, 'prom' => $promotions, 'funcs' => $funcs,'fsds' => $fsd_s, 'admins' => $admins, 'docs' => $docs, 'last4s' =>$last4]);
+            return $this->view("admin.index", "layout_admin",['students_count' => $student_count, 'nrs' =>$not_registered_students, 'rs' =>$registered_students, 'fac' => $faculties, 'dep' => $departs, 'prom' => $promotions, 'funcs' => $funcs,'fsds' => $fsd_s, 'admins' => $admins, 'docs' => $docs, 'last4s' =>$last4, 'last4p' =>$last4p,'personals_count' =>$personal_count,'rp'=>$registered_personals, 'nrp' =>$not_registered_personals, 'docs' =>$docs, 'p_docs' =>$p_docs, 's_docs' => $s_docs]);
         }
         $this->askLogin();
     }
