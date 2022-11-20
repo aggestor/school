@@ -140,7 +140,11 @@ class PersonalModel extends Model{
         return $this->find($this->table, $fields, "$where", $value);
     }
     public function findLast($limit = 4){
-        return $this->find($this->table, 'first_name, second_name, last_name,picture,id, registration_number, is_registered', "id != ? ORDER BY id ASC LIMIT $limit",['0']);
+        return $this->find($this->table, 'first_name, second_name, last_name,picture,id, registration_number, is_registered, is_verified, is_active', "id != ? ORDER BY id ASC LIMIT $limit",['0']);
+    }
+
+    public function findLastNotRegistered($limit = 4){
+        return $this->find($this->table, 'first_name, second_name, last_name,picture,id, registration_number, is_registered, is_verified, is_active', "id != ? AND is_registered = ? ORDER BY id ASC LIMIT $limit",['0','0']);
     }
     public function findMany($key, $value, $data = "*"){
         return self::findPersonal($data, "$key", $value);

@@ -7,11 +7,11 @@
             <span class="w-8 h-8 rounded-full bg-slate-200 grid place-items-center mr-3"><i class="fas text-blue-500 fa-tachometer-alt "></i></span>
              Dashboard</a> 
         </li>
-        <li><a href="/admin/etudiants" class="h-full mb-3 my-2 py-1.5 w-full rounded duration-500 transition-colors cursor-pointer hover:bg-slate-200 font-semibold text-gray-800 flex pl-2 items-center">
+        <li><a href="/admin/students" class="h-full mb-3 my-2 py-1.5 w-full rounded duration-500 transition-colors cursor-pointer hover:bg-slate-200 font-semibold text-gray-800 flex pl-2 items-center">
             <span class="w-8 h-8 rounded-full bg-slate-200 grid place-items-center mr-3"><i class="fas text-pink-500 fa-users "></i></span>
              Etudiants</a> 
         </li>
-        <li><a href="/admin/personnels" class="h-full mb-3 my-2 py-1.5 w-full rounded duration-500 transition-colors cursor-pointer hover:bg-slate-200 font-semibold text-gray-800 flex pl-2 items-center">
+        <li><a href="/admin/personals" class="h-full mb-3 my-2 py-1.5 w-full rounded duration-500 transition-colors cursor-pointer hover:bg-slate-200 font-semibold text-gray-800 flex pl-2 items-center">
             <span class="w-8 h-8 rounded-full bg-slate-200 grid place-items-center mr-3"><i class="fas text-green-500 fa-book-open "></i></span>
              Peronnels</a> 
         </li>

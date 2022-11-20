@@ -214,4 +214,11 @@ class StudentsController extends Controller
             }$this->askLogin(true);
         }
     }
+    public function getAll(){
+        if($this->isLoggedIn()){
+            $s = $this->getStudentProcessor();
+            $student = $s->loadData($s->student->findRegisteredOnly());
+            return $this->view('students.only-registered', 'layout_admin', ['students' => $student]);
+        }else $this->askLogin();
+    }
 }

@@ -50,8 +50,9 @@ $routes->get("/admin/update/([a-zA-Z0-9]*)", "App\Controllers\AdminController@up
 
 $routes->get("/admin/inscriptions/students", "App\Controllers\StudentsController@findInscription");
 $routes->get("/admin/inscriptions/personals", "App\Controllers\StudentsController@findInscriptionPersonals");
-$routes->get("/admin/inscriptions", "App\Controllers\InscriptionsController@inscriptions");
-$routes->get("/admin/personnels", "App\Controllers\AdminController@index");
+$routes->get("/admin/inscriptions", "App\Controllers\InscriptionsController@inscriptions")
+;
+$routes->get("/admin/personals", "App\Controllers\PersonalsController@getAll");
 
 $routes->get("/admin/faculties/new", "App\Controllers\FacultiesController@new");
 $routes->post("/admin/faculties/new", "App\Controllers\FacultiesController@_new");
@@ -97,7 +98,9 @@ $routes->get("/identification/personnel", "App\Controllers\PersonalsController@r
 $routes->post("/identification/personnel", "App\Controllers\PersonalsController@__registration");
 
 $routes->get("/admin/students/(\d*)", "App\Controllers\StudentsController@getStudent",'mat');
+$routes->get("/admin/students", "App\Controllers\StudentsController@getAll");
 $routes->get("/admin/students/confirm/(\d*)", "App\Controllers\StudentsController@confirmStudent",'mat');
+$routes->get("/admin/students/lock/(\d*)", "App\Controllers\StudentsController@lockStudent",'mat');
 $routes->get("/admin/students/update/data/(\d*)", "App\Controllers\StudentsController@updateData",'mat');
 
 $routes->get('/test', "App\Controllers\TestController@std");
