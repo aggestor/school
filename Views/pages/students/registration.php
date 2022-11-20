@@ -453,7 +453,7 @@
                     <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-2 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
-                                <input   name="exetat_pourcentage" type="number" placeholder="Pourcentage Exetat" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['diploma_year'];}?>" />
+                                <input   name="exetat_pourcentage" type="number" placeholder="Pourcentage Exetat" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['exetat_pourcentage'];}?>" />
                             </div>
                             <?php if (isset($_POST['register_student']) && !empty($params['errors']['exetat_pourcentage'])): ?>
                                 <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['exetat_pourcentage']; ?></span>

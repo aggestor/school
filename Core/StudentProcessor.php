@@ -196,10 +196,10 @@ class StudentProcessor extends Processor
     }
     public function initOrientation(){
         if(isset($_POST['register_student'])){
-            $this->fac_to_study = htmlspecialchars($_POST['fac_to_study']);
-            $this->department_to_study = htmlspecialchars($_POST['department_to_study']);
-            $this->orientation_to_study = htmlspecialchars($_POST['orientation_to_study']);
-            $this->promotion_to_study = htmlspecialchars($_POST['promotion_to_study']);
+            $this->fac_to_study = $this->sanitize('fac_to_study');
+            $this->department_to_study = $this->sanitize('department_to_study');
+            $this->orientation_to_study = $this->sanitize('orientation_to_study');
+            $this->promotion_to_study = $this->sanitize('promotion_to_study');
         }
     }
     public function initOrigin(){
@@ -316,18 +316,17 @@ class StudentProcessor extends Processor
     }
     public function checkOrientation(){
         $this->initOrientation();
-        $fac = [1,2,3,4,5,6,7,8,9,10,11];
-        if(!in_array($this->fac_to_study,$fac)){
-            $this->errors['fac_to_study'] = "Faculté choisie invalide !";
+        if(!$this->has2NumbersOnly($this->fac_to_study)){
+            $this->setError('fac_to_study', "Faculté choisie invalide !");
         }
-        if(!in_array($this->department_to_study,$fac)){
-            $this->errors['department_to_study'] = "Faculté choisie invalide !";
+        if(!$this->has2NumbersOnly($this->department_to_study)){
+            $this->setError('department_to_study', "Faculté choisie invalide !");
         }
-        if (!$this->hasMoreCharsThen($this->orientation_to_study, 2)) {
-            $this->errors['orientation_to_study'] = "L'orientation est invalide !";
+        if (!$this->hasMoreCharsThen($this->orientation_to_study, 5)) {
+            $this->setError('orientation_to_study', "L'orientation est invalide !");
         }
-        if (!$this->hasMoreCharsThen($this->promotion_to_study, 2)) {
-            $this->errors['promotion_to_study'] = "La promotion est invalide !";
+        if (!$this->has2NumbersOnly($this->promotion_to_study)) {
+            $this->setError('promotion_to_study',"La promotion est invalide !");
         }
 
     }
