@@ -30,6 +30,9 @@ $routes->post("/my-profile/docs/add", "App\Controllers\StudentsController@_addDo
 $routes->get("/my-profile/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\StudentsController@updateDocs","id");
 $routes->post("/my-profile/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\StudentsController@_updateDocs","id");
 
+$routes->get("/profile", "App\Controllers\PersonalsController@profile");
+$routes->get("/profile/docs", "App\Controllers\PersonalsController@docs");
+
 $routes->get("/dashboard", "App\Controllers\AdminController@dashboard");
 $routes->get("/users/current", "App\Controllers\AdminController@profile");
 $routes->get("/users", "App\Controllers\AdminController@users");
