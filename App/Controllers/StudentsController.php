@@ -92,10 +92,10 @@ class StudentsController extends Controller
     public function resetPassword(){
         return $this->view("auth.reset-password", 'layout');
     }
-    public function docs(){
+    public function getDocs(){
         if($this->isLoggedIn('student')){
             $process = $this->getStudentProcessor();
-            $docs = $process->loadData($process->docs->findAll());
+            $docs = $process->loadData($process->docs->findForStudent());
             return $this->view("students.docs", 'layout_simple', ['docs' => $docs]);
         }
         $this->askLogin(true);

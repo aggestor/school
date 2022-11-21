@@ -54,48 +54,13 @@ class PersonalsController extends Controller
     {
         return $this->view("personals.update-data", "layout_admin", ['message' => "L'étudiant que vous rechercher est introuvable."]);
     }
-    /**
-     * Render the login page from get REQUEST
-     */
-    public function login()
-    {
-        return $this->view("auth.login", 'layout');
-    }
-    /**
-     * Login data control
-     */
-    public function _login()
-    {
-        if ($this->isPostMethod()) {
-            $processor = $this->getStudentProcessor();
-            $processor->loginStudentProcess();
-            if ($processor->hasErrors()) {
-                $errors = $processor->getErrors();
-                return $this->view("auth.login", "layout", ["errors" => $errors]);
-            } else {
-                $student = $processor->student_data;
-                $_SESSION['student']["id"] = $student->id;
-                $_SESSION['student']["email"] = $student->mail_address;
-                $_SESSION['student']["mat"] = $student->registration_number;
-                $_SESSION['student']["password"] = $student->password;
-                $_SESSION['student']["picture"] = $student->picture;
-                $_SESSION['user']['type'] = 'student';
-                $this->redirect("/my-profile");
-            }
-        }
-    }
-    public function logout()
-    {
-        unset($_SESSION["student"]);
-        session_destroy();
-        $this->redirect('/');
-    }
+
     public function profile()
     {
-        if ($this->isLoggedIn('student')) {
-            $process = $this->getStudentProcessor();
-            $student = $process->student->findStudentData("registration_number", $_SESSION['student']['mat'])->fetch();
-            return $this->view("students.profile", "layout_simple", ["student" => $student]);
+        if ($this->isLoggedIn('personal')) {
+            $process = $this->getPersonalProcess();
+            $student = $process->personal->findPersonalData("registration_number", $_SESSION['personal']['mat'])->fetch();
+            return $this->view("personals.profile", "layout_simple", ["personal" => $student]);
         }
         $this->askLogin(true);
     }
@@ -103,19 +68,19 @@ class PersonalsController extends Controller
     {
         return $this->view("auth.reset-password", 'layout');
     }
-    public function docs()
+    public function getDocs()
     {
-        if ($this->isLoggedIn('student')) {
+        if ($this->isLoggedIn('personal')) {
             $process = $this->getStudentProcessor();
-            $docs = $process->loadData($process->docs->findAll());
-            return $this->view("students.docs", 'layout_simple', ['docs' => $docs]);
+            $docs = $process->loadData($process->docs->findForPersonal());
+            return $this->view("personals.docs", 'layout_simple', ['docs' => $docs]);
         }
         $this->askLogin(true);
     }
     public function modify()
     {
         if ($this->isGetMethod()) {
-            if ($this->isLoggedIn('student')) {
+            if ($this->isLoggedIn('personal')) {
                 $process = $this->getStudentProcessor();
                 $fac = $this->getFacultyProcessor();
                 $dep = $this->getDepartmentProcessor();
@@ -124,7 +89,7 @@ class PersonalsController extends Controller
                 $faculties = $fac->getAll();
                 $promotions = $prom->getAll();
 
-                $student = $process->student->findStudentData("registration_number", $_SESSION['student']['mat'])->fetch();
+                $student = $process->student->findStudentData("registration_number", $_SESSION['personal']['mat'])->fetch();
                 return $this->view("students.modify", 'layout_simple', ["student" => $student, 'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
             }
             $this->askLogin(true);
@@ -132,7 +97,7 @@ class PersonalsController extends Controller
     }
     public function _modify()
     {
-        if ($this->isLoggedIn('student')) {
+        if ($this->isLoggedIn('personal')) {
             $process = $this->getStudentProcessor();
             $fac = $this->getFacultyProcessor();
             $dep = $this->getDepartmentProcessor();
@@ -142,7 +107,7 @@ class PersonalsController extends Controller
             $promotions = $prom->getAll();
             $process->updateStudentProcess();
             if ($process->hasErrors()) {
-                $student = $process->student->findStudentData("registration_number", $_SESSION['student']['mat'])->fetch();
+                $student = $process->personal->findPersonalData("registration_number", $_SESSION['personal']['mat'])->fetch();
                 return $this->view("students.modify", 'layout_simple', ['errors' => $process->getErrors(), "student" => $student, 'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
             } else {
                 $process->student->updateData($process);
@@ -150,7 +115,7 @@ class PersonalsController extends Controller
                     unlink(FILES . "users" . DIRECTORY_SEPARATOR . $_SESSION['student']['picture']);
                     $this->uploadFile($process->user_profile['tmp_name'], FILES . "users" . DIRECTORY_SEPARATOR . $process->profile_file);
                 }
-                $this->redirect('/my-profile');
+                $this->redirect('/profile');
             }
         } else {
             $this->askLogin(true);
@@ -163,28 +128,34 @@ class PersonalsController extends Controller
     }
     public function addDocs()
     {
-        if ($this->isGetMethod()) {
-            if ($this->isLoggedIn('student')) {
-                return $this->view('students.add-docs', 'layout_simple');
-            }$this->askLogin(true);
-        }
+        if($this->isLoggedIn() OR $this->isLoggedIn('personal')){
+
+            if ($this->isGetMethod()) {
+                if ($this->isLoggedIn('personal')) {
+                    return $this->view('personals.add-docs', 'layout_simple');
+                }$this->askLogin(true);
+            }
+        }else $this->askLogin(true);
     }
     public function _addDocs()
     {
-        if ($this->isPostMethod()) {
-            if ($this->isLoggedIn('student')) {
-                $process = $this->getStudentProcessor();
+        if($this->isLoggedIn() OR $this->isLoggedIn('personal')){
 
-                $process->addDocsProcess();
-                if ($process->hasErrors()) {
-                    return $this->view('students.add-docs', 'layout_simple', ['errors' => $process->getErrors()]);
-                } else {
-                    $process->docs->new($process);
-                    $this->uploadFile($process->doc['tmp_name'], FILES . "docs" . DIRECTORY_SEPARATOR . $process->document_file);
-                    return $this->view('students.add-docs-success', 'layout_simple');
-                }
-            }$this->askLogin(true);
-        }
+            if ($this->isPostMethod()) {
+                if ($this->isLoggedIn('personal')) {
+                    $process = $this->getPersonalProcess();
+    
+                    $process->addDocsProcess();
+                    if ($process->hasErrors()) {
+                        return $this->view('personals.add-docs', 'layout_simple', ['errors' => $process->getErrors()]);
+                    } else {
+                        $process->docs->new($process);
+                        $this->uploadFile($process->doc['tmp_name'], FILES . "docs" . DIRECTORY_SEPARATOR . $process->document_file);
+                        return $this->view('personals.add-docs-success', 'layout_simple');
+                    }
+                }$this->askLogin(true);
+            }
+        }else $this->askLogin(true);
     }
     public function findInscription()
     {
@@ -208,7 +179,7 @@ class PersonalsController extends Controller
     public function updateDocs()
     {
         if ($this->isGetMethod()) {
-            if ($this->isLoggedIn('student')) {
+            if ($this->isLoggedIn('personal')) {
                 $id = $_GET['id'];
                 $process = $this->getStudentProcessor();
                 $data = $process->docs->findOne($id, "id")->fetch();
@@ -219,12 +190,12 @@ class PersonalsController extends Controller
     public function _updateDocs()
     {
         if ($this->isPostMethod()) {
-            if ($this->isLoggedIn('student')) {
+            if ($this->isLoggedIn('personal')) {
                 $process = $this->getStudentProcessor();
                 $id = $_GET['id'];
                 $process->updateDocsProcess();
                 if ($process->hasErrors()) {
-                    return $this->view('students.update-docs', 'layout_simple', ['errors' => $process->getErrors()]);
+                    return $this->view('personals.update-docs', 'layout_simple', ['errors' => $process->getErrors()]);
                 } else {
                     if ($process->document_file === null) {
                         $process->docs->updateOne($process, $id, false);

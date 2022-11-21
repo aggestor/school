@@ -16,14 +16,14 @@ $routes = new Router($_SERVER['REQUEST_URI']);
 
 $routes->get("/", "App\Controllers\StaticController@index");
 
-$routes->get("/login", "App\Controllers\StudentsController@login");
-$routes->post("/login", "App\Controllers\StudentsController@_login");
+$routes->get("/login", "App\Controllers\AuthController@login");
+$routes->post("/login", "App\Controllers\AuthController@_login");
 $routes->get("/reset-password", "App\Controllers\StudentsController@resetPassword");
-$routes->get("/logout", "App\Controllers\StudentsController@logout");
+$routes->get("/logout", "App\Controllers\AuthController@logout");
 $routes->get("/my-profile", "App\Controllers\StudentsController@profile");
 $routes->get("/my-profile/modify", "App\Controllers\StudentsController@modify");
 $routes->post("/my-profile/modify", "App\Controllers\StudentsController@_modify");
-$routes->get("/my-profile/docs", "App\Controllers\StudentsController@docs");
+$routes->get("/my-profile/docs", "App\Controllers\StudentsController@getDocs");
 $routes->get("/my-profile/docs/add", "App\Controllers\StudentsController@addDocs");
 $routes->post("/my-profile/docs/add", "App\Controllers\StudentsController@_addDocs");
 
@@ -31,7 +31,11 @@ $routes->get("/my-profile/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\Students
 $routes->post("/my-profile/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\StudentsController@_updateDocs","id");
 
 $routes->get("/profile", "App\Controllers\PersonalsController@profile");
-$routes->get("/profile/docs", "App\Controllers\PersonalsController@docs");
+$routes->get("/profile/docs", "App\Controllers\PersonalsController@getDocs");
+$routes->get("/profile/docs/add", "App\Controllers\PersonalsController@addDocs");
+$routes->post("/profile/docs/add", "App\Controllers\PersonalsController@_addDocs");
+$routes->get("/profile/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\PersonalsController@updateDocs","id");
+$routes->post("/profile/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\PersonalsController@_updateDocs","id");
 
 $routes->get("/dashboard", "App\Controllers\AdminController@dashboard");
 $routes->get("/users/current", "App\Controllers\AdminController@profile");

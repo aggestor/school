@@ -53,7 +53,7 @@ class PersonalProcessor extends Processor
     /**
      * Processing the student login, making sure the student, the real one with real data is logged in
      */
-    public function loginStudentProcess()
+    public function loginPersonalProcess()
     {
         $this->initLogin();
 
@@ -67,10 +67,10 @@ class PersonalProcessor extends Processor
         if (!$this->hasMoreCharsThen($this->password, 6)) {
             $this->setError('password', "Mot de passe trop court !");
         }
-        $result = $this->student->findMany("mail_address = ?", [$this->email], "registration_number,id,mail_address, password,picture")->fetch();
+        $result = $this->personal->findMany("mail_address = ?", [$this->email], "registration_number,id,mail_address, password,picture")->fetch();
         if ($result) {
             if ($this->valuesMatch(hash("SHA256", $this->password), $result->password)) {
-                $this->student_data = $result;
+                $this->personal_data = $result;
                 return;
             } else {
                 $this->setError("password", "Mot de passe incorrect ");
@@ -448,10 +448,15 @@ class PersonalProcessor extends Processor
      *
      * @return boolean TRUE if the data is found, else it returns FALSE.
      */
-    public function docExist($value)
+    public function docExist($value, $student = true)
     {
-        $result = $this->docs->findExactOneDoc($value, 'student', $_SESSION['student']['id']);
-        return $result === false;
+        if($student === true){
+            $result = $this->docs->findExactOneDoc($value, 'student', $_SESSION['student']['id']);
+            return $result === false;
+        }else{
+            $result = $this->docs->findExactOneDoc($value, 'personal', $_SESSION['personal']['id']);
+            return $result === false;
+        }
     }
     public function initAddDocs()
     {
@@ -464,7 +469,7 @@ class PersonalProcessor extends Processor
         if (!$this->hasMoreCharsThen($this->type, 10)) {
             $this->setError("type", "Ce type semble invalide");
         }
-        if (!$this->docExist($this->type)) {
+        if (!$this->docExist($this->type, false)) {
             $this->setError("type", "Vous avez déjà uploader ce type de document ($this->type)");
         }
         $this->checkUserDoc();

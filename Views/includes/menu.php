@@ -8,8 +8,9 @@
       <a href="/" class="hover:text-sky-500 duration-300 transition-colors">Acceuil</a>
       <a href="/apropos" class="hover:text-sky-500 duration-300 transition-colors">A propos</a>
       <a href="/contacts" class="hover:text-sky-500 duration-300 transition-colors">Contacts</a>
-      <?php if (isset($_SESSION['student'])): ?>
-        <a href="/my-profile" class="hover:text-sky-500 duration-300 transition-colors">Profil</a>
+      <a href="/admin" class="hover:text-sky-500 duration-300 transition-colors">Administration</a>
+      <?php if (isset($_SESSION['student']) OR isset($_SESSION['personal'])): ?>
+        <a href="<?php if(isset($_SESSION['personal'])){ echo "/profile";}else if(isset($_SESSION['student'])){echo '/my-profile';}?>" class="hover:text-sky-500 duration-300 transition-colors">Profil</a>
         <a href="/logout" class="hover:text-sky-500 duration-300 transition-colors">
         Déconnexion
       </a>

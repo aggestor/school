@@ -19,7 +19,15 @@ class DocModel extends Model {
         return $this->find($this->table,$fields, "$key = ?",[$value]);
     }
     public function findExactOneDoc($type,$user_type, $user ){
-        return parent::find($this->table, "*", "type = ? AND type_user = ? AND id = ?", [$type,$user_type, $user]);
+        return parent::find($this->table, "*", "type = ? AND type_user = ? AND id_user = ?", [$type,$user_type, $user])->fetch();
+    }
+    public function findForStudent(){
+        return parent::find($this->table, "*", "id_user = ? AND type_user = ?", [$_SESSION['student']['id'], 'student']);
+        
+    }
+    public function findForPersonal(){
+        return parent::find($this->table, "*", "id_user = ? AND type_user = ?", [$_SESSION['personal']['id'], 'personal']);
+
     }
     public function deleteOne($data){
         return parent::delete($this->table,"id = ?", [$data]);
