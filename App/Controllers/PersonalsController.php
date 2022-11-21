@@ -81,7 +81,7 @@ class PersonalsController extends Controller
     {
         if ($this->isGetMethod()) {
             if ($this->isLoggedIn('personal')) {
-                $process = $this->getStudentProcessor();
+                $process = $this->getPersonalProcess();
                 $fac = $this->getFacultyProcessor();
                 $dep = $this->getDepartmentProcessor();
                 $prom = $this->getPromotionProcessor();
@@ -89,8 +89,8 @@ class PersonalsController extends Controller
                 $faculties = $fac->getAll();
                 $promotions = $prom->getAll();
 
-                $student = $process->student->findStudentData("registration_number", $_SESSION['personal']['mat'])->fetch();
-                return $this->view("students.modify", 'layout_simple', ["student" => $student, 'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
+                $student = $process->personal->findPersonalData("registration_number", $_SESSION['personal']['mat'])->fetch();
+                return $this->view("personals.modify", 'layout_simple', ["personal" => $student, 'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
             }
             $this->askLogin(true);
         }

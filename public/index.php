@@ -31,6 +31,8 @@ $routes->get("/my-profile/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\Students
 $routes->post("/my-profile/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\StudentsController@_updateDocs","id");
 
 $routes->get("/profile", "App\Controllers\PersonalsController@profile");
+$routes->get("/profile/modify", "App\Controllers\PersonalsController@modify");
+$routes->post("/profile/modify", "App\Controllers\PersonalsController@_modify");
 $routes->get("/profile/docs", "App\Controllers\PersonalsController@getDocs");
 $routes->get("/profile/docs/add", "App\Controllers\PersonalsController@addDocs");
 $routes->post("/profile/docs/add", "App\Controllers\PersonalsController@_addDocs");

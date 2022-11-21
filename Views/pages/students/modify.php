@@ -561,7 +561,7 @@
                             <?php endif;?>
                         </div>
                     </div>
-                    <div  id="parent-sponsors" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[70%]">
+            <div  id="parent-sponsors" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[70%]">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">8. Mot de passe</h2>
                 </div>
