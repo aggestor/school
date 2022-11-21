@@ -30,7 +30,7 @@ class PersonalProcessor extends Processor
     {
         $this->initPasswordUpdate();
         if ($this->old_password !== '') {
-            if ($this->encrypt($this->old_password) != $_SESSION['student']['password']) {
+            if ($this->encrypt($this->old_password) != $_SESSION['personal']['password']) {
                 $this->setError('old_password', "Ancien mot de passe incorrect ");
             } else {
                 if (!$this->hasMoreCharsThen($this->new_password, 6)) {
@@ -42,7 +42,7 @@ class PersonalProcessor extends Processor
             }
             $this->password = $this->encrypt($this->password);
         } else {
-            $this->password = $_SESSION['student']['password'];
+            $this->password = $_SESSION['personal']['password'];
         }
     }
     private function initLogin()
@@ -147,7 +147,7 @@ class PersonalProcessor extends Processor
             $this->photo_updated = true;
         } else {
             $this->photo_updated = false;
-            $this->profile_file = $_SESSION['student']['picture'];
+            $this->profile_file = $_SESSION['personal']['picture'];
 
         }
 
@@ -179,15 +179,16 @@ class PersonalProcessor extends Processor
     public function initIdentityUpdate()
     {
         if (isset($_POST['save'])) {
-            $this->user_first_name = htmlspecialchars($_POST['user_first_name']);
-            $this->user_second_name = htmlspecialchars($_POST['user_second_name']);
-            $this->user_last_name = htmlentities($_POST['user_last_name']);
-            $this->user_phone_number = htmlspecialchars($_POST['user_phone_number']);
-            $this->user_email = htmlspecialchars($_POST['user_email']);
-            $this->birth_place = htmlspecialchars($_POST['birth_place']);
-            $this->birth_date = htmlspecialchars($_POST['birth_date']);
-            $this->civilian_status = htmlspecialchars($_POST['civilian_status']);
-            $this->sex = htmlspecialchars($_POST['sex']);
+            $this->user_first_name = $this->sanitize('user_first_name');
+            $this->user_second_name = $this->sanitize('user_second_name');
+            $this->user_last_name = $this->sanitize('user_last_name');
+            $this->user_phone_number = $this->sanitize('user_phone_number');
+            $this->user_email = $this->sanitize('user_email');
+            $this->birth_place = $this->sanitize('birth_place');
+            $this->birth_date = $this->sanitize('birth_date');
+            $this->civilian_status = $this->sanitize('civilian_status');
+            $this->registration_number = $this->sanitize('registration_number');
+            $this->sex = $this->sanitize('sex');
         }
     }
     public function initAddress()
@@ -360,7 +361,9 @@ class PersonalProcessor extends Processor
     {
         $this->initFiles();
         $this->initIdentityUpdate();
-
+        if (!$this->hasMoreCharsThen($this->registration_number, 2)) {
+            $this->errors['registration_number'] = 'Le matricule doit avoir au minium 2 caractères !';
+        }
         if (!$this->hasMoreCharsThen($this->user_first_name, 2)) {
             $this->errors['user_first_name'] = 'Le nom doit avoir au minium 2 caractères !';
         }
@@ -382,7 +385,7 @@ class PersonalProcessor extends Processor
         if (!$this->isEmail($this->user_email)) {
             $this->errors['user_email'] = 'Addresse Mail incorrect !';
         }
-        if ($_SESSION['student']['email'] != $this->user_email) {
+        if ($_SESSION['personal']['email'] != $this->user_email) {
             if ($this->mailExist($this->user_email)) {
                 $this->errors['user_email'] = 'Addresse Mail déjà utilisée !';
             }

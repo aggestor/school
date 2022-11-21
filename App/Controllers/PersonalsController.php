@@ -98,21 +98,21 @@ class PersonalsController extends Controller
     public function _modify()
     {
         if ($this->isLoggedIn('personal')) {
-            $process = $this->getStudentProcessor();
+            $process = $this->getPersonalProcess();
             $fac = $this->getFacultyProcessor();
             $dep = $this->getDepartmentProcessor();
             $prom = $this->getPromotionProcessor();
             $departments = $dep->getAll();
             $faculties = $fac->getAll();
             $promotions = $prom->getAll();
-            $process->updateStudentProcess();
+            $process->updatePersonalProcess();
             if ($process->hasErrors()) {
                 $student = $process->personal->findPersonalData("registration_number", $_SESSION['personal']['mat'])->fetch();
-                return $this->view("students.modify", 'layout_simple', ['errors' => $process->getErrors(), "student" => $student, 'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
+                return $this->view("personals.modify", 'layout_simple', ['errors' => $process->getErrors(), "student" => $student, 'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
             } else {
-                $process->student->updateData($process);
+                $process->personal->updateData($process);
                 if ($process->photo_updated) {
-                    unlink(FILES . "users" . DIRECTORY_SEPARATOR . $_SESSION['student']['picture']);
+                    unlink(FILES . "users" . DIRECTORY_SEPARATOR . $_SESSION['personal']['picture']);
                     $this->uploadFile($process->user_profile['tmp_name'], FILES . "users" . DIRECTORY_SEPARATOR . $process->profile_file);
                 }
                 $this->redirect('/profile');

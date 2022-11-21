@@ -1,9 +1,9 @@
 <?php $student = $params['student']?>
-<section class="w-full flex items-center justify-center overflow-x-auto h-ful">
-    <main class="h-auto block w-11/12 border-r-2 border-white border-b-2 bg-white rounded-lg shadow shadow-gray-400">
+<section class="w-full flex items-center justify-center">
+    <main class="h-full block w-11/12 border-r-2 border-white border-b-2 bg-white rounded-lg shadow shadow-gray-400">
         <div class="w-11/12 mb-2 mx-auto">
             <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">School Archive Manager.</h2>
-            <h2 class="text-black font-semibold text-lg mt-2 text-center">Modification étudiant / <span class="text-sky-500"><?=$student->registration_number?></span></h2>
+            <h2 class="text-black font-semibold text-lg mt-2 text-center">Modification étudiant : <span class="text-sky-500"><?=$student->registration_number?></span></h2>
         </div>
        
           <form enctype="multipart/form-data" method="POST" class="w-full h-auto overflow-auto flex justify-center flex-col">
@@ -561,6 +561,7 @@
                             <?php endif;?>
                         </div>
                     </div>
+
             <div  id="parent-sponsors" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[70%]">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">8. Mot de passe</h2>

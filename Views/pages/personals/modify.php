@@ -1,12 +1,10 @@
 <?php $personal = $params['personal'] ?>
-<section class="w-full flex items-center flex-col justify-center h-full ">
-    <main class="h-auto  block w-11/12 border-r-2 border-white border-b-2 mt-28 mb-12 bg-white rounded-lg shadow shadow-gray-400">
-        
+<section class="w-full flex items-center flex-col justify-center">
+    <main class="h-auto  w-11/12 border-r-2 border-white border-b-2 mb-12 bg-white rounded-lg shadow shadow-gray-400">
         <div class="w-11/12 mb-2 mx-auto">
             <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">School Archive Manager.</h2>
             <h2 class="text-black font-semibold text-lg mt-2 text-center">Modification personel personnel : <span class="text-sky-500"><?=$personal->registration_number?></span></h2>
         </div>
-        
           <form  method="POST" enctype="multipart/form-data" class="w-full h-auto  flex justify-center flex-col">
             <div  id="identity" class="w-full register-menu grid md:grid-cols-2 grid-cols-1">
                 <div class="md:col-span-2 col-span-1 mb-2 mx-auto">
@@ -120,7 +118,7 @@
                     </div>
                 </div>
             </div>
-            <div  id="address" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[70%]">
+            <div  id="address" class="w-full register-container grid grid-cols-1 md:grid-cols-2">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">2. Votre Adresse</h2>
                 </div>
@@ -209,7 +207,7 @@
                     </div>
                 </div>
             </div>
-            <div id="orientation" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[60%]">
+            <div id="orientation" class="w-full register-container grid grid-cols-1 md:grid-cols-2">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">3. Orientation académique</h2>
                 </div>
@@ -336,7 +334,7 @@
                     </div>
                 </div>
             </div>
-            <div style="display: none" id="origin" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[60%]">
+            <div  id="origin" class="w-full register-container grid grid-cols-1 md:grid-cols-2 ">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">4. Vos Origines</h2>
                 </div>
@@ -408,7 +406,7 @@
                     </div>
                 </div>
             </div>
-            <div style="display: none" id="payment" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[90%]">
+            <div  id="payment" class="w-full register-container grid grid-cols-1 md:grid-cols-2 ">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">5. Etat de paie</h2>
                 </div>
@@ -434,7 +432,7 @@
                     </div>
                 </div>
             </div>
-            <div  id="health" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[60%]">
+            <div  id="health" class="w-full register-container grid grid-cols-1 md:grid-cols-2">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">7. Informations sanitaires</h2>
                 </div>
@@ -479,7 +477,7 @@
                     </div>
                 </div>
             </div>
-             <div  id="parent-sponsors" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[70%]">
+             <div  id="parent-sponsors" class="w-full register-container grid grid-cols-1 md:grid-cols-2 ">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">8. Mot de passe</h2>
                 </div>
@@ -520,6 +518,5 @@
           </form>
         <!--End first section/hero-->
     </main>
-    
-    <div class=" w-full text-gray-600 text-center" id="footer"><?php include VIEWS.'includes/footer.php'?></div>
+
 </section>

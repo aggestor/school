@@ -65,11 +65,11 @@ class PersonalModel extends Model
      * @param
      * Creates a new student
      */
-    public function updateData($process)
-    {
+    function updateData ($process) {
 
-        return parent::update($this->table, 'first_name = ?,second_name =?,last_name = ?,phone_number = ?,mail_address = ?,picture = ?,place_of_birth = ?,date_of_birth = ?,civilian_status = ?,
-        sex = ?,id_type = ?,id_number = ?,nationality = ?,state = ?,town = ?,municipality = ?,neighborhood = ?,physical_address = ?,student_status = ?,faculty_id = ?,department_id = ?,orientation = ?,promotion_id = ?,state_origin = ?,town_origin = ?,municipality_origin = ?,neighborhood_origin = ?,clg_name = ?,clg_state = ?,clg_town = ?,clg_section_studied = ?,clg_l_e_center = ?,clg_l_e_year = ?,clg_l_e_percentage = ?,clg_diploma_number = ?,ps_father = ?,ps_mother = ?,ps_sponsor = ?,ps_phone_number = ?,ps_type_sponsor = ?,blood_type = ?,height = ?,allergies = ?,handicaps = ?,registration_number = ?,last_update = NOW(),password = ?', 'registration_number = ?',
+        return parent::update($this->table, 'first_name = ?,second_name = ?,last_name = ?,phone_number = ?,mail_address = ?,picture = ?,place_of_birth = ?,date_of_birth = ?,civilian_status = ?,
+        sex = ?,id_type = ?,id_number = ?,nationality = ?,state = ?,town = ?,municipality = ?,neighborhood = ?,physical_address = ?,
+        function_id = ?,personal_type = ?,academical_level = ?,academical_status = ?,academical_grade = ?,faculty_id = ?,faculty_search_domain = ?,search_domain = ?,engagement_date = ?,base_salary = ?,prime = ?,state_origin = ?,town_origin = ?,municipality_origin = ?,neighborhood_origin = ?,blood_type = ?,height = ?,allergies = ?,handicaps = ?,registration_number = ?,last_update = NOW(),password = ?', ' id = ?',
             [$process->user_first_name,
                 $process->user_second_name,
                 $process->user_last_name,
@@ -88,36 +88,29 @@ class PersonalModel extends Model
                 $process->municipality,
                 $process->neighborhood,
                 $process->physical_address,
-                $process->student_status,
-                $process->fac_to_study,
-                $process->department_to_study,
-                $process->orientation_to_study,
-                $process->promotion_to_study,
+                $process->function,
+                $process->personal_type,
+                $process->academical_level,
+                $process->academical_status,
+                $process->academical_grade,
+                $process->fac,
+                $process->fac_search_domain,
+                $process->search_domain_speciality,
+                $process->engagment_date,
+                $process->base_salary,
+                $process->prime,
                 $process->state_origin,
                 $process->town_origin,
                 $process->municipality_origin,
                 $process->neighborhood_origin,
-                $process->name_ss,
-                $process->state_ss,
-                $process->town_ss,
-                $process->section_ss,
-                $process->exetat_center,
-                $process->diploma_year,
-                $process->exetat_pourcentage,
-                $process->diploma_number,
-                $process->father_name,
-                $process->mother_name,
-                $process->sponsor_name,
-                $process->sponsor_phone_number,
-                $process->sponsoring_type,
                 $process->blood_type,
                 $process->height,
                 $process->allergies,
                 $process->handicap,
-                $_SESSION['personal']['mat'],
-                $process->password,
-                $_SESSION['personal']['mat']]);
+                $process->registration_number,
+                $process->password, $_SESSION['personal']['id']]);
     }
+
     public function findLastId()
     {
         return $this->find($this->table, "MAX(id) as id", 'id > ?', [0]);
