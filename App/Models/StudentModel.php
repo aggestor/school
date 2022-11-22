@@ -137,10 +137,10 @@ class StudentModel extends Model{
         return self::findStudent($key, "$key = ?", [$value])->fetch();
     }
     public function findAwaitingInscriptions(){
-        return $this->find($this->table.' INNER JOIN departments ON departments.id = students.department_id INNER JOIN promotions ON promotions.id = students.promotion_id','first_name, last_name,second_name, students.id as s_id,registration_number, picture,departments.name as d_name, promotions.name as p_name','is_registered = ?',['0']);
+        return $this->find($this->table.' INNER JOIN departments ON departments.id = students.department_id INNER JOIN promotions ON promotions.id = students.promotion_id','first_name, last_name,second_name, students.id as s_id,registration_number, picture,departments.name as d_name, promotions.name as p_name,is_active, is_registered, is_verified','is_registered = ?',['0']);
     }
     public function findRegisteredOnly(){
-        return $this->find($this->table.' INNER JOIN departments ON departments.id = students.department_id INNER JOIN promotions ON promotions.id = students.promotion_id','first_name, last_name,second_name, students.id as s_id,registration_number, picture,departments.name as d_name, promotions.name as p_name','is_registered = ?',['1']);
+        return $this->find($this->table.' INNER JOIN departments ON departments.id = students.department_id INNER JOIN promotions ON promotions.id = students.promotion_id','first_name, last_name,second_name, students.id as s_id,registration_number, picture,departments.name as d_name, promotions.name as p_name, is_active, is_registered, is_verified','is_registered = ?',['1']);
     }
      public static function findStudent($fields, $where, $value){
         return parent::find('students', $fields, "$where", $value);

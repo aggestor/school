@@ -133,11 +133,11 @@ class PersonalModel extends Model
     }
     public function findAwaitingInscriptions()
     {
-        return $this->find($this->table." INNER JOIN functions ON functions.id = personals.function_id", 'first_name, last_name,second_name, personals.id as p_id,registration_number, picture, functions.name as f_name, personal_type, academical_status', 'is_registered = ?', ['0']);
+        return $this->find($this->table." INNER JOIN functions ON functions.id = personals.function_id", 'first_name, last_name,second_name, personals.id as p_id,registration_number, picture, functions.name as f_name, personal_type, academical_status, is_registered, is_active, is_verified', 'is_registered = ?', ['0']);
     }
     public function findRegisteredOnly()
     {
-        return $this->find($this->table."  INNER JOIN functions ON functions.id = personals.function_id", 'first_name, last_name,second_name, personals.id as p_id,registration_number, picture, functions.name as f_name, personal_type', 'is_registered = ?', ['1']);
+        return $this->find($this->table."  INNER JOIN functions ON functions.id = personals.function_id", 'first_name, last_name,second_name, personals.id as p_id,registration_number, picture, functions.name as f_name, personal_type, is_registered, is_active, is_verified', 'is_registered = ?', ['1']);
     }
     public function findPersonal($fields, $where, $value)
     {

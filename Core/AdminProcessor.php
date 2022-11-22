@@ -126,17 +126,77 @@ class AdminProcessor extends Processor
      * 
      * @return boolean telling whether the data is correct or not.
      */
-    public function updateAdminProcess(){
-        if ($this->isNull($_POST[parent::USER_NAMES]) || !$this->hasMoreCharsThen($_POST[parent::USER_NAMES], 5)) {
-            $this->errors[parent::USER_NAMES] = "Le nom de l'utilisateur doit avoir plus de 5 caractères !";
+    public function updateProcess(){
+       $this->checkAdminData();
+       $this->checkPasswordUpdate();
+    }
+    public function initPasswordUpdate()
+    {
+        if (isset($_POST['update'])) {
+            $this->old_password = $this->sanitize('old_password');
+            $this->new_password = $this->sanitize('new_password');
+            $this->password = $this->sanitize('repeat_password');
         }
-        if (!$this->isEmail($_POST[parent::USER_EMAIL])) {
-            $this->errors[parent::USER_EMAIL] = "Addresse email invalide !";
+    }
+    public function initAdminData(){
+        if(isset($_POST['update'])){
+            $this->name = $this->sanitize('name');
+            $this->email = $this->sanitize('email');
+            $this->phone = $this->sanitize('phone');
         }
-        if ($this->isNull($_POST[parent::USER_PASSWORD]) || !$this->hasMoreCharsThen($_POST[parent::USER_PASSWORD], 8)) {
-            $this->errors[parent::USER_PASSWORD] = "Le mot de passe doit avoir plus de 8 caractères !";
-        } else if ($this->valuesMatch($_POST[parent::USER_PASSWORD], parent::USER_PASSWORD_2)) {
-            $this->errors[parent::USER_PASSWORD] = "Le mot de passe ne correspond pas !";
+    }
+    public function checkAdminData(){
+        $this->initAdminData();
+        if (!$this->hasMoreCharsThen($this->name, 4)) {
+            $this->setError('name', " Le nom semble trop court !");
         }
+        if (!$this->isPhoneNumber($this->phone)) {
+            $this->setError('name', " Le numéro est invalide !");
+        }
+        if (!$this->isEmail($this->email)) {
+            $this->setError("email", "Email invalide !");
+        }
+        if ($_SESSION['admin']['email'] != $this->email) {
+            if ($this->mailExist($this->email)) {
+                $this->setError('email','Addresse Mail déjà utilisée !');
+            }
+        }
+    }
+    public function checkPasswordUpdate()
+    {
+        $this->initPasswordUpdate();
+        if ($this->old_password !== '') {
+            if ($this->encrypt($this->old_password) != $_SESSION['admin']['password']) {
+                $this->setError('old_password', "Ancien mot de passe incorrect ");
+            } else {
+                if (!$this->hasMoreCharsThen($this->new_password, 6)) {
+                    $this->setError('new_password', "Mot de passe trop court, minimum 6 Caractètes !");
+                }
+                if (!$this->valuesMatch($this->new_password, $this->password)) {
+                    $this->setError('repeat_password', "Le mot de passe ne correspond pas ");
+                }
+            }
+            $this->password = $this->encrypt($this->password);
+        } else {
+            $this->password = $_SESSION['admin']['password'];
+        }
+    }
+    public function mailExist($email = null)
+    {
+        $data = $this->AdminKeyExist('email', $email ?? $this->phone);
+        $count = $this->getCount($data);
+        if ($count == 0) {
+            return false;
+        }
+        return true;
+    }
+    public function phoneNumber($phone = null)
+    {
+        $data = $this->AdminKeyExist('phone', $phone ?? $this->phone);
+        $count = $this->getCount($data);
+        if ($count == 0) {
+            return false;
+        }
+        return true;
     }
 }

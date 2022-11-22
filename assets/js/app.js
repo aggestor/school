@@ -33,6 +33,9 @@ let setHashContainer = async container => {
     }
 
 }
+$("#showEditForm").on("click", () => {
+  $('#editForm').slideDown()
+});
 async function useMenus() {
     menus.forEach(menu => {
         menu.onclick = function () {

@@ -1,6 +1,6 @@
 <div class="w-full flex justify-between items-center py-1 mb-4 px-3 h-14 rounded shadow bg-white">
-    <h1 class="text-gray-800 font-semibold text-lg">Liste des etudiants inscrits</h1>
-    <span class="text-white bg-sky-500 rounded p-1.5"><?=count($params['personals'])?></span>
+    <h1 class="text-gray-800 flex items-center font-semibold text-lg"> <a class="w-8 h-8 rounded-full bg-sky-500 text-white grid place-items-center mr-3" href="javascript:history.back()"><span class="fas fa-arrow-left"></span></a><span>Liste des personels inscrits</span> </h1>
+    <span class="text-black bg-gray-200 rounded px-1 py-1.5">Total : &nbsp; <b><?=count($params['personals'])?></b></span>
 </div>
 <div class="w-full flex justify-between flex-col items-center py-1 mb-4 px-3 min-h-max h-auto rounded shadow bg-white">
     <div class="border border-gray-500 mb-2 rounded w-full text-gray-800 font-semibold p-2 flex justify-between">
@@ -19,8 +19,12 @@
         <span class="w-2/12 text-center"><?= $s->f_name?></span>
         <span class="w-2/12 text-center"><?= $s->personal_type?></span>
         <span class="w-1/12 flex justify-center">
-            <a class="mr-2 h-8 w-8 rounded bg-gray-800 text-white grid place-items-center" href="/admin/personals/<?=$s->registration_number?>"><span class="fas fa-eye"></span></a>
-            <a class="mr-2 h-8 w-8 rounded bg-red-500 text-white grid place-items-center" href="/admin/personals/lock/<?=$s->registration_number?>"><span class="fas fa-lock"></span></a>
+            <a class="mr-2 h-8 w-8 rounded bg-gray-200 text-gray-500 hover:bg-gray-300 grid place-items-center" href="/admin/personals/<?=$s->registration_number?>"><span class="fas fa-eye"></span></a>
+           <?php if ($s->is_active == 1): ?>
+            <a class="h-8 w-8 rounded bg-red-500 text-white grid place-items-center" href="/admin/personals/lock/<?=$s->registration_number?>"><span class="fas fa-lock"></span></a>
+            <?php else: ?>
+            <a class="h-8 w-8 rounded bg-blue-500 text-white grid place-items-center" href="/admin/personals/unlock/<?=$s->registration_number?>"><span class="fas fa-unlock"></span></a>
+            <?php endif;?>
         </span>
     </div>
     <?php endforeach?>

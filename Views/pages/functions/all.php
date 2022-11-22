@@ -1,5 +1,5 @@
 <div class="w-full flex justify-between items-center py-1 mb-4 px-3 h-14 rounded shadow bg-white">
-    <h1 class="text-gray-800 font-semibold text-lg">Liste des fonctions</h1>
+    <h1 class="text-gray-800 font-semibold text-lg flex items-center"><a class="w-8 h-8 rounded-full bg-sky-500 text-white grid place-items-center mr-3" href="javascript:history.back()"><span class="fas fa-arrow-left"></span></a>Liste des fonctions</h1>
     <a class="p-1.5 bg-sky-500 text-white flex justify-between items-center rounded text-sm hover:shadow-sky-300 hover:shadow" href="/admin/functions/new"><span class="fas fa-plus-circle mr-1"></span> Nouvelle </a>
 </div>
 <div class="w-full flex justify-between flex-col items-center py-1 mb-4 px-3 h-auto min-h-max rounded shadow bg-white">

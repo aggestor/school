@@ -19,6 +19,11 @@ class AdminModel extends Model{
         $create_user_feedback = parent::create('admins',"name,email,phone,password","?,?,?,?" ,[$data['name'], $data['email'], $data['phone'], $data['password']]);
         return $create_user_feedback->fetch();
     }
+    public static function updateData($data) {
+        $schema = new Schema;
+        $create_user_feedback = parent::update('admins',"name = ?,email = ?,phone = ?,password = ?, last_update = NOW()",'id = ?' ,[$data->name, $data->email, $data->phone, $data->password, $_SESSION['admin']['id']]);
+        return $create_user_feedback->fetch();
+    }
     
     public static function findAdmin($fields, $where, $value){
         return parent::find('admins', $fields, "$where", $value);

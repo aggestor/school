@@ -85,6 +85,17 @@ class AdminController extends Controller{
             return $this->view("admin.register_success", "layout_admin", ['name' => $processor->getData()['name']]);
         }
     }
+    public function updateProfile(){
+        if($this->isPostMethod() && $this->isLoggedIn()){
+            $processor = $this->getAdminProcessor();
+            $processor->updateProcess();
+            if($processor->hasErrors()){
+                return $this->view("admin.profile", "layout_admin",['errors' => $processor->getErrors()]);
+            }
+            $processor->admin->updateData($processor);
+            return $this->view("admin.update_success", "layout_admin", ['name' => $processor->name]);
+        }
+    }
     /**
      * Login data control
      */
@@ -100,9 +111,9 @@ class AdminController extends Controller{
                 $_SESSION['admin']["id"] = $admin->id;
                 $_SESSION['admin']["email"] = $admin->email;
                 $_SESSION['admin']["name"] = $admin->name;
+                $_SESSION['admin']["phone"] = $admin->phone;
                 $_SESSION['admin']["status"] = $admin->status;
-                $_SESSION['admin']["record_date"] = $admin->recordDate;
-                $_SESSION['admin']["record_time"] = $admin->recordTime;
+                $_SESSION['admin']["password"] = $admin->password;
 
                 $this->redirect("/admin");
             }

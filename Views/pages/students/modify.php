@@ -5,7 +5,6 @@
             <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">School Archive Manager.</h2>
             <h2 class="text-black font-semibold text-lg mt-2 text-center">Modification étudiant : <span class="text-sky-500"><?=$student->registration_number?></span></h2>
         </div>
-       
           <form enctype="multipart/form-data" method="POST" class="w-full h-auto overflow-auto flex justify-center flex-col">
             <!---Identity section beginning--->
             <div  id="identity" class="w-full register-menu grid md:grid-cols-2 grid-cols-1">
