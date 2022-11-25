@@ -147,7 +147,9 @@ class StudentsController extends Controller
     public function addDocs(){
         if($this->isGetMethod()){
             if($this->isLoggedIn('student')){
-                return $this->view('students.add-docs', 'layout_simple');
+                $process = $this->getStudentProcessor();
+                $docs = $process->loadData($process->docs->findDoctype());
+                return $this->view('students.add-docs', 'layout_simple', ['documents' => $docs]);
             }$this->askLogin(true);
         }
     }
@@ -157,8 +159,10 @@ class StudentsController extends Controller
                 $process = $this->getStudentProcessor();
                 
                 $process->addDocsProcess();
+                $docs = $process->loadData($process->docs->findDoctype());
+
                 if($process->hasErrors()){
-                    return $this->view('students.add-docs', 'layout_simple', ['errors' => $process->getErrors()]);
+                    return $this->view('students.add-docs', 'layout_simple', ['errors' => $process->getErrors(), 'documents' =>$docs]);
                 }else {
                     $process->docs->new($process);
                     $this->uploadFile($process->doc['tmp_name'], FILES . "docs" . DIRECTORY_SEPARATOR . $process->document_file);

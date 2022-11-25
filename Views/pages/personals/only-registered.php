@@ -1,6 +1,14 @@
 <div class="w-full flex justify-between items-center py-1 mb-4 px-3 h-14 rounded shadow bg-white">
     <h1 class="text-gray-800 flex items-center font-semibold text-lg"> <a class="w-8 h-8 rounded-full bg-sky-500 text-white grid place-items-center mr-3" href="javascript:history.back()"><span class="fas fa-arrow-left"></span></a><span>Liste des personels inscrits</span> </h1>
-    <span class="text-black bg-gray-200 rounded px-1 py-1.5">Total : &nbsp; <b><?=count($params['personals'])?></b></span>
+    <div>
+        <select class="border-2 rounded border-sky-500 p-1.5 text-sky-500 outline-none"  id="personalFilter">
+            <option value='0'>Tous</option>
+            <?php foreach($params['fnx'] as $fn) : ?>
+            <option value="<?=$fn->name?>"><?=$fn->name?></option>
+            <?php endforeach;?>
+        </select>
+        <span class="text-black bg-gray-200 rounded px-1 py-1.5">Total : &nbsp; <b><?=count($params['personals'])?></b></span>
+    </div>
 </div>
 <div class="w-full flex justify-between flex-col items-center py-1 mb-4 px-3 min-h-max h-auto rounded shadow bg-white">
     <div class="border border-gray-500 mb-2 rounded w-full text-gray-800 font-semibold p-2 flex justify-between">

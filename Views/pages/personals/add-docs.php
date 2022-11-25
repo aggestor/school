@@ -8,9 +8,9 @@
                     <div class=" mx-auto focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                         <input  name="type" type="text" list='types' placeholder="Type du dossier" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['add-doc']) && empty($params['errors']['type'])) {echo $_POST['type'];}?>" />
                         <datalist id="types">
-                                    <option value="Attestation de naissance">Attestation de naissance</option>
-                                    <option value="Diplome d'état">Diplome d'état</option>
-                                    <option value="Certificat Ecole primaire">Certificat Ecole primaire</option>
+                                   <?php foreach ($params['documents'] as $doc): ?>
+                                <option value="<?=$doc->name?>"><?=$doc->name . " | " . $doc->id?></option>
+                            <?php endforeach;?>
                                 </datalist>
                     </div>
                     <?php if (isset($_POST['add-doc']) && !empty($params['errors']['type'])): ?>

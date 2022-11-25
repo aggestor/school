@@ -13,6 +13,16 @@ const docPicker = _g("#dockPicker")
 if ($('#docPicker')) {
     $("#docPicker").on("click", () => $("#fileHolder").click())
 } 
+function prettyString($data) {
+    return $data.toString().toLowerCase().replace(/é/gi,'e').replace(/\s/,'-')
+     
+}
+const personalFilter = $("#personalFilter");
+personalFilter.on('change', (e) => {
+    const t = prettyString(e.target.value)
+    window.location.href = '/admin/personals/'+t
+    
+})
 
 console.log("there we go")
 let setHashContainer = async container => {

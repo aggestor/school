@@ -132,7 +132,9 @@ class PersonalsController extends Controller
 
             if ($this->isGetMethod()) {
                 if ($this->isLoggedIn('personal')) {
-                    return $this->view('personals.add-docs', 'layout_simple');
+                    $process = $this->getPersonalProcess();
+                    $docs = $process->loadData($process->docs->findDoctype('personal'));
+                    return $this->view('personals.add-docs', 'layout_simple', ['documents' => $docs]);
                 }$this->askLogin(true);
             }
         }else $this->askLogin(true);
@@ -146,8 +148,10 @@ class PersonalsController extends Controller
                     $process = $this->getPersonalProcess();
     
                     $process->addDocsProcess();
+                    $docs = $process->loadData($process->docs->findDoctype('personal'));
+
                     if ($process->hasErrors()) {
-                        return $this->view('personals.add-docs', 'layout_simple', ['errors' => $process->getErrors()]);
+                        return $this->view('personals.add-docs', 'layout_simple', ['errors' => $process->getErrors(), 'documents' => $docs]);
                     } else {
                         $process->docs->new($process);
                         $this->uploadFile($process->doc['tmp_name'], FILES . "docs" . DIRECTORY_SEPARATOR . $process->document_file);
@@ -212,7 +216,10 @@ class PersonalsController extends Controller
         if($this->isLoggedIn()){
             $s = $this->getPersonalProcess();
             $personals = $s->loadData($s->personal->findRegisteredOnly());
-            return $this->view('personals.only-registered', 'layout_admin', ['personals' => $personals]);
+            $fn = $this->getFunctionProcessor();
+            $fnx = $fn->getAll();
+
+            return $this->view('personals.only-registered', 'layout_admin', ['personals' => $personals, 'fnx' => $fnx]);
         }else $this->askLogin();
     }
 }

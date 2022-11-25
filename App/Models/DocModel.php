@@ -27,7 +27,6 @@ class DocModel extends Model {
     }
     public function findForPersonal(){
         return parent::find($this->table, "*", "id_user = ? AND type_user = ?", [$_SESSION['personal']['id'], 'personal']);
-
     }
     public function deleteOne($data){
         return parent::delete($this->table,"id = ?", [$data]);
@@ -39,5 +38,8 @@ class DocModel extends Model {
             parent::update($this->table,"type = ?,last_update=NOW()","id=?",[$object->type,$id]);
 
         }
+    }
+    public function findDoctype($type = 'student'){
+        return $this->find('documents', "*", "type  = ?",[$type]);
     }
 }
