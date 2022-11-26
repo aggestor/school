@@ -164,4 +164,8 @@ class PersonalModel extends Model
         return $this->update($this->table, "$key = ?", "$k = ?", [$value, $data]);
 
     }
+    public function findRegisteredOnlyBy($id){
+        return $this->find($this->table . "  INNER JOIN functions ON functions.id = personals.function_id", 'first_name, last_name,second_name, personals.id as p_id,registration_number, picture, functions.name as f_name, personal_type, is_registered, is_active, is_verified', 'function_id = ?', [$id]);
+
+    }
 }

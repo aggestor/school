@@ -21,12 +21,14 @@ class DocModel extends Model {
     public function findExactOneDoc($type,$user_type, $user ){
         return parent::find($this->table, "*", "type = ? AND type_user = ? AND id_user = ?", [$type,$user_type, $user])->fetch();
     }
-    public function findForStudent(){
-        return parent::find($this->table, "*", "id_user = ? AND type_user = ?", [$_SESSION['student']['id'], 'student']);
+    public function findForStudent($id=null){
+        $id = $id == null ? $_SESSION['student']['id'] : $id;
+        return parent::find($this->table, "*", "id_user = ? AND type_user = ?", [$id, 'student']);
         
     }
-    public function findForPersonal(){
-        return parent::find($this->table, "*", "id_user = ? AND type_user = ?", [$_SESSION['personal']['id'], 'personal']);
+    public function findForPersonal($id = null){
+        $id = $id == null ? $_SESSION['personal']['id'] : $id;
+        return parent::find($this->table, "*", "id_user = ? AND type_user = ?", [$id, 'personal']);
     }
     public function deleteOne($data){
         return parent::delete($this->table,"id = ?", [$data]);

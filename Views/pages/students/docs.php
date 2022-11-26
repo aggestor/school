@@ -3,7 +3,7 @@
 <div class="w-11/12 mx-auto p-4 bg-white">
     <div class="w-full flex justify-between">
         <h1 class="text-center font-bold text-2xl text-gray-800">
-            Dossiers de l'étudiant/<span class="text-sky-500"><?=$_SESSION['student']['mat']?></span>
+            Dossiers de l'étudiant/<span class="text-sky-500"><?=$_SESSION['student']['mat'] ?? 'ID = '.$_GET['id']?></span>
         </h1>
             <a href="/my-profile/docs/add" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200">Ajouter un dossier <span class="fas fa-folder text-gray-500 ml-3 mt-1"></span></a>
     </div>

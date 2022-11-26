@@ -19,12 +19,13 @@ function prettyString($data) {
 }
 const personalFilter = $("#personalFilter");
 personalFilter.on('change', (e) => {
-    const t = prettyString(e.target.value)
-    window.location.href = '/admin/personals/'+t
+    const t = decodeURI(prettyString(e.target.value))
+    if (t == '0') {
+        window.location.href = '/admin/personals'
+    }
+    else window.location.href = '/admin/personals/' + t
     
 })
-
-console.log("there we go")
 let setHashContainer = async container => {
     const allowedRoutes = ['/identification/etudiant', '/identification/personnel']
     if (allowedRoutes.includes(window.location.pathname)) {

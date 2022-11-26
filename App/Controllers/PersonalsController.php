@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
+use App\Exceptions\NotFoundException;
 
 class PersonalsController extends Controller
 {
@@ -77,6 +78,17 @@ class PersonalsController extends Controller
         }
         $this->askLogin(true);
     }
+    public function getDocsAdminPersonal()
+    {
+        if ($this->isLoggedIn()) {
+            $id = $_GET['id'];
+            $process = $this->getStudentProcessor();
+            $docs = $process->loadData($process->docs->findForPersonal($id));
+            return $this->view("personals.docs", 'layout_simple', ['docs' => $docs]);
+        }
+        $this->askLogin();
+    }
+    
     public function modify()
     {
         if ($this->isGetMethod()) {
@@ -220,6 +232,19 @@ class PersonalsController extends Controller
             $fnx = $fn->getAll();
 
             return $this->view('personals.only-registered', 'layout_admin', ['personals' => $personals, 'fnx' => $fnx]);
+        }else $this->askLogin();
+    }
+    public function getByType(){
+        if($this->isLoggedIn()){
+            $id = explode("/",$_GET['url'])[3];
+            $s = $this->getPersonalProcess();
+            $personals = $s->loadData($s->personal->findRegisteredOnlyBy($id));
+            $fn = $this->getFunctionProcessor();
+            $fnx = $fn->getAll();
+
+            if(count($personals) > 0)
+            return $this->view('personals.only-registered-type', 'layout_admin', ['personals' => $personals, 'fnx' => $fnx]);
+            else throw new NotFoundException("Ce type de personnel n'existe pas encore ou ne sont pas inscrits");
         }else $this->askLogin();
     }
 }

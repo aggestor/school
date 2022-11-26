@@ -171,6 +171,16 @@ class StudentsController extends Controller
             }$this->askLogin(true);
         }
     }
+    public function getDocsAdminStudent()
+    {
+        if ($this->isLoggedIn()) {
+            $id = $_GET['id'];
+            $process = $this->getStudentProcessor();
+            $docs = $process->loadData($process->docs->findForStudent($id));
+            return $this->view("students.docs", 'layout_simple', ['docs' => $docs]);
+        }
+        $this->askLogin();
+    }
     public function findInscription(){
         if($this->isLoggedIn()){
             $process = $this->getStudentProcessor();

@@ -1,6 +1,6 @@
 <nav class="col-span-2 h-full block px-3 py-1.5    w-full bg-white">
-    <div class="text-sky-500 pl-3 font-bold text-2xl">
-        S.A.M
+    <div class="text-sky-500 pl-3 flex items-center font-bold text-2xl">
+         <img src="/assets/images/logo.jpg" class="mr-2 h-12"/> <span>UOR</span>
     </div>
     <ul id="menu_list">
         <li><a href="/admin" class="h-full mt-3 py-1.5 w-full rounded duration-500 transition-colors cursor-pointer hover:bg-slate-200 font-semibold text-gray-800 flex pl-2 items-center">

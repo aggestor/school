@@ -10,11 +10,15 @@ use Core\FunctionProcessor;
 use Core\PersonalProcessor;
 use Core\StudentProcessor;
 use Core\PromotionProcessor;
+use Core\ConfigProcessor;
 
 class Controller
 {
     public function getStudentProcessor(){
         return new StudentProcessor;
+    }
+    public function getConfigProcessor(){
+        return new ConfigProcessor;
     }
     public function getFacultyProcessor(){
         return new FacultyProcessor;

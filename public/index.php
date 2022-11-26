@@ -101,18 +101,24 @@ $routes->get("/admin/promotions/delete/([a-zA-Z0-9]*)", "App\Controllers\Promoti
 $routes->get("/admin", "App\Controllers\AdminController@index");
 $routes->get("/admin/logout", "App\Controllers\AdminController@logout");
 
+$routes->get("/admin/config", "App\Controllers\ConfigController@index");
+$routes->get("/admin/update", "App\Controllers\ConfigController@update");
+
 $routes->get("/identification/etudiant", "App\Controllers\StudentsController@registration");
 $routes->post("/identification/etudiant", "App\Controllers\StudentsController@__registration");
 $routes->get("/identification/personnel", "App\Controllers\PersonalsController@registration");
 $routes->post("/identification/personnel", "App\Controllers\PersonalsController@__registration");
 
 $routes->get("/admin/students/(\d*)", "App\Controllers\StudentsController@getStudent",'mat');
+$routes->get("/admin/students/docs/(\d*)", "App\Controllers\StudentsController@getDocsAdminStudent",'id');
 $routes->get("/admin/students", "App\Controllers\StudentsController@getAll");
 $routes->get("/admin/students/confirm/(\d*)", "App\Controllers\StudentsController@confirmStudent",'mat');
 $routes->get("/admin/students/lock/(\d*)", "App\Controllers\StudentsController@lockStudent",'mat');
 $routes->get("/admin/students/update/data/(\d*)", "App\Controllers\StudentsController@updateData",'mat');
 
 $routes->get("/admin/personals/(\d*)", "App\Controllers\PersonalsController@getPersonal",'mat');
+$routes->get("/admin/personals/docs/(\d*)", "App\Controllers\PersonalsController@getDocsAdminPersonal",'id');
+$routes->get("/admin/personals/(.*)/(\d*)", "App\Controllers\PersonalsController@getByType",'type', 'type_id');
 $routes->get("/admin/personals", "App\Controllers\PersonalsController@getAll");
 $routes->get("/admin/personals/confirm/(\d*)", "App\Controllers\PersonalsController@confirmPersonal",'mat');
 $routes->get("/admin/personals/lock/(\d*)", "App\Controllers\PersonalsController@lockPersonal",'mat');
