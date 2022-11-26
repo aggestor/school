@@ -81,6 +81,68 @@ async function main() {
         useMenus()
     })
     pickImage()
+    captureImageAndLoad()
+}
+function switchCameraToIMGPicker(reverse = false) {
+    if (reverse) {
+        $("#camera").slideUp();
+        $("#imaged").slideDown();
+    } else {
+        $("#camera").slideDown()
+        $("#imaged").slideUp()
+    }
+}
+ function dataURLtoFile(dataURL, filename) {
+   let arr = dataURL.split(","),
+     mime = arr[0].match(/:(.*?);/)[1],
+     bstr = atob(arr[1]),
+     n = bstr.length,
+     u8arr = new Uint8Array(n);
+
+   while (n--) {
+     u8arr[n] = bstr.charCodeAt(n);
+   }
+
+   return new File([u8arr], filename, { type: mime });
+}
+ 
+function appendDataToInput(myFile) {
+    const fileInput = document.querySelector("#userProfile");
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(myFile);
+    fileInput.files = dataTransfer.files;
 }
 
+async function getStream() {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+    navigator.localStream = stream
+    return stream
+}
+
+function captureImageAndLoad() {
+    const video = document.getElementById('video')
+    const canvas = document.getElementById('canvas')
+    $("#capture").click(async () => {
+      canvas
+        .getContext("2d")
+        .drawImage(video, 0, 0, canvas.width, canvas.height);
+        let image = canvas.toDataURL("image/png");
+        let file = dataURLtoFile(image, 'user.png')
+        document.getElementById('imageContainer').src = image
+        appendDataToInput(file)
+        switchCameraToIMGPicker(true)
+        
+        navigator.localStream.getVideoTracks()
+            .forEach((track) => {
+                track.enabled = false;
+                track.stop()
+            });
+    });
+
+    $("#picHandle").click(async (e) => {
+        switchCameraToIMGPicker()
+        let stream = await getStream();
+        video.srcObject = stream
+    });
+}
 main()

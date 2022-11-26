@@ -20,11 +20,21 @@
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">1. Votre identité</h2>
                 </div>
                 <div class="col-span-1">
-                    <div class="mx-auto h-40 w-40 rounded-full relative">
+                    <div id="camera" style="display: none;" class="w-56 mx-auto h-auto rounded border-2 border-sky-500 relative">
+                        <video class="object-cover" id="video" autoplay height="320" width="320"></video>
+                        <span id="capture" class="w-9 h-9 cursor-pointer rounded-full text-white grid place-items-center absolute left-24  bottom-2 bg-sky-500">
+                            <span class="fas fa-camera"></span>
+                        </span>
+                    </div>
+                    <canvas hidden id="canvas" height="320" width="320"></canvas>
+                    <div id="imaged" class="mx-auto h-40 w-40 rounded-full relative">
                         <img id="imageContainer" src="/assets/images/output-onlinepngtools.png" class="w-full  rounded-full h-full object-cover">
                         <span id="cameraHandle" class="w-8 h-8 cursor-pointer rounded-full text-white grid place-items-center absolute right-1 bottom-4 bg-sky-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" /></svg>
                             </span>
+                        <span id="picHandle" class="w-8 h-8 cursor-pointer rounded-full text-white grid place-items-center absolute left-1 bottom-4 bg-sky-500">
+                            <span class="fas fa-camera"></span>
+                        </span>
                         <input type="file" id="userProfile" name="user_profile" hidden>
                     </div>
                     <?php if (isset($_POST['save']) && !empty($params['errors']['user_profile'])): ?>

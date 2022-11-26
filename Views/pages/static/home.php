@@ -11,7 +11,7 @@
         </div>
         <div class="w-1/2 grid place-items-center">
             <div class="w-[400px] h-[400px]">
-                <img src="/assets/images/soft-academia.jpg" alt="illustration" class="w-full h-full object-cover">
+                <img src="/assets/images/soft-dossier.jpg" alt="illustration" class="w-full h-full object-cover">
             </div>
         </div>
     </div>
