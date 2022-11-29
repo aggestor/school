@@ -38,7 +38,12 @@ class StudentsController extends Controller
             $mat = $_GET['mat'];
             $student = $process->student->findStudentData("registration_number", $mat)->fetch();
             if ($student) {
-                return $this->view("students.profile", "layout_simple", ["student" => $student]);
+                $_SESSION['mod-user']['id'] = $student->id;
+                $_SESSION['mod-user']['mat'] = $student->registration_number;
+                $_SESSION['mod-user']['picture'] = $student->picture;
+                $_SESSION['mod-user']['email'] = $student->mail_address;
+
+                return $this->view("students.profile", "layout_admin", ["student" => $student]);
             }
             return $this->view("static.404", "layouts", ['message' => "L'étudiant que vous rechercher est introuvable."]);
         }
@@ -85,6 +90,10 @@ class StudentsController extends Controller
         if($this->isLoggedIn('student')){
             $process = $this->getStudentProcessor();
             $student = $process->student->findStudentData("registration_number", $_SESSION['student']['mat'])->fetch();
+            $_SESSION['mod-user']['id'] = $student->id;
+            $_SESSION['mod-user']['mat'] = $student->registration_number;
+            $_SESSION['mod-user']['picture'] = $student->picture;
+            $_SESSION['mod-user']['email'] = $student->mail_address;
             return $this->view("students.profile", "layout_simple", ["student" => $student]);
         }
         $this->askLogin(true);
@@ -144,6 +153,7 @@ class StudentsController extends Controller
     public function modifyByAdmin(){
         if($this->isGetMethod()){
             if($this->isLoggedIn()){
+                $mat = $_GET['mat'];
                 $process = $this->getStudentProcessor();
                 $fac = $this->getFacultyProcessor();
                 $dep = $this->getDepartmentProcessor();
@@ -152,8 +162,8 @@ class StudentsController extends Controller
                 $faculties = $fac->getAll();
                 $promotions = $prom->getAll();
     
-                $student = $process->student->findStudentData("registration_number", $_SESSION['student']['mat'])->fetch();
-                return $this->view("admin.modify-student", 'layout_simple',["student" => $student,'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
+                $student = $process->student->findStudentData("registration_number", $mat)->fetch();
+                return $this->view("admin.modify-student", 'layout_admin',["student" => $student,'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
             }
             $this->askLogin();
         }
@@ -170,18 +180,19 @@ class StudentsController extends Controller
             $promotions = $prom->getAll();
             $process->updateStudentProcess();
             if($process->hasErrors()){
-                $student = $process->student->findStudentData("registration_number", $_SESSION['student']['mat'])->fetch();
-                return $this->view("students.modify-student", 'layout_simple',['errors' => $process->getErrors(),"student" => $student,'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
+                $student = $process->student->findStudentData("registration_number", $mat)->fetch();
+                return $this->view("admin.modify-student", 'layout_admin',['errors' => $process->getErrors(),"student" => $student,'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
             }else{
                $process->student->updateData($process);
                if($process->photo_updated){
                     unlink(FILES . "users" . DIRECTORY_SEPARATOR . $_SESSION['student']['picture']);
                     $this->uploadFile($process->user_profile['tmp_name'], FILES . "users" . DIRECTORY_SEPARATOR . $process->profile_file);
                 }
+
                 $this->redirect('/admin/students/'.$mat);
             }
         }
-        else $this->askLogin(true);
+        else $this->askLogin();
     }
     public function _resetPassword(){
         $process = $this->getStudentProcessor();
@@ -213,13 +224,40 @@ class StudentsController extends Controller
             }$this->askLogin(true);
         }
     }
+    public function addDocsByAdmin(){
+        if($this->isGetMethod()){
+            if($this->isLoggedIn()){
+                $process = $this->getStudentProcessor();
+                $docs = $process->loadData($process->docs->findDoctype());
+                return $this->view('students.add-docs', 'layout_admin', ['documents' => $docs]);
+            }$this->askLogin();
+        }
+    }
+    public function _addDocsByAdmin(){
+        if($this->isPostMethod()){
+            if($this->isLoggedIn()){
+                $process = $this->getStudentProcessor();
+                
+                $process->addDocsProcess();
+                $docs = $process->loadData($process->docs->findDoctype());
+
+                if($process->hasErrors()){
+                    return $this->view('students.add-docs', 'layout_admin', ['errors' => $process->getErrors(), 'documents' =>$docs]);
+                }else {
+                    $process->docs->new($process);
+                    $this->uploadFile($process->doc['tmp_name'], FILES . "docs" . DIRECTORY_SEPARATOR . $process->document_file);
+                    return $this->view('students.add-docs-success', 'layout_simple');
+                }
+            }$this->askLogin();
+        }
+    }
     public function getDocsAdminStudent()
     {
         if ($this->isLoggedIn()) {
             $id = $_GET['id'];
             $process = $this->getStudentProcessor();
             $docs = $process->loadData($process->docs->findForStudent($id));
-            return $this->view("students.docs", 'layout_simple', ['docs' => $docs]);
+            return $this->view("students.docs", 'layout_admin', ['docs' => $docs]);
         }
         $this->askLogin();
     }

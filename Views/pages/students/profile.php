@@ -1,23 +1,23 @@
 <?php $student = $params['student']?>
-<div class="w-11/12 mx-auto p-4 bg-white">
+<div class="<?=$data = isset($_SESSION['admin']) ? 'w-[98%]':'w-11/12'?> mx-auto rounded shadow p-4 bg-white">
     <div class="w-full flex justify-between">
 
         <h1 class="text-center font-bold text-2xl text-gray-800">
             Fiche étudiant/<span class="text-sky-500"><?=$student->registration_number?></span>
         </h1>
 
-       <?php if(isset($_SESSION['admin'])) :?> <div class="flex w-4/12 items-center justify-between"> <?php else : ?>
+       <?php if(isset($_SESSION['admin'])) :?> <div class="flex <?=$data = $student->is_registered != 0 ? 'w-3/12': 'w-4/12' ?> items-center justify-between"> <?php else : ?>
         <div class="flex w-3/12 items-center justify-between"> 
             <?php endif ; ?>
-                <a href="/my-profile/modify" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200">Modifier <span class="fas fa-pen text-gray-500 ml-3 mt-1"></span></a>
+                <a href="<?=$e = isset($_SESSION['admin']) ? '/admin/students/modify/'.$student->registration_number : 'my-profile/modify'?>" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200">Modifier <span class="fas fa-pen text-gray-500 ml-3 mt-1"></span></a>
                 <a href="<?=$d =isset($_SESSION['admin']) ?  '/admin/students/docs/'.$student->id:'my-profile/docs'?>" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200">Mes dossiers <span class="fas fa-folder text-gray-500 ml-3 mt-1"></span></a>
-            <?php if(isset($_SESSION['admin'])) : ?><a href="/admin/students/confirm/<?=$student->registration_number?>" class="p-1.5 bg-green-500 flex justify-between rounded hover:bg-green-600 text-white">Confirmer<span class="fas fa-check-circle ml-3 mt-1"></span></a> <?php endif;?>
+            <?php if(isset($_SESSION['admin']) AND $student->is_registered != 1) : ?><a href="/admin/students/confirm/<?=$student->registration_number?>" class="p-1.5 bg-green-500 flex justify-between rounded hover:bg-green-600 text-white">Confirmer<span class="fas fa-check-circle ml-3 mt-1"></span></a> <?php endif;?>
         </div>
     </div>
     <!--First section-->
     <div class="w-full mt-4 h-72 space-x-3 grid grid-cols-12">
-        <div class="col-span-3 h-ful">
-            <div class="w-64 h-64">
+        <div class="col-span-3 flex items-center h-ful">
+            <div class="w-60 rounded overflow-hidden h-60">
                 <img class="w-full h-full object-cover" src="/files/users/<?=$student->picture?>" alt="<?=$student->first_name.' '.$student->second_name.' '.$student->last_name?>">
             </div>
         </div>

@@ -64,6 +64,14 @@ $routes->post("/admin/personals/modify/([a-zA-Z0-9]*)", "App\Controllers\Persona
 $routes->get("/admin/personals/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\PersonalsController@updateDocsByAdmin","id");
 $routes->post("/admin/personals/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\PersonalsController@_updateDocsByAdmin","id");
 
+$routes->get("/admin/students/docs/add/([a-zA-Z0-9]*)", "App\Controllers\StudentsController@addDocsByAdmin","id");
+$routes->post("/admin/students/docs/add/([a-zA-Z0-9]*)", "App\Controllers\StudentsController@_addDocsByAdmin","id");
+$routes->get("/admin/students/modify/([a-zA-Z0-9]*)", "App\Controllers\StudentsController@modifyByAdmin", 'mat');
+$routes->post("/admin/students/modify/([a-zA-Z0-9]*)", "App\Controllers\StudentsController@_modifyByAdmin", 'mat');
+$routes->get("/admin/students/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\StudentsController@updateDocsByAdmin","id");
+$routes->post("/admin/students/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\StudentsController@_updateDocsByAdmin","id");
+
+
 $routes->get("/admin/inscriptions/students", "App\Controllers\StudentsController@findInscription");
 $routes->get("/admin/inscriptions/personals", "App\Controllers\PersonalsController@findInscription");
 $routes->get("/admin/inscriptions", "App\Controllers\InscriptionsController@inscriptions")

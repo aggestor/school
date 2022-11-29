@@ -5,7 +5,11 @@
         <h1 class="text-center font-bold text-2xl text-gray-800">
             Dossiers de l'étudiant/<span class="text-sky-500"><?=$_SESSION['student']['mat'] ?? 'ID = '.$_GET['id']?></span>
         </h1>
+            <?php if (isset($_SESSION['admin'])): ?>
+            <a href="/admin/students/docs/add/<?=$_GET['id']?>" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200">Ajouter un dossier <span class="fas fa-folder text-gray-500 ml-3 mt-1"></span></a>
+        <?php else: ?>
             <a href="/my-profile/docs/add" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200">Ajouter un dossier <span class="fas fa-folder text-gray-500 ml-3 mt-1"></span></a>
+        <?php endif;?>
     </div>
 </div>
 <div class="w-11/12 mx-auto flex mt-2 justify-between flex-col items-center py-1 mb-4 px-3 min-h-max h-auto rounded shadow bg-white">

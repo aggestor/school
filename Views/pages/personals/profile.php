@@ -1,5 +1,5 @@
 <?php $personal = $params['personal']?>
-<div class="w-11/12 mx-auto p-4 bg-white">
+<div class="<?=$data = isset($_SESSION['admin']) ?'w-[98%]' : 'w-11/12' ?> rounded-shadow mx-auto p-4 bg-white">
     <div class="w-full flex justify-between">
 
         <h1 class="text-center font-bold text-2xl text-gray-800">
@@ -9,7 +9,7 @@
        <?php if(isset($_SESSION['admin']) AND $params['personal']->is_registered != 1) :?> <div class="flex w-4/12 items-center justify-between"> <?php else : ?>
         <div class="flex w-3/12 items-center justify-between"> <?php endif ; ?>
         <?php if(isset($_SESSION['admin'])) : ?>
-            <a href="/admin/personals/modify/<?=$_GET['mat']?>" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200">Modifier <span class="fas fa-pen text-gray-500 ml-3 mt-1"></span></a>
+            <a href="/admin/personals/modify/<?=$personal->registration_number?>" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200">Modifier <span class="fas fa-pen text-gray-500 ml-3 mt-1"></span></a>
             <?php else : ?>
                 <a href="/profile/modify" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200">Modifier <span class="fas fa-pen text-gray-500 ml-3 mt-1"></span></a>
                 <?php endif;?>
@@ -19,8 +19,8 @@
     </div>
     <!--First section-->
     <div class="w-full mt-4 h-72 space-x-3 grid grid-cols-12">
-        <div class="col-span-3 h-ful">
-            <div class="w-64 h-64">
+        <div class="col-span-3 flex items-center h-ful">
+            <div class="w-60 rounded overflow-hidden h-60">
                 <img class="w-full h-full object-cover" src="/files/users/<?=$personal->picture?>" alt="<?=$personal->first_name.' '.$personal->second_name.' '.$personal->last_name?>">
             </div>
         </div>

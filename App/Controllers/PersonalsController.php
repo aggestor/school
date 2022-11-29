@@ -47,7 +47,7 @@ class PersonalsController extends Controller
                 $_SESSION['mod-user']['id'] = $student->id;
                 $_SESSION['mod-user']['mat'] = $student->registration_number;
                 $_SESSION['mod-user']['picture'] = $student->picture;
-                return $this->view("personals.profile", "layout_simple", ["personal" => $student]);
+                return $this->view("personals.profile", "layout_admin", ["personal" => $student]);
             }
             return $this->view("static.404", "layouts", ['message' => "Le personel que vous rechercher est introuvable."]);
         }
@@ -90,7 +90,7 @@ class PersonalsController extends Controller
             $id = $_GET['id'];
             $process = $this->getStudentProcessor();
             $docs = $process->loadData($process->docs->findForPersonal($id));
-            return $this->view("personals.docs", 'layout_simple', ['docs' => $docs]);
+            return $this->view("personals.docs", 'layout_admin', ['docs' => $docs]);
         }
         $this->askLogin();
     }

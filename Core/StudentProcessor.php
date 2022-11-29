@@ -27,7 +27,7 @@ class StudentProcessor extends Processor
     }
     public function checkPasswordUpdate(){
         $this->initPasswordUpdate();
-        if($this->old_password !== ''){
+        if($this->old_password !== '' AND $this->old_password !== 'leave'){
             if($this->encrypt($this->old_password) != $_SESSION['student']['password']){
                 $this->setError('old_password', "Ancien mot de passe incorrect ");
             }else{
@@ -39,7 +39,10 @@ class StudentProcessor extends Processor
                 }
             }
             $this->password = $this->encrypt($this->password);
-        }else{
+        }else if($this->old_password == 'leave'){
+            $this->password = 'leave';
+        }
+        else{
             $this->password = $_SESSION['student']['password'];
         }
     }
@@ -141,7 +144,7 @@ class StudentProcessor extends Processor
             $this->photo_updated = true;
         }else{
             $this->photo_updated = false;
-            $this->profile_file = $_SESSION['student']['picture'];
+            $this->profile_file = $_SESSION['mod-user']['picture'];
 
         }
 
@@ -165,6 +168,11 @@ class StudentProcessor extends Processor
             $this->old_password = $this->sanitize('old_password');
             $this->new_password = $this->sanitize('new_password');
             $this->password = $this->sanitize('repeat_password');
+
+            if (isset($_SESSION['admin'])) {
+                $this->old_password = 'leave';
+            }
+
         }
     }
     public function initIdentityUpdate(){
@@ -389,7 +397,7 @@ class StudentProcessor extends Processor
         if (!$this->isEmail($this->user_email)) {
             $this->errors['user_email'] = 'Addresse Mail incorrect !';
         }
-        if($_SESSION['student']['email'] != $this->user_email){
+        if($_SESSION['mod-user']['email'] != $this->user_email){
             if ($this->mailExist($this->user_email)) {
                 $this->errors['user_email'] = 'Addresse Mail déjà utilisée !';
             }
@@ -490,12 +498,16 @@ class StudentProcessor extends Processor
      * @return boolean TRUE if the data is found, else it returns FALSE.
      */
     public function docExist($value){
-        $result = $this->docs->findExactOneDoc($value, 'student',$_SESSION['student']['id']);
+        $result = $this->docs->findExactOneDoc($value, 'student',$_SESSION['mod-user']['id']);
         return $result === false;
     }
     public function initAddDocs(){
         $this->type = $this->sanitize('type');
         $this->doc = $_FILES['document'];
+        $this->type_user = 'student';
+        if(isset($_SESSION['admin'])){
+            $this->id = $_GET['id'];
+        }
     }
     public function addDocsProcess(){
         $this->initAddDocs();
@@ -526,7 +538,7 @@ class StudentProcessor extends Processor
             if (!in_array(strtolower($extension), $accepted_extensions)) {
                 $this->errors['document'] = "Le fichier doit etre en format PDF ";
             }
-            $mat = isset($_SESSION['student']) ? $_SESSION['student']['mat'] : $_SESSION['personal']['mat'];
+            $mat = $_SESSION['mod-user']['mat'] ;
             $this->document_file = time()."_".$mat."_". $extension;
         } else {
             $this->document_file = null;

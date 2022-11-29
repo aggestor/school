@@ -117,9 +117,9 @@ class StudentModel extends Model{
         $process->height,
         $process->allergies,
         $process->handicap,
-        $_SESSION['student']['mat'],
+        $_SESSION['mod-user']['mat'],
         $process->password,
-        $_SESSION['student']['mat']]);
+        $_SESSION['mod-user']['mat']]);
     }
     public function findLastId(){
         return $this->find($this->table,"MAX(id) as id",'id > ?',[0]);

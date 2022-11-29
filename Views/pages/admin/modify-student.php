@@ -562,10 +562,10 @@
                     </div>
 
             <div  id="parent-sponsors" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[70%]">
-                <div class="col-span-2  mb-2 mx-auto">
+                <!-- <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">8. Mot de passe</h2>
-                </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
+                </div> -->
+                <div style="display:none ;" class="px-8 grid grid-cols-1 col-span-2">
                     <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-3 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
