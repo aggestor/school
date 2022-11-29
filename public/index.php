@@ -57,6 +57,13 @@ $routes->post("/admin/current", "App\Controllers\AdminController@updateProfile")
 $routes->get("/admin/all", "App\Controllers\AdminController@all");
 $routes->get("/admin/update/([a-zA-Z0-9]*)", "App\Controllers\AdminController@update");
 
+$routes->get("/admin/personals/docs/add/([a-zA-Z0-9]*)", "App\Controllers\PersonalsController@addDocsByAdmin","id");
+$routes->post("/admin/personals/docs/add/([a-zA-Z0-9]*)", "App\Controllers\PersonalsController@_addDocsByAdmin","id");
+$routes->get("/admin/personals/modify/([a-zA-Z0-9]*)", "App\Controllers\PersonalsController@modifyByAdmin", 'mat');
+$routes->post("/admin/personals/modify/([a-zA-Z0-9]*)", "App\Controllers\PersonalsController@_modifyByAdmin", 'mat');
+$routes->get("/admin/personals/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\PersonalsController@updateDocsByAdmin","id");
+$routes->post("/admin/personals/docs/modify/([a-zA-Z0-9]*)", "App\Controllers\PersonalsController@_updateDocsByAdmin","id");
+
 $routes->get("/admin/inscriptions/students", "App\Controllers\StudentsController@findInscription");
 $routes->get("/admin/inscriptions/personals", "App\Controllers\PersonalsController@findInscription");
 $routes->get("/admin/inscriptions", "App\Controllers\InscriptionsController@inscriptions")
@@ -118,7 +125,7 @@ $routes->get("/admin/students/update/data/(\d*)", "App\Controllers\StudentsContr
 
 $routes->get("/admin/personals/(\d*)", "App\Controllers\PersonalsController@getPersonal",'mat');
 $routes->get("/admin/personals/docs/(\d*)", "App\Controllers\PersonalsController@getDocsAdminPersonal",'id');
-$routes->get("/admin/personals/(.*)/(\d*)", "App\Controllers\PersonalsController@getByType",'type', 'type_id');
+$routes->get("/admin/personals/t/(.*)/(\d*)", "App\Controllers\PersonalsController@getByType",'type', 'type_id');
 $routes->get("/admin/personals", "App\Controllers\PersonalsController@getAll");
 $routes->get("/admin/personals/confirm/(\d*)", "App\Controllers\PersonalsController@confirmPersonal",'mat');
 $routes->get("/admin/personals/lock/(\d*)", "App\Controllers\PersonalsController@lockPersonal",'mat');

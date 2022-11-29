@@ -92,7 +92,7 @@
                     <img class="h-12 w-12 object-cover rounded-full" src="/files/users/<?=$s->picture?>"/>
                     <span class="w-6/12 font-semibold text-sm"><?=$s->first_name." ".$s->second_name." ".$s->last_name?></span> 
                     <div class="w-1/12"><?php if($s->is_registered == 1): ?><span class="fas fa-check-circle text-green-500"></span> <?php else : ?><span class="fas fa-history text-yellow-500"></span><?php endif;?></div>
-                    <a class="h-8 w-8 rounded bg-gray-600 text-white grid place-items-center" href="/admin/students/<?=$s->registration_number?>"><span class="fas fa-eye"></span></a>
+                    <a class="h-8 w-8 rounded bg-gray-600 text-white grid place-items-center" href="/admin/personals/<?=$s->registration_number?>"><span class="fas fa-eye"></span></a>
                 </div> 
             <?php endforeach;?>
     </div>

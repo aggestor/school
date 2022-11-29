@@ -29,7 +29,7 @@ class PersonalProcessor extends Processor
     public function checkPasswordUpdate()
     {
         $this->initPasswordUpdate();
-        if ($this->old_password !== '') {
+        if ($this->old_password !== '' AND $this->old_password !== 'leave') {
             if ($this->encrypt($this->old_password) != $_SESSION['personal']['password']) {
                 $this->setError('old_password', "Ancien mot de passe incorrect ");
             } else {
@@ -41,7 +41,10 @@ class PersonalProcessor extends Processor
                 }
             }
             $this->password = $this->encrypt($this->password);
-        } else {
+        }else if($this->old_password == 'leave'){
+            $this->password = 'leave';
+        }
+         else {
             $this->password = $_SESSION['personal']['password'];
         }
     }
@@ -146,8 +149,8 @@ class PersonalProcessor extends Processor
             $this->profile_file = $this->user_email . $extension;
             $this->photo_updated = true;
         } else {
-            $this->photo_updated = false;
-            $this->profile_file = $_SESSION['personal']['picture'];
+            $this->photo_updated = false; 
+            $this->profile_file = $_SESSION['mod-user']['picture'];
 
         }
 
@@ -174,6 +177,9 @@ class PersonalProcessor extends Processor
             $this->old_password = $this->sanitize('old_password');
             $this->new_password = $this->sanitize('new_password');
             $this->password = $this->sanitize('repeat_password');
+        }
+        if(isset($_SESSION['admin'])){
+            $this->old_password = 'leave';
         }
     }
     public function initIdentityUpdate()
@@ -215,7 +221,7 @@ class PersonalProcessor extends Processor
             $this->fac = $this->sanitize('fac');
             $this->fac_search_domain = $this->sanitize('fac_search_domain');
             $this->search_domain_speciality = $this->sanitize('search_domain_speciality');
-            $this->engagment_date = $this->sanitize('engagment_date');
+            $this->engagement_date = $this->sanitize('engagement_date');
         }
     }
     public function initPayment(){
@@ -313,8 +319,8 @@ class PersonalProcessor extends Processor
         if (!$this->hasMoreCharsThen($this->personal_type, 5)) {
             $this->errors['personal_type'] = "Type personnel invalide !";
         }
-        if($this->isNull($this->engagment_date)){
-            $this->setError("engagment_date", "La date est invalide ");
+        if($this->isNull($this->engagement_date)){
+            $this->setError("engagement_date", "La date est invalide ");
         }
 
     }
@@ -385,9 +391,11 @@ class PersonalProcessor extends Processor
         if (!$this->isEmail($this->user_email)) {
             $this->errors['user_email'] = 'Addresse Mail incorrect !';
         }
-        if ($_SESSION['personal']['email'] != $this->user_email) {
-            if ($this->mailExist($this->user_email)) {
-                $this->errors['user_email'] = 'Addresse Mail déjà utilisée !';
+        if(!isset($_SESSION['admin'])){
+            if ($_SESSION['personal']['email'] != $this->user_email) {
+                if ($this->mailExist($this->user_email)) {
+                    $this->errors['user_email'] = 'Addresse Mail déjà utilisée !';
+                }
             }
         }
         if (!$this->hasMoreCharsThen($this->birth_place, 4)) {
@@ -453,23 +461,29 @@ class PersonalProcessor extends Processor
      */
     public function docExist($value, $student = true)
     {
+        $id = isset($_SESSION['admin']) ? $this->id : $_SESSION['student']['id'];
+        $id_ = isset($_SESSION['admin']) ? $this->id : $_SESSION['personal']['id'];
         if($student === true){
-            $result = $this->docs->findExactOneDoc($value, 'student', $_SESSION['student']['id']);
+            $result = $this->docs->findExactOneDoc($value, 'student', $id);
             return $result === false;
         }else{
-            $result = $this->docs->findExactOneDoc($value, 'personal', $_SESSION['personal']['id']);
+            $result = $this->docs->findExactOneDoc($value, 'personal', $id_);
             return $result === false;
         }
     }
     public function initAddDocs()
     {
         $this->type = $this->sanitize('type');
+        if(isset($_SESSION['admin'])){
+            $this->id = $_GET['id'];
+            $this->type_user = 'personal';
+        }
         $this->doc = $_FILES['document'];
     }
     public function addDocsProcess()
     {
         $this->initAddDocs();
-        if (!$this->hasMoreCharsThen($this->type, 10)) {
+        if (!$this->hasMoreCharsThen($this->type,5)) {
             $this->setError("type", "Ce type semble invalide");
         }
         if (!$this->docExist($this->type, false)) {
@@ -498,7 +512,12 @@ class PersonalProcessor extends Processor
             if (!in_array(strtolower($extension), $accepted_extensions)) {
                 $this->errors['document'] = "Le fichier doit etre en format PDF ";
             }
-            $mat = isset($_SESSION['student']) ? $_SESSION['student']['mat'] : $_SESSION['personal']['mat'];
+            $mat = '';
+            if(!isset($_SESSION['admin'])){
+                $mat = isset($_SESSION['student']) ? $_SESSION['student']['mat'] : $_SESSION['personal']['mat'];
+            }else{
+                $mat = $this->id;
+            }
             $this->document_file = time() . "_" . $mat . "_" . $extension;
         } else {
             $this->document_file = null;
@@ -518,7 +537,10 @@ class PersonalProcessor extends Processor
             if (!in_array(strtolower($extension), $accepted_extensions)) {
                 $this->errors['document'] = "Le fichier doit etre en format PDF ";
             }
-            $mat = isset($_SESSION['student']) ? $_SESSION['student']['mat'] : $_SESSION['personal']['mat'];
+            $mat = '';
+            if(isset($_SESSION['admin'])){
+                $mat = $this->id;
+            }else $mat = isset($_SESSION['student']) ? $_SESSION['student']['mat'] : $_SESSION['personal']['mat'];
             $this->document_file = time() . "_" . $mat . "_" . $extension;
         } else {
             $this->document_file = null;

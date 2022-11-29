@@ -6,8 +6,14 @@ class DocModel extends Model {
     private $table = 'docs';
     public function __construct(){}
     public function new($object){
-        $id = isset($_SESSION['student']) ? $_SESSION['student']['id'] : $_SESSION['personal']['id'] ;
-        parent::create($this->table,'doc_name,type,type_user,id_user','?,?,?,?',[$object->document_file, $object->type,$_SESSION['user']['type'],$id]);
+        $id = '';
+        if(isset($_SESSION['admin'])){
+            $id = $object->id;
+            parent::create($this->table,'doc_name,type,type_user,id_user','?,?,?,?',[$object->document_file, $object->type,$object->type_user,$id]);
+        }else{
+            $id = isset($_SESSION['student']) ? $_SESSION['student']['id'] : $_SESSION['personal']['id'] ;
+            parent::create($this->table,'doc_name,type,type_user,id_user','?,?,?,?',[$object->document_file, $object->type,$_SESSION['user']['type'],$id]);
+        }
     }
     public function findAll(){
         return parent::find($this->table,"*", "id != ?", ['0']);

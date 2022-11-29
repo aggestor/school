@@ -141,6 +141,48 @@ class StudentsController extends Controller
         }
         else $this->askLogin(true);
     }
+    public function modifyByAdmin(){
+        if($this->isGetMethod()){
+            if($this->isLoggedIn()){
+                $process = $this->getStudentProcessor();
+                $fac = $this->getFacultyProcessor();
+                $dep = $this->getDepartmentProcessor();
+                $prom = $this->getPromotionProcessor();
+                $departments = $dep->getAll();
+                $faculties = $fac->getAll();
+                $promotions = $prom->getAll();
+    
+                $student = $process->student->findStudentData("registration_number", $_SESSION['student']['mat'])->fetch();
+                return $this->view("admin.modify-student", 'layout_simple',["student" => $student,'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
+            }
+            $this->askLogin();
+        }
+    }
+    public function _modifyByAdmin(){
+        if($this->isLoggedIn()){
+            $mat = $_GET['mat'];
+            $process = $this->getStudentProcessor();
+            $fac = $this->getFacultyProcessor();
+            $dep = $this->getDepartmentProcessor();
+            $prom = $this->getPromotionProcessor();
+            $departments = $dep->getAll();
+            $faculties = $fac->getAll();
+            $promotions = $prom->getAll();
+            $process->updateStudentProcess();
+            if($process->hasErrors()){
+                $student = $process->student->findStudentData("registration_number", $_SESSION['student']['mat'])->fetch();
+                return $this->view("students.modify-student", 'layout_simple',['errors' => $process->getErrors(),"student" => $student,'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
+            }else{
+               $process->student->updateData($process);
+               if($process->photo_updated){
+                    unlink(FILES . "users" . DIRECTORY_SEPARATOR . $_SESSION['student']['picture']);
+                    $this->uploadFile($process->user_profile['tmp_name'], FILES . "users" . DIRECTORY_SEPARATOR . $process->profile_file);
+                }
+                $this->redirect('/admin/students/'.$mat);
+            }
+        }
+        else $this->askLogin(true);
+    }
     public function _resetPassword(){
         $process = $this->getStudentProcessor();
     }

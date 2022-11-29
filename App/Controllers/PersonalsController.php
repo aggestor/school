@@ -40,11 +40,13 @@ class PersonalsController extends Controller
     public function getPersonal()
     {
         if ($this->isLoggedIn()) {
-
             $process = $this->getPersonalProcess();
             $mat = $_GET['mat'];
             $student = $process->personal->findPersonalData("registration_number", $mat)->fetch();
             if ($student) {
+                $_SESSION['mod-user']['id'] = $student->id;
+                $_SESSION['mod-user']['mat'] = $student->registration_number;
+                $_SESSION['mod-user']['picture'] = $student->picture;
                 return $this->view("personals.profile", "layout_simple", ["personal" => $student]);
             }
             return $this->view("static.404", "layouts", ['message' => "Le personel que vous rechercher est introuvable."]);
@@ -61,6 +63,10 @@ class PersonalsController extends Controller
         if ($this->isLoggedIn('personal')) {
             $process = $this->getPersonalProcess();
             $student = $process->personal->findPersonalData("registration_number", $_SESSION['personal']['mat'])->fetch();
+            $_SESSION['mod-user']['id'] = $student->id;
+            $_SESSION['mod-user']['mat'] = $student->registration_number;
+            $_SESSION['mod-user']['picture'] = $student->picture;
+
             return $this->view("personals.profile", "layout_simple", ["personal" => $student]);
         }
         $this->askLogin(true);
@@ -134,6 +140,53 @@ class PersonalsController extends Controller
         }
 
     }
+    public function modifyByAdmin()
+    {
+        if ($this->isGetMethod()) {
+            if ($this->isLoggedIn()) {
+                $mat = $_GET['mat'];
+                $process = $this->getPersonalProcess();
+                $fac = $this->getFacultyProcessor();
+                $dep = $this->getDepartmentProcessor();
+                $prom = $this->getPromotionProcessor();
+                $departments = $dep->getAll();
+                $faculties = $fac->getAll();
+                $promotions = $prom->getAll();
+
+                $student = $process->personal->findPersonalData("registration_number", $mat)->fetch();
+                return $this->view("admin.modify-personal", 'layout_admin', ["personal" => $student, 'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
+            }
+            $this->askLogin();
+        }
+    }
+    public function _modifyByAdmin()
+    {
+        if ($this->isLoggedIn()) {
+            $mat = $_GET['mat'];
+            $process = $this->getPersonalProcess();
+            $fac = $this->getFacultyProcessor();
+            $dep = $this->getDepartmentProcessor();
+            $prom = $this->getPromotionProcessor();
+            $departments = $dep->getAll();
+            $faculties = $fac->getAll();
+            $promotions = $prom->getAll();
+            $process->updatePersonalProcess();
+            $student = $process->personal->findPersonalData("registration_number", $mat)->fetch(); 
+            if ($process->hasErrors()) {
+                return $this->view("admin.modify-personal", 'layout_admin', ['errors' => $process->getErrors(), "student" => $student, 'faculties' => $faculties, "departments" => $departments, 'promotions' => $promotions]);
+            } else {
+                $process->personal->updateData($process, $student->id);
+                if ($process->photo_updated) {
+                    unlink(FILES . "users" . DIRECTORY_SEPARATOR . $_SESSION['personal']['picture']);
+                    $this->uploadFile($process->user_profile['tmp_name'], FILES . "users" . DIRECTORY_SEPARATOR . $process->profile_file);
+                }
+                $this->redirect('/admin/personals');
+            }
+        } else {
+            $this->askLogin(true);
+        }
+
+    }
     public function _resetPassword()
     {
         $process = $this->getStudentProcessor();
@@ -163,7 +216,7 @@ class PersonalsController extends Controller
                     $docs = $process->loadData($process->docs->findDoctype('personal'));
 
                     if ($process->hasErrors()) {
-                        return $this->view('personals.add-docs', 'layout_simple', ['errors' => $process->getErrors(), 'documents' => $docs]);
+                        return $this->view('admin.add-docs', 'layout_simple', ['errors' => $process->getErrors(), 'documents' => $docs]);
                     } else {
                         $process->docs->new($process);
                         $this->uploadFile($process->doc['tmp_name'], FILES . "docs" . DIRECTORY_SEPARATOR . $process->document_file);
@@ -172,6 +225,40 @@ class PersonalsController extends Controller
                 }$this->askLogin(true);
             }
         }else $this->askLogin(true);
+    }
+    public function addDocsByAdmin()
+    {
+        if($this->isLoggedIn()){
+
+            if ($this->isGetMethod()) {
+                $id = $_GET['id'];
+                    $process = $this->getPersonalProcess();
+                    $docs = $process->loadData($process->docs->findDoctype('personal'));
+                    return $this->view('admin.add-docs-admin', 'layout_admin', ['documents' => $docs]);
+            }
+        }
+        else $this->askLogin();
+    }
+    public function _addDocsByAdmin()
+    {
+        if($this->isLoggedIn()){
+
+            if ($this->isPostMethod()) {
+                
+                    $process = $this->getPersonalProcess();
+                    $id = $_GET['id'];
+                    $process->addDocsProcess();
+                    $docs = $process->loadData($process->docs->findDoctype('personal'));
+
+                    if ($process->hasErrors()) {
+                        return $this->view('admin.add-docs-admin', 'layout_admin', ['errors' => $process->getErrors(), 'documents' => $docs]);
+                    } else {
+                        $process->docs->new($process);
+                        $this->uploadFile($process->doc['tmp_name'], FILES . "docs" . DIRECTORY_SEPARATOR . $process->document_file);
+                        return $this->view('personals.add-docs-success', 'layout_simple');
+                    }
+            }
+        }else $this->askLogin();
     }
     public function findInscription()
     {
@@ -189,8 +276,7 @@ class PersonalsController extends Controller
             $process = $this->getPersonalProcess();
             $process->personal->confirmData($mat);
             $this->redirect('/admin/personals/' . $mat);
-        }
-        $this->askLogin();
+        }else $this->askLogin();
     }
     public function updateDocs()
     {
@@ -224,6 +310,38 @@ class PersonalsController extends Controller
             }$this->askLogin(true);
         }
     }
+    public function updateDocsByAdmin()
+    {
+        if ($this->isGetMethod()) {
+            if ($this->isLoggedIn()) {
+                $id = $_GET['id'];
+                $process = $this->getPersonalProcess();
+                $data = $process->docs->findOne($id, "id")->fetch();
+                return $this->view('students.update-docs', 'layout_simple', ['doc' => $data]);
+            }$this->askLogin();
+        }
+    }
+    public function _updateDocsByAdmin()
+    {
+        if ($this->isPostMethod()) {
+            if ($this->isLoggedIn()) {
+                $process = $this->getPersonalProcess();
+                $id = $_GET['id'];
+                $process->updateDocsProcess();
+                if ($process->hasErrors()) {
+                    return $this->view('personals.update-docs', 'layout_simple', ['errors' => $process->getErrors()]);
+                } else {
+                    if ($process->document_file === null) {
+                        $process->docs->updateOne($process, $id, false);
+                    } else {
+                        $process->docs->updateOne($process, $id);
+                        $this->uploadFile($process->doc['tmp_name'], FILES . "docs" . DIRECTORY_SEPARATOR . $process->document_file);
+                    }
+                    return $this->view('students.update-docs-success', 'layout_simple');
+                }
+            }$this->askLogin();
+        }
+    }
     public function getAll(){
         if($this->isLoggedIn()){
             $s = $this->getPersonalProcess();
@@ -236,7 +354,7 @@ class PersonalsController extends Controller
     }
     public function getByType(){
         if($this->isLoggedIn()){
-            $id = explode("/",$_GET['url'])[3];
+            $id = explode("/",$_GET['url'])[4];
             $s = $this->getPersonalProcess();
             $personals = $s->loadData($s->personal->findRegisteredOnlyBy($id));
             $fn = $this->getFunctionProcessor();

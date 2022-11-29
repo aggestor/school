@@ -8,7 +8,11 @@
 
        <?php if(isset($_SESSION['admin']) AND $params['personal']->is_registered != 1) :?> <div class="flex w-4/12 items-center justify-between"> <?php else : ?>
         <div class="flex w-3/12 items-center justify-between"> <?php endif ; ?>
-            <a href="/profile/modify" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200">Modifier <span class="fas fa-pen text-gray-500 ml-3 mt-1"></span></a>
+        <?php if(isset($_SESSION['admin'])) : ?>
+            <a href="/admin/personals/modify/<?=$_GET['mat']?>" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200">Modifier <span class="fas fa-pen text-gray-500 ml-3 mt-1"></span></a>
+            <?php else : ?>
+                <a href="/profile/modify" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200">Modifier <span class="fas fa-pen text-gray-500 ml-3 mt-1"></span></a>
+                <?php endif;?>
            <a href="<?=$d =isset($_SESSION['admin']) ?  '/admin/personals/docs/'.$personal->id:'/profile/docs'?>" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200">Mes dossiers <span class="fas fa-folder text-gray-500 ml-3 mt-1"></span></a>
             <?php if(isset($_SESSION['admin']) AND $params['personal']->is_registered != 1) : ?><a href="/admin/personals/confirm/<?=$personal->registration_number?>" class="p-1.5 bg-green-500 flex justify-between rounded hover:bg-green-600 text-white">Confirmer<span class="fas fa-check-circle ml-3 mt-1"></span></a> <?php endif;?>
         </div>

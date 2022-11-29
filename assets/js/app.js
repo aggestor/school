@@ -23,7 +23,7 @@ personalFilter.on('change', (e) => {
     if (t == '0') {
         window.location.href = '/admin/personals'
     }
-    else window.location.href = '/admin/personals/' + t
+    else window.location.href = '/admin/personals/t/' + t
     
 })
 let setHashContainer = async container => {
