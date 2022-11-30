@@ -557,7 +557,7 @@ class StudentProcessor extends Processor
             if (!in_array(strtolower($extension), $accepted_extensions)) {
                 $this->errors['document'] = "Le fichier doit etre en format PDF ";
             }
-            $mat = isset($_SESSION['student']) ? $_SESSION['student']['mat'] : $_SESSION['personal']['mat'];
+            $mat = $_SESSION['mod-user']['mat'];
             $this->document_file = time()."_".$mat."_". $extension;
         } else {
             $this->document_file = null;

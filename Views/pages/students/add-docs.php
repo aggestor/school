@@ -19,7 +19,7 @@
                 </div>
                 <input accept="application/pdf" type="file" hidden id="fileHolder" name="document">
                 <div class="md:w-10/12 flex justify-between mx-auto my-4">
-                    <button type="button" id="docPicker"  class="bg-white font-semibold text-sky-500 p-2 w-4/12 h-10 hover:bg-sky-600 transition-colors border-2 hover:text-white border-sky-500 duration-500 justify-center items-center rounded">Choisir le dossier <span class="fas fa-folder ml-1"></span></button>
+                    <button type="button" id="docPicker"  class="bg-white font-semibold text-sky-500 p-2 w-fit h-10 hover:bg-sky-600 transition-colors border-2 hover:text-white border-sky-500 duration-500 justify-center items-center rounded">Choisir le dossier <span class="fas fa-folder ml-1"></span></button>
                     <button type="submit" name="add-doc" class="bg-sky-500 font-semibold text-white p-2 w-4/12 h-10 hover:bg-sky-600 transition-colors duration-500 justify-center items-center rounded">Enregistrer <span class="fas fa-check-circle ml-1"></span></button>
                 </div>
                 <div class="md:w-10/12 mx-auto">

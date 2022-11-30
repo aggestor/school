@@ -27,7 +27,11 @@
         <span class="w-1/12 text-center"><?=$doc->created_at?></span>
         <span class="w-2/12 text-center"><?= $data = $doc->last_update === $doc->created_at ? "Jamais" : $doc->last_update?></span>
         <span class="w-1/12 flex justify-center">
-            <a class="mr-2 h-8 w-8 rounded bg-blue-500 text-white grid place-items-center" href="/my-profile/docs/modify/<?=$doc->id?>"><span class="fas fa-pen"></span></a>
+            <?php if(isset($_SESSION['admin'])) :?>
+            <a class="mr-2 h-8 w-8 rounded bg-blue-500 text-white grid place-items-center" href="/admin/students/docs/modify/<?=$doc->id?>"><span class="fas fa-pen"></span></a>
+            <?php else : ?>
+                <a class="mr-2 h-8 w-8 rounded bg-blue-500 text-white grid place-items-center" href="/admin/students/docs/modify/<?=$doc->id?>"><span class="fas fa-pen"></span></a>
+            <?php endif;?>
             <a class="mr-2 h-8 w-8 rounded bg-gray-800 text-white grid place-items-center" target="_blank" href="/files/docs/<?=$doc->doc_name?>"><span class="fas fa-download"></span></a>
         </span>
     </div>

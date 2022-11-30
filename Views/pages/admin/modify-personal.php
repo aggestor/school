@@ -324,11 +324,11 @@
                         </div>
                         <div class="col-span-1">
                             <div class="w-full relative focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
-                                <input   name="engagment_date" type="date" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['save']) && empty($params['errors']['engagment_date'])) {echo $_POST['engagment_date'];}else echo $personal->engagement_date?>" />
+                                <input   name="engagement_date" type="date" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['save']) && empty($params['errors']['engagement_date'])) {echo $_POST['engagement_date'];}else echo $personal->engagement_date?>" />
                                 <span class="absolute -top-5 border text-sm left-2 rounded focus-within:border-sky-600 p-0.5 bg-gray-200">Date d'engagement</span>
                             </div>
-                            <?php if (isset($_POST['save']) && !empty($params['errors']['engagment_date'])): ?>
-                                <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['engagment_date']; ?></span>
+                            <?php if (isset($_POST['save']) && !empty($params['errors']['engagement_date'])): ?>
+                                <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['engagement_date']; ?></span>
                             <?php endif;?>
                         </div>
                     </div>

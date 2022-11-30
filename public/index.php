@@ -55,7 +55,8 @@ $routes->post("/admin/register", "App\Controllers\AdminController@_register");
 $routes->get("/admin/current", "App\Controllers\AdminController@profile");
 $routes->post("/admin/current", "App\Controllers\AdminController@updateProfile");
 $routes->get("/admin/all", "App\Controllers\AdminController@all");
-$routes->get("/admin/update/([a-zA-Z0-9]*)", "App\Controllers\AdminController@update");
+$routes->get("/admin/update/([a-zA-Z0-9]*)", "App\Controllers\AdminController@update", 'id');
+$routes->get("/admin/delete/([a-zA-Z0-9]*)", "App\Controllers\AdminController@delete", 'id');
 
 $routes->get("/admin/personals/docs/add/([a-zA-Z0-9]*)", "App\Controllers\PersonalsController@addDocsByAdmin","id");
 $routes->post("/admin/personals/docs/add/([a-zA-Z0-9]*)", "App\Controllers\PersonalsController@_addDocsByAdmin","id");

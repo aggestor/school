@@ -317,7 +317,7 @@ class PersonalsController extends Controller
                 $id = $_GET['id'];
                 $process = $this->getPersonalProcess();
                 $data = $process->docs->findOne($id, "id")->fetch();
-                return $this->view('students.update-docs', 'layout_simple', ['doc' => $data]);
+                return $this->view('students.update-docs', 'layout_admin', ['doc' => $data]);
             }$this->askLogin();
         }
     }
@@ -329,7 +329,7 @@ class PersonalsController extends Controller
                 $id = $_GET['id'];
                 $process->updateDocsProcess();
                 if ($process->hasErrors()) {
-                    return $this->view('personals.update-docs', 'layout_simple', ['errors' => $process->getErrors()]);
+                    return $this->view('personals.update-docs', 'layout_admin', ['errors' => $process->getErrors()]);
                 } else {
                     if ($process->document_file === null) {
                         $process->docs->updateOne($process, $id, false);
@@ -337,7 +337,7 @@ class PersonalsController extends Controller
                         $process->docs->updateOne($process, $id);
                         $this->uploadFile($process->doc['tmp_name'], FILES . "docs" . DIRECTORY_SEPARATOR . $process->document_file);
                     }
-                    return $this->view('students.update-docs-success', 'layout_simple');
+                    return $this->view('students.update-docs-success', 'layout_admin');
                 }
             }$this->askLogin();
         }

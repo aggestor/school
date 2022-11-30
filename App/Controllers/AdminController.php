@@ -127,4 +127,13 @@ class AdminController extends Controller{
     public function update(){
         return $this->view("admin.update", 'layout_admin');
     }
+    public function delete(){
+        if($this->isLoggedIn()){
+            $id = htmlspecialchars($_GET['id']);
+            $process = $this->getAdminProcessor();
+            $process->admin->remove($id);
+            $this->redirect("/admin/all");
+        }
+        else $this->askLogin();
+    }
 }
