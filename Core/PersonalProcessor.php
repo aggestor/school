@@ -70,14 +70,17 @@ class PersonalProcessor extends Processor
         if (!$this->hasMoreCharsThen($this->password, 6)) {
             $this->setError('password', "Mot de passe trop court !");
         }
-        $result = $this->personal->findMany("mail_address = ?", [$this->email], "registration_number,id,mail_address, password,picture")->fetch();
+        $result = $this->personal->findMany("mail_address = ?", [$this->email], "registration_number,id,mail_address, password,picture,is_active")->fetch();
         if ($result) {
-            if ($this->valuesMatch(hash("SHA256", $this->password), $result->password)) {
-                $this->personal_data = $result;
-                return;
-            } else {
-                $this->setError("password", "Mot de passe incorrect ");
-            }
+            if($result->is_active == '1'){
+
+                if ($this->valuesMatch(hash("SHA256", $this->password), $result->password)) {
+                    $this->personal_data = $result;
+                    return;
+                } else {
+                    $this->setError("password", "Mot de passe incorrect ");
+                }
+            }else $this->setError('403', 'issue');
         }
 
     }

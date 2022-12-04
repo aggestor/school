@@ -53,34 +53,6 @@ class StudentsController extends Controller
     {
         return $this->view("students.update-data", "layout_simple", ['message' => "L'étudiant que vous rechercher est introuvable."]);
     }
-    /**
-     * Render the login page from get REQUEST
-     */
-    public function login(){
-        return $this->view("auth.login", 'layout');
-    }
-    /**
-     * Login data control
-     */
-    public function _login(){
-        if($this->isPostMethod()){
-            $processor = $this->getStudentProcessor();
-            $processor->loginStudentProcess();
-            if($processor->hasErrors()){
-                $errors = $processor->getErrors();
-                return $this->view("auth.login", "layout",["errors"=>$errors]);
-            }else{
-                $student = $processor->student_data;
-                $_SESSION['student']["id"] = $student->id;
-                $_SESSION['student']["email"] = $student->mail_address;
-                $_SESSION['student']["mat"] = $student->registration_number;
-                $_SESSION['student']["password"] = $student->password;
-                $_SESSION['student']["picture"] = $student->picture;
-                $_SESSION['user']['type'] = 'student';
-                $this->redirect("/my-profile");
-            }
-        }
-    }
     public function logout(){
             unset($_SESSION["student"]);
             session_destroy();
@@ -276,7 +248,25 @@ class StudentsController extends Controller
             $students = $process->loadData($process->student->confirmData($mat));
             $this->redirect('/admin/students/'.$mat);
         }
-        $this->askLogin();
+        else $this->askLogin();
+    }
+    public function lockStudent(){
+        if ($this->isLoggedIn()) {
+            $mat = $_GET['mat'];
+            $process = $this->getStudentProcessor();
+            $students = $process->loadData($process->student->lock($mat));
+            $this->redirect('/admin/students');
+        }
+        else $this->askLogin();
+    }
+    public function unlockStudent(){
+        if ($this->isLoggedIn()) {
+            $mat = $_GET['mat'];
+            $process = $this->getStudentProcessor();
+            $students = $process->loadData($process->student->unlock($mat));
+            $this->redirect('/admin/students');
+        }
+        else $this->askLogin();
     }
     public function updateDocs(){
         if($this->isGetMethod()){

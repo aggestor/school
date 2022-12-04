@@ -12,7 +12,13 @@ class AuthController extends Controller
                 $personal->loginPersonalProcess();
                 if ($personal->hasErrors()) {
                     $errors = $personal->getErrors();
-                    return $this->view("auth.login", "layout", ["errors" => $errors]);
+                    if (isset($errors[403])) {
+                        http_response_code(403);
+                        return $this->view("static.403", "layouts", ['message' => "Votre compte est temporairement bloqué."]);
+                    } else {
+                        return $this->view("auth.login", "layout", ["errors" => $personal->getErrors()]);
+                    }
+
                 } else {
                     $personal = $personal->personal_data;
                     $_SESSION['personal']["id"] = $personal->id;
@@ -29,7 +35,13 @@ class AuthController extends Controller
                 $student->loginStudentProcess();
                 if ($student->hasErrors()) {
                     $errors = $student->getErrors();
-                    return $this->view("auth.login", "layout", ["errors" => $errors]);
+                    if (isset($errors[403])) {
+                        http_response_code(403);
+                        return $this->view("static.403", "layouts", ['message' => "Votre compte est temporairement bloqué."]);
+                    } else {
+                        return $this->view("auth.login", "layout", ["errors" =>$errors]);
+                    }
+
                 } else {
                     $student = $student->student_data;
                     $_SESSION['student']["id"] = $student->id;

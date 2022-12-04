@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/assets/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/assets/css/tailwind.css">
     <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
     <link rel="shortcut icon" href="/assets/images/128x128.png" sizes="128x128"/>
@@ -21,9 +22,7 @@
         <?php include VIEWS.'includes/menu.php' ?>
    <?php echo $content; ?>
     <?php include VIEWS . 'includes/footer.php';?>
-        <script src="/assets/js/jquery.min.js"></script>
-        <script>
-           
-        </script>
+        
+        <script src="/assets/js/app.js"></script>
 </body>
 </html>

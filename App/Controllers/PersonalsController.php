@@ -278,6 +278,24 @@ class PersonalsController extends Controller
             $this->redirect('/admin/personals/' . $mat);
         }else $this->askLogin();
     }
+    public function lockPersonal()
+    {
+        if ($this->isLoggedIn()) {
+            $mat = $_GET['mat'];
+            $process = $this->getPersonalProcess();
+            $process->personal->lock($mat);
+            $this->redirect('/admin/personals');
+        }else $this->askLogin();
+    }
+    public function unlockPersonal()
+    {
+        if ($this->isLoggedIn()) {
+            $mat = $_GET['mat'];
+            $process = $this->getPersonalProcess();
+            $process->personal->unlock($mat);
+            $this->redirect('/admin/personals');
+        }else $this->askLogin();
+    }
     public function updateDocs()
     {
         if ($this->isGetMethod()) {

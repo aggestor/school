@@ -210,6 +210,12 @@ class PersonalModel extends Model
     {
         return $this->updateOne('is_registered', '1', $id);
     }
+    public function lock($id){
+        return $this->updateOne('is_active','0',$id);
+    }
+    public function unlock($id){
+        return $this->updateOne('is_active','1',$id);
+    }
     public function updateOne($key, $value, $data, $k = 'registration_number')
     {
         return $this->update($this->table, "$key = ?", "$k = ?", [$value, $data]);

@@ -44,6 +44,20 @@ let setHashContainer = async container => {
     }
 
 }
+$("#showMenu").click(() => {
+    $("#menuToShow").slideToggle();
+    $("#menuToShow").css({
+      background: "#fff",
+      color: "#000000",
+      position: "absolute",
+      top: "64px",
+      left: "0",
+      width: "100%",
+        height: "60%",
+        display: "flex",
+      flexDirection:'column'
+    });
+})
 $("#showEditForm").on("click", () => {
   $('#editForm').slideDown()
 });

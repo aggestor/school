@@ -130,6 +130,7 @@ $routes->get("/admin/students/docs/(\d*)", "App\Controllers\StudentsController@g
 $routes->get("/admin/students", "App\Controllers\StudentsController@getAll");
 $routes->get("/admin/students/confirm/(\d*)", "App\Controllers\StudentsController@confirmStudent",'mat');
 $routes->get("/admin/students/lock/(\d*)", "App\Controllers\StudentsController@lockStudent",'mat');
+$routes->get("/admin/students/unlock/(\d*)", "App\Controllers\StudentsController@unlockStudent",'mat');
 $routes->get("/admin/students/update/data/(\d*)", "App\Controllers\StudentsController@updateData",'mat');
 
 $routes->get("/admin/personals/(\d*)", "App\Controllers\PersonalsController@getPersonal",'mat');
@@ -138,6 +139,7 @@ $routes->get("/admin/personals/t/(.*)/(\d*)", "App\Controllers\PersonalsControll
 $routes->get("/admin/personals", "App\Controllers\PersonalsController@getAll");
 $routes->get("/admin/personals/confirm/(\d*)", "App\Controllers\PersonalsController@confirmPersonal",'mat');
 $routes->get("/admin/personals/lock/(\d*)", "App\Controllers\PersonalsController@lockPersonal",'mat');
+$routes->get("/admin/personals/unlock/(\d*)", "App\Controllers\PersonalsController@unlockPersonal",'mat');
 $routes->get("/admin/personals/update/data/(\d*)", "App\Controllers\PersonalsController@updateData",'mat');
 
 
