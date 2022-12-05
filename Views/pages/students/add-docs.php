@@ -1,5 +1,5 @@
 <div class="w-full h-full flex justify-center items-center">
-    <div class="w-6/12  shadow bg-white h-[400px] rounded">
+    <div class="md:w-6/12 w-full  shadow bg-white h-auto p-2 md:p-0 md:h-[400px] rounded">
     <form method="POST" enctype="multipart/form-data" class="w-full h-full flex justify-center flex-col">
                 <div class="md:w-10/12 w-11/12 mb-8 flex mx-auto">
                     <a class="h-8 w-8 rounded-full bg-sky-500 text-white grid place-items-center" href="javascript:history.go(-1)"><span class="fas fa-arrow-left"></span></a><h2 class="text-black text-center w-[90%] font-semibold text-lg">Nouveau dossier.</h2>
@@ -18,11 +18,11 @@
                     <?php endif;?>
                 </div>
                 <input accept="application/pdf" type="file" hidden id="fileHolder" name="document">
-                <div class="md:w-10/12 flex justify-between mx-auto my-4">
+                <div class="md:w-10/12 w-full flex justify-between mx-auto my-4">
                     <button type="button" id="docPicker"  class="bg-white font-semibold text-sky-500 p-2 w-fit h-10 hover:bg-sky-600 transition-colors border-2 hover:text-white border-sky-500 duration-500 justify-center items-center rounded">Choisir le dossier <span class="fas fa-folder ml-1"></span></button>
                     <button type="submit" name="add-doc" class="bg-sky-500 font-semibold text-white p-2 w-4/12 h-10 hover:bg-sky-600 transition-colors duration-500 justify-center items-center rounded">Enregistrer <span class="fas fa-check-circle ml-1"></span></button>
                 </div>
-                <div class="md:w-10/12 mx-auto">
+                <div class="md:w-10/12 w-full mx-auto">
                     <?php if (isset($_POST['add-doc']) && !empty($params['errors']['document'])): ?>
                         <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['document']; ?></span>
                     <?php endif;?>
