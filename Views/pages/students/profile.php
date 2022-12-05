@@ -15,7 +15,7 @@
         </div>
     </div>
     <!--First section-->
-    <div class="w-full mt-4 md:h-72 h-auto md:space-x-3 grid sm:grid-cols-6 space-y-3 grid-cols-3 lg:grid-cols-12">
+    <div class="w-full mt-4 lg:h-72 h-auto md:space-x-3 grid sm:grid-cols-6 space-y-3 grid-cols-3 lg:grid-cols-12">
         <div class="col-span-3 flex items-center h-ful">
             <div class="w-60 rounded overflow-hidden h-60">
                 <img class="w-full h-full object-cover" src="/files/users/<?=$student->picture?>" alt="<?=$student->first_name.' '.$student->second_name.' '.$student->last_name?>">
@@ -106,7 +106,7 @@
         </div>
     </div>
     <!--Second section-->
-    <div class="w-full mt-4 md:h-72 h-auto md:space-x-3 grid sm:grid-cols-6 space-y-3 grid-cols-3 lg:grid-cols-12">
+    <div class="w-full mt-4 lg:h-72 h-auto md:space-x-3 grid sm:grid-cols-6 space-y-3 grid-cols-3 lg:grid-cols-12">
         <div class="col-span-3 py-2 h-full">
             <div class="w-full flex flex-col justify-between">
                 <span class="text-sky-500 font-semibold border-b-2 w-fit border-sky-500 pb-1">Addresse</span>
@@ -213,7 +213,7 @@
         </div>
     </div>
     <!--Third Section-->
-    <div class="w-full mt-4 md:h-72 h-auto md:space-x-3 grid sm:grid-cols-6 space-y-3 grid-cols-3 lg:grid-cols-12">
+    <div class="w-full mt-4 lg:h-72 h-auto md:space-x-3 grid sm:grid-cols-6 space-y-3 grid-cols-3 lg:grid-cols-12">
         <div class="col-span-3 py-2 h-full">
             <div class="w-full flex flex-col justify-between">
                 <span class="text-sky-500 font-semibold border-b-2 w-fit border-sky-500 pb-1">Ecole secondaire fréquentée</span>

@@ -1,11 +1,11 @@
 <?php $student = $params['student']?>
 <section class="w-full flex items-center justify-center">
-    <main class="h-full block w-11/12 border-r-2 border-white border-b-2 bg-white rounded-lg shadow shadow-gray-400">
+    <main class="h-full block md:w-11/12 w-full border-r-2 border-white border-b-2 bg-white rounded-lg shadow shadow-gray-400">
         <div class="w-11/12 mb-2 mx-auto">
             <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">School Archive Manager.</h2>
             <h2 class="text-black font-semibold text-lg mt-2 text-center">Modification étudiant : <span class="text-sky-500"><?=$student->registration_number?></span></h2>
         </div>
-          <form enctype="multipart/form-data" method="POST" class="w-full h-auto overflow-auto flex justify-center flex-col">
+          <form enctype="multipart/form-data" method="POST" class="md:w-full w-11/12 mx-auto h-auto overflow-auto flex justify-center flex-col">
             <!---Identity section beginning--->
             <div  id="identity" class="w-full register-menu grid md:grid-cols-2 grid-cols-1">
                 <div class="md:col-span-2 col-span-1 mb-2 mx-auto">
@@ -112,12 +112,12 @@
             <!---Identity section end--->
 
             <!---Address section beginning--->
-            <div  id="address" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[70%]">
+            <div  id="address" class="w-full register-container grid grid-cols-1 md:grid-cols-2 md:h-[70%]">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">2. Votre Adresse</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
-                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
+                <div class="md:px-8 grid grid-cols-1 col-span-2">
+                    <div class="col-span-2 md:space-x-3 space-y-3  my-3 grid grid-cols-1 md:grid-cols-2">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="id_type"  name="id_type" type="text" placeholder="Choisir type de pièce" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['id_type'];}else echo $student->id_type?>" />
@@ -147,7 +147,7 @@
                             <?php endif;?>
                         </div>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-3 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 space-y-3  my-3 grid md:grid-cols-3 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="nationality" type="text" placeholder="Nationalité" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['nationality'];}else echo $student->nationality?>" />
@@ -173,7 +173,7 @@
                             <?php endif;?>
                         </div>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-3 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 space-y-3  my-3 grid md:grid-cols-3 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="municipality" type="text" placeholder="Collectivité / Secteur / Commune" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['municipality'];}else echo $student->municipality?>" />
@@ -200,7 +200,7 @@
                         </div>
                     </div>
                     <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
-                        <div class="col-span-1">
+                        <div class="md:col-span-1 col-span-2">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="student_status"  name="student_status" type="text" placeholder="Status Etudiant" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['student_status'];}else echo $student->student_status?>" />
                                 <datalist id="student_status">
@@ -222,8 +222,8 @@
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">3. Orientation académique</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
-                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
+                <div class="md:px-8 grid grid-cols-1 col-span-2">
+                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-1 space-y-2 md:grid-cols-2">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="fac_to_study"  name="fac_to_study" type="text" placeholder="Choisir Faculté / Section" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['fac_to_study'];}else echo $student->f_id?>" />
@@ -251,7 +251,7 @@
                             <?php endif;?>
                         </div>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-2 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 space-y-2  my-3 grid md:grid-cols-2 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="orientation_to_study" type="text" placeholder="Orientation" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['orientation_to_study'];}else echo $student->orientation?>" />
@@ -283,8 +283,8 @@
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">4. Vos Origines</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
-                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
+                <div class="md:px-8 grid grid-cols-1 col-span-2">
+                    <div class="col-span-2 md:space-x-3 space-y-2 grid-cols-1  my-3 grid md:grid-cols-2">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="state_origin"  name="state_origin" type="text" placeholder="Choisir Province" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['state_origin'];}else echo $student->state_origin?>" />
@@ -330,7 +330,7 @@
                             <?php endif;?>
                         </div>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-2 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 space-y-2  my-3 grid md:grid-cols-2 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="municipality_origin" type="text" placeholder="Collectivité / Secteur / Commune" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['municipality_origin'];}else echo $student->municipality_origin?>" />
@@ -357,16 +357,16 @@
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">5. Informations sur l'école sécondaire frequentée</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
+                <div class="md:px-8 grid grid-cols-1 col-span-2">
                     <div class="col-span-1">
-                        <div class="w-8/12 focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
+                        <div class="md:w-8/12 focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                             <input   name="name_ss" type="text" placeholder="Nom de l'école secondaire" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['name_ss'];}else echo $student->clg_name?>" />
                         </div>
                         <?php if (isset($_POST['register_student']) && !empty($params['errors']['name_ss'])): ?>
                                 <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['name_ss']; ?></span>
                             <?php endif;?>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-2 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 space-y-2  my-3 grid md:grid-cols-2 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="state_ss"  name="state_ss" type="text" placeholder="Choisir Province" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['state_ss'];}else echo $student->clg_state?>" />
@@ -413,14 +413,14 @@
                         </div>
                     </div>
                     <div class="col-span-1">
-                        <div class="w-8/12 focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
+                        <div class="md:w-8/12 focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                             <input   name="section_ss" type="text" placeholder="Section suivie (Humanité)" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['section_ss'];}else echo $student->clg_section_studied?>" />
                         </div>
                         <?php if (isset($_POST['register_student']) && !empty($params['errors']['section_ss'])): ?>
                                 <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['section_ss']; ?></span>
                             <?php endif;?>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-2 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 space-y-2  my-3 grid md:grid-cols-2 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="exetat_center" type="text" placeholder="Centre Exetat" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['exetat_center'];}else echo $student->clg_l_e_center?>" />
@@ -438,7 +438,7 @@
                             <?php endif;?>
                         </div>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-2 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 space-y-2  my-3 grid md:grid-cols-2 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="exetat_pourcentage" type="number" placeholder="Pourcentage Exetat" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['exetat_pourcentage'];}else echo $student->clg_l_e_percentage?>" />
@@ -465,8 +465,8 @@
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">6. Parents et sponsors</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-3 grid-cols-1">
+                <div class="md:px-8 grid grid-cols-1 col-span-2">
+                    <div class="col-span-2 md:space-x-3 space-y-2  my-3 grid md:grid-cols-3 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="father_name" type="text" placeholder="Nom du père" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['father_name'];}else echo $student->ps_father?>" />
@@ -496,7 +496,7 @@
                             <?php endif;?>
                         </div>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-3 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 space-y-2  my-3 grid md:grid-cols-3 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="sponsor_name" type="text" placeholder="Nom Sponsor" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['sponsor_name'];}else echo $student->ps_sponsor?>" />
@@ -523,8 +523,8 @@
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">7. Informations sanitaires</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
-                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
+                <div class="md:px-8 grid grid-cols-1 col-span-2">
+                    <div class="col-span-2 md:space-x-3 space-y-2  my-3 grid grid-cols-1 md:grid-cols-2">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input  name="blood_type" type="text" placeholder="Groupe Sanguin" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if(isset($_POST['register_student'])){echo $_POST['blood_type'];}else echo $student->blood_type?>"/>
@@ -542,7 +542,7 @@
                             <?php endif;?>
                         </div>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-2 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 space-y-2  my-3 grid md:grid-cols-2 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="allergies" type="text" placeholder="Allergies" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['allergies'];}else echo $student->allergies?>" />
@@ -565,8 +565,8 @@
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">8. Mot de passe</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-3 grid-cols-1">
+                <div class="md:px-8 grid grid-cols-1 col-span-2">
+                    <div class="col-span-2 md:space-x-3 space-y-2  my-3 grid md:grid-cols-3 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="old_password" type="text" placeholder="Ancien mot de passe" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['old_password'];}?>" />
@@ -595,7 +595,7 @@
                     </div>
                 </div>
                     <div class="col-span-2 md:space-x-3  my-3 flex justify-center">
-                        <button name="register_student" class="p-1.5 w-fit bg-sky-500 text-white rounded fles justify-between items-center" type="submit">Enregistrer les modification <span class="fas fa-save mt-1 mr-2"></span></button>
+                        <button name="register_student" class="p-1.5 md:w-fit bg-sky-500 text-white rounded fles justify-between items-center" type="submit">Enregistrer les modification <span class="fas fa-save mt-1 mr-2"></span></button>
                     </div>
                 </div>
             </div>
