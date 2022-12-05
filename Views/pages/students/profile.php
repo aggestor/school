@@ -9,8 +9,8 @@
        <?php if(isset($_SESSION['admin'])) :?> <div class="flex <?=$data = $student->is_registered != 0 ? 'w-3/12': 'w-4/12' ?> items-center justify-between"> <?php else : ?>
         <div class="flex w-3/12 items-center justify-between"> 
             <?php endif ; ?>
-                <a href="<?=$e = isset($_SESSION['admin']) ? '/admin/students/modify/'.$student->registration_number : 'my-profile/modify'?>" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200"><span class="hidden md:flex">Modifier </span> <span class="fas fa-pen text-gray-500 md:ml-3 mt-1"></span></a>
-                <a href="<?=$d =isset($_SESSION['admin']) ?  '/admin/students/docs/'.$student->id:'my-profile/docs'?>" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200"><span class="hidden md:flex">Mes dossiers</span>  <span class="fas fa-folder text-gray-500 md:ml-3 mt-1"></span></a>
+                <a href="<?=$e = isset($_SESSION['admin']) ? '/admin/students/modify/'.$student->registration_number : 'my-profile/modify'?>" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200"><span class="hidden lg:flex">Modifier </span> <span class="fas fa-pen text-gray-500 lg:ml-3 mt-1"></span></a>
+                <a href="<?=$d =isset($_SESSION['admin']) ?  '/admin/students/docs/'.$student->id:'my-profile/docs'?>" class="p-1.5 bg-gray-100 flex justify-between rounded hover:bg-gray-200"><span class="hidden lg:flex">Mes dossiers</span>  <span class="fas fa-folder text-gray-500 lg:ml-3 mt-1"></span></a>
             <?php if(isset($_SESSION['admin']) AND $student->is_registered != 1) : ?><a href="/admin/students/confirm/<?=$student->registration_number?>" class="p-1.5 bg-green-500 flex justify-between rounded hover:bg-green-600 text-white"> <span class="hidden md:flex">Confirmer</span> <span class="fas fa-check-circle ml-3 mt-1"></span></a> <?php endif;?>
         </div>
     </div>
