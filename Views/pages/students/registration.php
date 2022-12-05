@@ -1,23 +1,23 @@
 
 <section class="w-full relative flex items-center justify-center overflow-hidden h-full bg-white">
-    <main class="h-[580px] z-10 block w-8/12 border-r-2 border-white border-b-2 bg-white rounded-lg shadow shadow-gray-400">
+    <main class="md:h-[580px] h-full z-10 block md:w-8/12 w-11/12 border-r-2 border-white border-b-2 bg-white rounded-lg shadow shadow-gray-400">
         <div class="w-11/12 mb-2 mx-auto">
             <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">School Archive Manager.</h2>
             <h2 class="text-black font-semibold text-lg mt-2 text-center">Identification étudiant.</h2>
         </div>
         <div class="relative menu h-10 mb-2 flex justify-between items-center w-11/12 mx-auto">
-            <a href="#identity" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">1</a>
-            <a href="#address" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">2</a>
-            <a href="#orientation" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">3</a>
-            <a href="#origin" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">4</a>
-            <a href="#secondary-school" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">5</a>
-            <a href="#parent-sponsors" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">6</a>
-            <a href="#health" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">7</a>
+            <a href="#identity" class="w-6 h-6 md:w-8 md:h-8 text-sm hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 md:text-lg font-semibold">1</a>
+            <a href="#address" class="w-6 h-6 md:w-8 md:h-8 text-sm hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 md:text-lg font-semibold">2</a>
+            <a href="#orientation" class="w-6 h-6 md:w-8 md:h-8 text-sm hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 md:text-lg font-semibold">3</a>
+            <a href="#origin" class="w-6 h-6 md:w-8 md:h-8 text-sm hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 md:text-lg font-semibold">4</a>
+            <a href="#secondary-school" class="w-6 h-6 md:w-8 md:h-8 text-sm hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 md:text-lg font-semibold">5</a>
+            <a href="#parent-sponsors" class="w-6 h-6 md:w-8 md:h-8 text-sm hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 md:text-lg font-semibold">6</a>
+            <a href="#health" class="w-6 h-6 md:w-8 md:h-8 text-sm hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 md:text-lg font-semibold">7</a>
             <div class="h-1 border-t-4 bottom-4 border-sky-500 w-full absolute"></div>
         </div>
           <form enctype="multipart/form-data" method="POST" class="w-full h-[78%] overflow-auto flex justify-center flex-col">
             <!---Identity section beginning--->
-            <div style="display: none" id="identity" class="w-full register-menu grid md:grid-cols-2 grid-cols-1">
+            <div style="display: none" id="identity" class="md:w-full w-11/12 mx-auto md:mx-0 register-menu grid md:grid-cols-2 grid-cols-1">
                 <div class="md:col-span-2 col-span-1 mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">1. Votre identité</h2>
                 </div>
@@ -30,7 +30,7 @@
                     </div>
                     <canvas hidden id="canvas" height="320" width="320"></canvas>
                     <div id="imaged" class="mx-auto h-40 w-40 rounded-full relative">
-                        <img id="imageContainer" src="/assets/images/output-onlinepngtools.png" class="w-full  rounded-full h-full object-cover">
+                        <img id="imageContainer" src="/assets/images/u.png" class="w-full  rounded-full h-full object-cover">
                         <span id="cameraHandle" class="w-8 h-8 cursor-pointer rounded-full text-white grid place-items-center absolute right-1 bottom-4 bg-sky-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" /></svg>
                             </span>
@@ -132,12 +132,12 @@
             <!---Identity section end--->
 
             <!---Address section beginning--->
-            <div style="display: none" id="address" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[70%]">
+            <div style="display: none" id="address" class="md:w-full w-11/12 mx-auto md:mx-0 register-container grid grid-cols-1 md:grid-cols-2 h-[70%]">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">2. Votre Adresse</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
-                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
+                <div class="lg:px-8 grid grid-cols-1 col-span-2">
+                    <div class="col-span-2 md:space-x-3 space-y-2   my-3 grid grid-cols-1 lg:grid-cols-2">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="id_type"  name="id_type" type="text" placeholder="Choisir type de pièce" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['id_type'];}?>" />
@@ -167,7 +167,7 @@
                             <?php endif;?>
                         </div>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-3 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 space-y-2  my-3 grid md:grid-cols-3 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="nationality" type="text" placeholder="Nationalité" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['nationality'];}?>" />
@@ -193,7 +193,7 @@
                             <?php endif;?>
                         </div>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-3 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 space-y-2  my-3 grid md:grid-cols-3 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="municipality" type="text" placeholder="Collectivité / Secteur / Commune" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['municipality'];}?>" />
@@ -219,7 +219,7 @@
                             <?php endif;?>
                         </div>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
+                    <div class="col-span-2 md:space-x-3  space-y-2  my-3 grid grid-cols-2">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="student_status"  name="student_status" type="text" placeholder="Status Etudiant" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['student_status'];}?>" />
@@ -238,12 +238,12 @@
             <!---Address section end--->
 
             <!---Orientation section beginning--->
-            <div style="display: none" id="orientation" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[60%]">
+            <div style="display: none" id="orientation" class="md:w-full w-11/12 mx-auto md:mx-0 register-container grid grid-cols-1 md:grid-cols-2 h-[60%]">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">3. Orientation académique</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
-                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
+                <div class="lg:px-8 grid grid-cols-1 col-span-2">
+                    <div class="col-span-2 md:space-x-3 space-y-2  my-3 grid grid-cols-1 lg:grid-cols-2">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="fac_to_study"  name="fac_to_study" type="text" placeholder="Choisir Faculté / Section" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['fac_to_study'];}?>" />
@@ -300,12 +300,12 @@
             <!---Orientation section end--->
 
             <!---Origin section beginning--->
-            <div style="display: none" id="origin" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[60%]">
+            <div style="display: none" id="origin" class="md:w-full w-11/12 mx-auto md:mx-0 register-container grid grid-cols-1 md:grid-cols-2 h-[60%]">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">4. Vos Origines</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
-                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
+                <div class="lg:px-8 grid grid-cols-1 col-span-2">
+                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-1 lg:grid-cols-2">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="state_origin"  name="state_origin" type="text" placeholder="Choisir Province" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['state_origin'];}?>" />
@@ -375,13 +375,13 @@
             <!---Origin section end--->
 
             <!---Secondary School section beginning--->
-            <div style="display: none" id="secondary-school" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[90%]">
+            <div style="display: none" id="secondary-school" class="md:w-full w-11/12 mx-auto md:mx-0 register-container grid grid-cols-1 md:grid-cols-2 h-[90%]">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">5. Informations sur l'école sécondaire frequentée</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
+                <div class="lg:px-8 grid grid-cols-1 col-span-2">
                     <div class="col-span-1">
-                        <div class="w-8/12 focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
+                        <div class="md:w-8/12 w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                             <input   name="name_ss" type="text" placeholder="Nom de l'école secondaire" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['name_ss'];}?>" />
                         </div>
                         <?php if (isset($_POST['register_student']) && !empty($params['errors']['name_ss'])): ?>
@@ -435,7 +435,7 @@
                         </div>
                     </div>
                     <div class="col-span-1">
-                        <div class="w-8/12 focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
+                        <div class="md:w-8/12 w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                             <input   name="section_ss" type="text" placeholder="Section suivie (Humanité)" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['section_ss'];}?>" />
                         </div>
                         <?php if (isset($_POST['register_student']) && !empty($params['errors']['section_ss'])): ?>
@@ -483,11 +483,11 @@
             <!---Secondary School section end--->
 
             <!---Parents and sponsors section beginning--->
-            <div style="display: none" id="parent-sponsors" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[70%]">
+            <div style="display: none" id="parent-sponsors" class="md:w-full w-11/12 mx-auto md:mx-0 register-container grid grid-cols-1 md:grid-cols-2 h-[70%]">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">6. Parents et sponsors</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
+                <div class="lg:px-8 grid grid-cols-1 col-span-2">
                     <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-3 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
@@ -541,12 +541,12 @@
             <!---Parents and sponsors section end--->
 
             <!---Health section beginning--->
-            <div style="display: none" id="health" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[60%]">
+            <div style="display: none" id="health" class="md:w-full w-11/12 mx-auto md:mx-0 register-container grid grid-cols-1 md:grid-cols-2 h-[60%]">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">7. Informations sanitaires</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
-                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
+                <div class="md:px-8 grid grid-cols-1 col-span-2">
+                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-1 space-y-2 md:grid-cols-2">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input  name="blood_type" type="text" placeholder="Groupe Sanguin" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['register_student'])) {echo $_POST['blood_type'];}?>" />

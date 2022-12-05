@@ -23,7 +23,7 @@
     <body class="w-full bg-slate-200 grid overflow-hidden grid-cols-12 home-body h-full">
         <main class="col-span-12 h-full block">
             <?php include VIEWS . 'includes/menu.php';?>
-            <section style="height: calc(100vh - 56px);" class="w-full overflow-y-auto p-6">
+            <section style="height: calc(100vh - 56px);" class="w-full overflow-y-auto md:p-6 p-3">
                 <?php echo $content; ?>
             </section>
         </main>
