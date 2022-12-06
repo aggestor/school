@@ -14,14 +14,14 @@ if ($('#docPicker')) {
     $("#docPicker").on("click", () => $("#fileHolder").click())
 } 
 function prettyString($data) {
-    return $data.toString().toLowerCase().replace(/é/gi,'e').replace(/\s/,'-')
+    return $data.toString().toLowerCase().replace(/é/gi,'e').replace(/\s/gi,'-')
      
 }
 const personalFilter = $("#personalFilter");
 personalFilter.on('change', (e) => {
     const t = decodeURI(prettyString(e.target.value))
     if (t == '0') {
-        window.location.href = '/admin/personals'
+       window.location.href = '/admin/personals'
     }
     else window.location.href = '/admin/personals/t/' + t
     

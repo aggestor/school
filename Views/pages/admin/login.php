@@ -1,5 +1,5 @@
-<div class="w-5/12 shadow bg-white h-[430px] rounded">
-    <form  method="POST" class="w-full h-full flex justify-center flex-col">
+<div class="md:w-5/12 w-11/12 shadow bg-white h-[430px] rounded">
+    <form  method="POST" class="md:w-full w-11/12 mx-auto h-full flex justify-center flex-col">
                 <div class="md:w-10/12 w-11/12 mb-8 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl my-4 text-center">School Archive Manager.</h2>
                     <h2 class="text-black font-semibold text-lg my-2 text-center"> Connexion administrateur.</h2>
@@ -21,12 +21,12 @@
                         <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['password']; ?></span>
                     <?php endif;?>
                 </div>
-                <div class="md:w-10/12 mx-auto my-2">
+                <!-- <div class="md:w-10/12 w-full mx-auto my-2">
                     <label for="remember" class="flex items-center">
                         <input id="remember" class=" bg-slate-200 rounded-lg w-5 mr-4 h-5 accent-sky-500 text-2xl "  type="checkbox">  <span class="mb-0.5 text-sm text-gray-600">Se souvenir de moi</span>
                     </label>
-                </div>
-                <div class="md:w-10/12 flex justify-between mx-auto my-4">
+                </div> -->
+                <div class="md:w-10/12 w-full flex justify-between mx-auto my-4">
                     <button type="submit" name="login" class="bg-sky-500 font-semibold text-white p-2 w-4/12 h-10 hover:bg-sky-600 transition-colors duration-500 justify-center items-center rounded">Connexion</button>
                     <a href="javascript:history.go(-1)" class="text-sky-500 font-semibold border-2 border-sky-500 hover:text-white transition-colors duration-500 bg-white flex justify-center items-center w-4/12 h-10 hover:bg-sky-600 rounded">Retour</a>
                 </div>

@@ -143,6 +143,7 @@ $routes->get("/admin/personals/unlock/(\d*)", "App\Controllers\PersonalsControll
 $routes->get("/admin/personals/update/data/(\d*)", "App\Controllers\PersonalsController@updateData",'mat');
 
 
+$routes->get("/test", "App\Controllers\AuthController@test");
 
 try {
     $routes->run();

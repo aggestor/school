@@ -68,4 +68,7 @@ class AuthController extends Controller
         session_destroy();
         $this->redirect('/');
     }
+    public function test(){
+        return $this->view("students.add-docs-success",'layout_admin');
+    }
 }

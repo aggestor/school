@@ -1,4 +1,4 @@
-<nav class="col-span-2 h-full block px-3 py-1.5    w-full bg-white">
+<nav class="col-span-2 hidden h-full md:block px-3 py-1.5    w-full bg-white">
     <div class="text-sky-500 pl-3 flex items-center font-bold text-2xl">
          <img src="/assets/images/logo.jpg" class="mr-2 h-12"/> <span>UOR</span>
     </div>
