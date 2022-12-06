@@ -16,9 +16,12 @@
     <a href="/admin/logout" class="w-8 mx-0.5  h-8 grid place-items-center cursor-pointer hover:bg-slate-200 duration-500 transition-colors rounded-full">
       <span class="fas fa-power-off"></span>
     </a>
-    <span class="w-8 mx-0.5  h-8 grid place-items-center cursor-pointer hover:bg-slate-200 duration-500 transition-colors rounded-full">
+    <span id="showNavAdmin" class="w-8 mx-0.5  h-8 grid place-items-center cursor-pointer hover:bg-slate-200 duration-500 transition-colors rounded-full">
       <span class="fas fa-bars"></span>
     </span>
   </div>
 
+</div>
+<div>
+  <?php include VIEWS."includes/admin-mobile-menu.php"?>
 </div>

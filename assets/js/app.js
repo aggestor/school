@@ -58,6 +58,9 @@ $("#showMenu").click(() => {
       flexDirection:'column'
     });
 })
+$('#showNavAdmin').click(() => {
+    $("#navAdmin").slideToggle()
+})
 $("#showEditForm").on("click", () => {
   $('#editForm').slideDown()
 });
