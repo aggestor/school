@@ -1,11 +1,11 @@
 <div class="w-full h-full">
-    <div class="w-full  space-x-4 flex justify-evenly h-[450px]">
-        <div class="w-5/12 overflow-hidden h-full rounded bg-white shadow shadow-gray-400">
-            <div class="others mt-20 flex flex-col items-center justify-around">
-                <div class="w-8/12 flex justify-between  mb-4 mx-auto">
+    <div class="w-full  space-y-2 md:space-y-0 md:space-x-4 flex flex-col md:flex-row justify-evenly p-2 md:p-0 h-full md:h-[450px]">
+        <div class="md:w-5/12 w-full overflow-hidden h-full rounded bg-white shadow shadow-gray-400">
+            <div class="others md:mt-20 mt-4 md:w-full w-11/12 mx-auto h-full flex flex-col items-center justify-around">
+                <div class="md:w-8/12 w-full flex justify-between  mb-4 mx-auto">
                    <a href="javascript:history.back()" class="w-8 h-8 bg-sky-500 text-white rounded-full grid place-items-center"><span class="fas fa-arrow-left"></span> </a><span class="font-semibold text-sky-500">Informations de l'administrateur</span> 
                 </div>
-                <div class="flex w-8/12 mx-auto flex-col">
+                <div class="flex md:w-8/12 w-full mx-auto flex-col">
                     <div class="w-full mb-2 flex justify-between">
                         <span>Noms </span>
                         <h1 class="text-black font-semibold text-center"><?= ucfirst($_SESSION['admin']['name'])?></h1>
@@ -26,7 +26,7 @@
                 <span id="showEditForm" class="py-2 px-3 cursor-pointer rounded bg-sky-500 text-white hover:shadow shadow-sky-300 mt-4"><span class="fas fa-pen mr-2"></span> Modifier mes informations</span>
             </div>
         </div>
-        <div  id="editForm" class="w-7/12 h-full block p-3 rounded bg-white shadow shadow-gray-400">
+        <div style="display:none;"  id="editForm" class="md:w-7/12 w-full h-full block p-3 rounded bg-white shadow shadow-gray-400">
              <form  method="POST" class="w-full h-full flex justify-center flex-col">
                 <div class="md:w-10/12 w-11/12 mb-8 flex mx-auto">
                     <h2 class="text-black text-center w-[90%] font-semibold text-lg">Nouvel administrateur.</h2>
@@ -49,8 +49,8 @@
                     <?php endif;?>
                     </div>
                 </div>
-                <div class="md:w-10/12 mx-auto my-2">
-                    <div class="w-7/12">
+                <div class="md:w-10/12 w-full mx-auto my-2">
+                    <div class="md:w-7/12 w-full">
                         <div class="mx-auto focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                             <input  name="phone" type="phone" placeholder="Téléphone" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['update']) && empty($params['errors']['phone'])) {echo $_POST['phone'];}else echo $_SESSION['admin']['phone']?>" />
                         </div>
@@ -59,8 +59,8 @@
                         <?php endif;?>
                     </div>
                 </div>
-                <div class="md:w-10/12 mx-auto my-2">
-                    <div class="w-7/12">
+                <div class="md:w-10/12 w-full mx-auto my-2">
+                    <div class="md:w-7/12 w-full">
                          <div class=" mx-auto focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                         <input autocomplete="new-password"  name="old_password" type="password" placeholder="Ancient mot de passe" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['update']) && empty($params['errors']['old_password'])) {echo $_POST['old_password'];}?>" />
                     </div>
@@ -87,8 +87,8 @@
                     <?php endif;?>
                     </div>
                 </div>
-                <div class="md:w-10/12 flex justify-end mx-auto my-4">
-                    <button type="submit" name="update" class="bg-sky-500 font-semibold text-white p-2 w-4/12 h-10 hover:bg-sky-600 transition-colors duration-500 justify-center items-center rounded">Enregistrer <span class="fas fa-check-circle ml-1"></span></button>
+                <div class="md:w-10/12 flex justify-end md:mx-auto my-4">
+                    <button type="submit" name="update" class="bg-sky-500 font-semibold text-white p-2 w-fit h-10 hover:bg-sky-600 transition-colors duration-500 justify-center items-center rounded">Enregistrer <span class="fas fa-check-circle ml-1"></span></button>
                 </div>
           </form>
         </div>

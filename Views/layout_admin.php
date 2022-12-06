@@ -32,11 +32,9 @@
         <script>
             const menuItems = document.querySelectorAll("#menu_list li a")
             const currentPath = window.location.href
-            console.log(menuItems)
             menuItems.forEach(item =>{
                 let rgx  = new RegExp(`^(${currentPath})$`)
                 if(rgx.test(item.href)){
-                    console.log(rgx)
                     $(item).addClass("bg-sky-500").css("color","white")
                 }
             })

@@ -7,7 +7,7 @@
         <span class="w-1/12 text-center">#</span>
         <span class="w-3/12 text-center">Nom</span>
         <span class="w-3/12 text-center">Acronyme</span>
-        <span class="w-2/12 text-center">Derniére Modif.</span>
+        <span class="w-2/12 md:flex hidden text-center">Derniére Modif.</span>
         <span class="w-2/12 text-center">Action</span>
     </div>
     <?php foreach($params['fsd'] as $fac) :?>
@@ -15,7 +15,7 @@
         <span class="w-1/12 text-center"><?= array_search($fac,$params['fsd'])+1?></span>
         <span class="w-3/12 text-center"><?= $fac->name?></span>
         <span class="w-3/12 text-center"><?= $res = $fac->acronym === null ? "Aucun" : $fac->acronym?></span>
-        <span class="w-2/12 text-center text-green-500">Jamais</span>
+        <span class="w-2/12 md:flex hidden text-center text-green-500">Jamais</span>
         <span class="w-2/12 flex justify-center">
             <a class="mr-2 h-8 w-8 rounded bg-blue-500 text-white grid place-items-center" href="/admin/domains/update/<?=$fac->id?>"><span class="fas fa-pen"></span></a>
             <a class="mr-2 h-8 w-8 rounded bg-red-500 text-white grid place-items-center" href="/admin/domains/delete/<?=$fac->id?>"><span class="fas fa-trash"></span></a>

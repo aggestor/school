@@ -6,18 +6,18 @@
     <div class="border border-gray-500 mb-2 rounded w-full text-gray-800 font-semibold p-2 flex justify-between">
         <span class="w-1/12 text-center">#</span>
         <span class="w-3/12 text-center">Nom</span>
-        <span class="w-1/12 text-center">Acronyme</span>
+        <span class="w-1/12 hidden md:flex text-center">Acronyme</span>
         <span class="w-3/12 text-center">Faculté</span>
-        <span class="w-2/12 text-center">Derniére Modif.</span>
+        <span class="w-2/12 hidden md:flex text-center">Derniére Modif.</span>
         <span class="w-2/12 text-center">Action</span>
     </div>
     <?php foreach($params['dep'] as $dep) :?>
     <div class="border rounded w-full mb-3 items-center text-gray-700 font-semibold p-2 flex justify-between">
         <span class="w-1/12 text-center"><?= array_search($dep,$params['dep'])+1?></span>
         <span class="w-3/12 text-center"><?= $dep->name?></span>
-        <span class="w-1/12 text-center"><?=$dep->acronym?></span>
+        <span class="w-1/12 hidden md:flex text-center"><?=$dep->acronym?></span>
         <span class="w-3/12 text-center"><?= $dep->f_name?></span>
-        <span class="w-2/12 text-center text-green-500">Jamais</span>
+        <span class="w-2/12 hidden md:flex text-center text-green-500">Jamais</span>
         <span class="w-2/12 flex justify-center">
             <a class="mr-2 h-8 w-8 rounded bg-blue-500 text-white grid place-items-center" href="/admin/departments/update/<?=$dep->id?>"><span class="fas fa-pen"></span></a>
             <a class="mr-2 h-8 w-8 rounded bg-red-500 text-white grid place-items-center" href="/admin/departments/delete/<?=$dep->id?>"><span class="fas fa-trash"></span></a>

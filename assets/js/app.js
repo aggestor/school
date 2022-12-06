@@ -17,7 +17,7 @@ function prettyString($data) {
     return $data.toString().toLowerCase().replace(/é/gi,'e').replace(/\s/gi,'-')
      
 }
-const personalFilter = $("#personalFilter");
+const personalFilter = $(".personalFilter");
 personalFilter.on('change', (e) => {
     const t = decodeURI(prettyString(e.target.value))
     if (t == '0') {
