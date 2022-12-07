@@ -1,6 +1,6 @@
 <div class="w-full flex justify-between items-center py-1 mb-4 px-3 h-14 rounded shadow bg-white">
     <h1 class="text-gray-800 flex items-center font-semibold text-lg"> <a class="w-8 h-8 rounded-full bg-sky-500 text-white grid place-items-center mr-3" href="javascript:history.back()"><span class="fas fa-arrow-left"></span></a><span>Liste des personels inscrits</span> </h1>
-    <div>
+    <div class="w-fit flex">
         <select class="border-2 hidden md:flex rounded border-sky-500 p-1.5 text-sky-500 outline-none personalFilter">
             <option value='0'>Tous</option>
             <?php foreach($params['fnx'] as $fn) : ?>
@@ -43,7 +43,7 @@
             <?php endif;?>
         </span>
     </div>
-    <div class="md:border border-b md:border-b-0 space-y-2 md:space-y-0 rounded w-full mb-3 items-center text-gray-700 font-semibold p-2 grid grid-cols-2">
+    <div class="md:border border-b md:border-b-0 space-y-2 md:space-y-0 rounded w-full mb-3 items-center text-gray-700 font-semibold p-2 md:hidden grid grid-cols-2">
         <span class="col-span-1"><?= array_search($s,$params['personals'])+1?></span>
         <span class="col-span-1 text-cyan-500"><?= $s->first_name.' '.$s->second_name.' '.$s->last_name?></span>
         <span class="col-span-1 text-cyan-500"><?=$s->registration_number?></span>

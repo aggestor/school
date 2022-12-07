@@ -1,20 +1,20 @@
 <section class="w-full relative flex items-center justify-center overflow-hidden h-full bg-white">
-    <main class="h-[580px] z-10 block w-8/12 border-r-2 border-white border-b-2 bg-white rounded-lg shadow shadow-gray-400">
-        
+    <main class="md:h-[580px] z-10 block md:w-8/12 w-11/12 mx-auto border-r-2 border-white border-b-2 bg-white rounded-lg shadow shadow-gray-400">
+
         <div class="w-11/12 mb-2 mx-auto">
-            <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">School Archive Manager.</h2>
+            <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">Soft-Dossier.</h2>
             <h2 class="text-black font-semibold text-lg mt-2 text-center">Identification personnel.</h2>
         </div>
         <div class="relative menu h-10 mb-2 flex justify-between items-center w-11/12 mx-auto">
-            <a href="#identity" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">1</a>
-            <a href="#address" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">2</a>
-            <a href="#orientation" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">3</a>
-            <a href="#origin" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">4</a>
-            <a href="#payment" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">5</a>
-            <a href="#health" class="w-8 h-8 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 text-lg font-semibold">6</a>
+            <a href="#identity" class="lg:w-8 w-7 lg:h-8 h-7 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 lg:text-lg font-semibold">1</a>
+            <a href="#address" class="lg:w-8 w-7 lg:h-8 h-7 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 lg:text-lg font-semibold">2</a>
+            <a href="#orientation" class="lg:w-8 w-7 lg:h-8 h-7 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 lg:text-lg font-semibold">3</a>
+            <a href="#origin" class="lg:w-8 w-7 lg:h-8 h-7 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 lg:text-lg font-semibold">4</a>
+            <a href="#payment" class="lg:w-8 w-7 lg:h-8 h-7 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 lg:text-lg font-semibold">5</a>
+            <a href="#health" class="lg:w-8 w-7 lg:h-8 h-7 hover:text-white hover:bg-sky-500 cursor-pointer transition-colors duration-500 bg-white z-10 rounded-full border-2 border-sky-500 grid place-items-center text-sky-500 lg:text-lg font-semibold">6</a>
             <div class="h-1 border-t-4 bottom-4 border-sky-500 w-full absolute"></div>
         </div>
-          <form  method="POST" enctype="multipart/form-data" class="w-full h-[78%] overflow-auto flex justify-center flex-col">
+          <form  method="POST" enctype="multipart/form-data" class="md:w-full w-11/12 mx-auto md:h-[78%] h-auto overflow-auto flex justify-center flex-col">
             <div style="display: none" id="identity" class="w-full register-menu grid md:grid-cols-2 grid-cols-1">
                 <div class="md:col-span-2 col-span-1 mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">1. Votre identité</h2>
@@ -28,7 +28,7 @@
                     </div>
                     <canvas hidden id="canvas" height="320" width="320"></canvas>
                     <div id="imaged" class="mx-auto h-40 w-40 rounded-full relative">
-                        <img id="imageContainer" src="/assets/images/output-onlinepngtools.png" class="w-full  rounded-full h-full object-cover">
+                        <img id="imageContainer" src="/assets/images/u.png" class="w-full  rounded-full h-full object-cover">
                         <span id="cameraHandle" class="w-8 h-8 cursor-pointer rounded-full text-white grid place-items-center absolute right-1 bottom-4 bg-sky-500"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" /></svg>
                             </span>
@@ -137,12 +137,12 @@
                     </div>
                 </div>
             </div>
-            <div style="display: none" id="address" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[70%]">
+            <div style="display: none" id="address" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-auto md:h-[70%]">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">2. Votre Adresse</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
-                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
+                <div class="md:px-8 grid grid-cols-1 col-span-2">
+                    <div class="col-span-2 md:space-x-3 md:space-y-0 space-y-2  my-3 grid grid-cols-1 md:grid-cols-2">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="id_type"  name="id_type" type="text" placeholder="Choisir type de pièce" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['save'])) {echo $_POST['id_type'];}?>" />
@@ -172,7 +172,7 @@
                             <?php endif;?>
                         </div>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-3 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 md:space-y-0 space-y-2  my-3 grid md:grid-cols-3 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="nationality" type="text" placeholder="Nationalité" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['save'])) {echo $_POST['nationality'];}?>" />
@@ -198,7 +198,7 @@
                             <?php endif;?>
                         </div>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-3 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 md:space-y-0 space-y-2  my-3 grid md:grid-cols-3 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="municipality" type="text" placeholder="Collectivité / Secteur / Commune" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['save'])) {echo $_POST['municipality'];}?>" />
@@ -226,12 +226,12 @@
                     </div>
                 </div>
             </div>
-            <div style="display: none" id="orientation" class="w-full register-container grid grid-cols-1 md:grid-cols-2 h-[60%]">
+            <div style="display: none" id="orientation" class="w-full register-container grid grid-cols-1 md:grid-cols-2 md:h-[60%]">
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">3. Orientation académique</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
-                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-3">
+                <div class="md:px-8 grid grid-cols-1 col-span-2">
+                    <div class="col-span-2 md:space-x-3 md:space-y-0 space-y-2  grid-cols-1 my-3 grid md:grid-cols-3">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list='fnx'   name="function" type="text" placeholder="Fonction" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['save']) && empty($params['errors']['function'])) {echo $_POST['function'];}?>" />
@@ -275,9 +275,9 @@
                                 <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['academical_status']; ?></span>
                             <?php endif;?>
                         </div>
-                        
+
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-3 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 md:space-y-0 space-y-2  my-3 grid md:grid-cols-3 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="academical_level"  name="academical_level" type="text" placeholder="Choisir Niveau académique" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['save']) && empty($params['errors']['academical_level'])) {echo $_POST['academical_level'];}?>" />
@@ -319,7 +319,7 @@
                             <?php endif;?>
                         </div>
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-3 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 md:space-y-0 space-y-2  my-3 grid md:grid-cols-3 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="fac_search_domain"  name="fac_search_domain" type="text" placeholder="Choisir faculté de domaine de recherche" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['save']) && empty($params['errors']['fac_search_domain'])) {echo $_POST['fac_search_domain'];}?>" />
@@ -357,8 +357,8 @@
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">4. Vos Origines</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
-                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
+                <div class="md:px-8 grid grid-cols-1 col-span-2">
+                    <div class="col-span-2 md:space-x-3 md:space-y-0 space-y-2 grid-cols-1 my-3 grid md:grid-cols-2">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input list="state_origin"  name="state_origin" type="text" placeholder="Choisir Province" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['save'])) {echo $_POST['state_origin'];}?>" />
@@ -405,7 +405,7 @@
                         </div>
 
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-2 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 md:space-y-0 space-y-2  my-3 grid md:grid-cols-2 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="municipality_origin" type="text" placeholder="Collectivité / Secteur / Commune" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['save'])) {echo $_POST['municipality_origin'];}?>" />
@@ -429,9 +429,8 @@
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">5. Etat de paie</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
-                    
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-2 grid-cols-1">
+                <div class="md:px-8 grid grid-cols-1 col-span-2">
+                    <div class="col-span-2 md:space-x-3  my-3 grid space-y-2 md:space-y-0 md:grid-cols-2 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="base_salary" type="text" placeholder="Salaire de base" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['save']) && empty($params['errors']['base_salary'])) {echo $_POST['base_salary'];}?>" />
@@ -455,12 +454,12 @@
                 <div class="col-span-2  mb-2 mx-auto">
                     <h2 class="text-sky-500 font-semibold text-xl mt-2 text-center">7. Informations sanitaires</h2>
                 </div>
-                <div class="px-8 grid grid-cols-1 col-span-2">
-                    <div class="col-span-2 md:space-x-3  my-3 grid grid-cols-2">
+                <div class="md:px-8 grid grid-cols-1 col-span-2">
+                    <div class="col-span-2 md:space-x-3 space-y-2 md:space-y-0  my-3 grid grid-cols-1 md:grid-cols-2">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input  name="blood_type" type="text" placeholder="Groupe Sanguin" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['save']) && empty($params['errors']['blood_type'])) {echo $_POST['blood_type'];}?>" />
-                                
+
                             </div>
                             <?php if (isset($_POST['save']) && !empty($params['errors']['blood_type'])): ?>
                                 <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['blood_type']; ?></span>
@@ -474,9 +473,9 @@
                                 <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['height']; ?></span>
                             <?php endif;?>
                         </div>
-                        
+
                     </div>
-                    <div class="col-span-2 md:space-x-3  my-3 grid md:grid-cols-2 grid-cols-1">
+                    <div class="col-span-2 md:space-x-3 space-y-2 md:space-y-0  my-3 grid md:grid-cols-2 grid-cols-1">
                         <div class="col-span-1">
                             <div class="w-full focus-within:font-semibold  text-gray-700 focus-within:text-sky-500 focus-within:border-sky-500 border-2 transition-colors duration-500 border-transparent bg-slate-200 h-10 items-center flex rounded">
                                 <input   name="allergies" type="text" placeholder="Allergies" class="bg-transparent transition-colors duration-500 placeholder:text-sm placeholder:text-gray-600 focus:text-sky-500 focus:outline-none ml-2 w-full" value="<?php if (isset($_POST['save']) && empty($params['errors']['allergies'])) {echo $_POST['allergies'];}?>" />
@@ -493,7 +492,7 @@
                                 <span class="-mt-2 text-red-500 text-xs"><?php echo $params['errors']['handicap']; ?></span>
                             <?php endif;?>
                         </div>
-                        <div class="col-span-2">
+                        <div class="md:col-span-2 col-span-1">
                                 <div class="mt-3 w-10/12 mx-auto flex justify-center items-center">
                                     <button name="save" class="flex transition-all duration-500 justify-between items-center h-10 px-2 w-fit py-1 bg-sky-500 font-semibold hover:bg-sky-600 text-white rounded hover:shadow-lg hover:shadow-gray-300"> Envoyer le dossier <svg class="ml-2 h-6" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></button>
                             </div>
@@ -512,5 +511,5 @@
     <div class="w-full  absolute left-0 right-0 bottom-0">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#06b6d4" fill-opacity="1" d="M0,192L80,160C160,128,320,64,480,69.3C640,75,800,149,960,154.7C1120,160,1280,96,1360,64L1440,32L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
     </div>
-    <div class="absolute bottom-3 w-full text-white text-center" id="footer"><?php include VIEWS.'includes/footer.php'?></div>
+    <div class="absolute bottom-3 w-full text-white text-center" id="footer"><?php include VIEWS . 'includes/footer.php'?></div>
 </section>

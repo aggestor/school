@@ -8,9 +8,9 @@
     <script src="/assets/js/jquery.min.js"></script>
     <link rel="shortcut icon" href="/assets/images/128x128.png" sizes="128x128"/>
     <link rel="shortcut icon" href="/assets/images/32x32.png" sizes="32x32"/>
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha512-L7MWcK7FNPcwNqnLdZq86lTHYLdQqZaz5YcAgE+5cnGmlw8JT03QB2+oxL100UeB6RlzZLUxCGSS4/++mNZdxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta name="theme-color" content="#"/>
-    <title>UOR | School Archive Manager</title>
+    <title>Soft Dossier</title>
     <style>
         /* width */
         ::-webkit-scrollbar {
